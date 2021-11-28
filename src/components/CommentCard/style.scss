@@ -1,0 +1,31 @@
+.comments {
+    .comment-card {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 8px 0;
+      margin: 16px 0;
+      min-height: 124px;
+      border-top: solid 1px var(--color__text);
+      .comment-card__text {
+        padding: 0;
+        margin: 0;
+        margin-left: 12px;
+      }
+      .comment-card__container {
+        display: flex;
+        flex-direction: column;
+        .comment-card__donator {
+          width: 280px;
+          margin-left: 12px;
+          display: flex;
+          align-items: center;
+          padding-top: 12px;
+          span {
+            margin-left: 4px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
