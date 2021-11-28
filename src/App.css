@@ -1,38 +1,289 @@
-.App {
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+:root {
+  --color__main: #ff0157;
+  --color__title: #323332;
+  --color__text: #767777;
+  --color__background: #fffefe;
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* Buttons*/
+
+/* HEADER */
+section {
+  padding: 80px;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 100px;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  /* transition: 0.5s; */
+}
+header.sticky {
+  background: #fff;
+  padding: 0px 100px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  align-items: baseline;
+}
+header .logo {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2em;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+header.sticky .logo {
+  color: #111;
+  margin-top: 10px;
+}
+header .logo span {
+  color: var(--color__main);
+}
+header .navigation {
+  position: relative;
+  display: flex;
+}
+header .navigation li {
+  list-style: none;
+  margin-left: 30px;
+}
+header .navigation li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header.sticky .navigation li a {
+  color: #111;
+}
+/* header .navigation li a:hover {
+  color: #ff0157;
+} */
+.boton {
+  color: #fff;
+  font-size: 14px;
+  background: var(--color__main);
+  display: inline-block;
+  border: none;
+  padding: 5px 10px;
+  margin-top: -5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  font-family: Poppins;
+  border-radius: 5px;
+}
+.boton:hover {
+  color: #000;
+}
+.sub-menu-1 {
+  display: none;
+}
+header ul li:hover .sub-menu-1 {
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 1);
+  margin-top: 4px;
+  margin-left: -20px;
+}
+header ul li:hover .sub-menu-1 a {
+  color: #000;
+}
+header .navigation li:hover .sub-menu-1 ul li {
+  width: 150px;
+  padding: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.banner {
+  position: relative;
+  width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background: url(https://image.freepik.com/foto-gratis/tiro-escala-grises-lindo-perro-cansado-hogar-durmiendo-calle-tarde_181624-4738.jpg);
+  background-size: cover;
+}
+.banner .content {
+  max-width: 900px;
+  text-align: center;
+}
+.banner .content h2 {
+  font-size: 5em;
+  color: #fff;
+}
+.banner .content p {
+  font-size: 1em;
+  color: #fff;
+}
+.boton2 {
+  font-size: 1em;
+  color: #fff;
+  background: #ff0157;
+  display: inline-block;
+  padding: 10px 30px;
+  margin-top: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+}
+.boton2:hover {
+  letter-spacing: 0px;
+  color: #fff;
+  text-decoration: none;
+}
+/* SECTION 3 */
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.cards .content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.cards .content .box {
+  width: 340px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 15px solid #fff;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.08);
+}
+.cards .content .box .imgBx {
+  position: relative;
+  width: 100%;
+  height: 150px;
+}
+.cards .content .box .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cards .content .box .text {
+  padding: 15px 0 5px;
+}
+.cards .content .box .text h3 {
+  font-weight: 400;
+  color: #111;
+}
+/* FOOTER */
+footer {
+  padding: 8px 16px 80px;
 }
 
-.App-link {
-  color: #61dafb;
+footer .footer__nav {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+footer .footer__nav span {
+  color: var(--color__main);
+  font-weight: bold;
+}
+footer .footer__nav div p {
+  color: var(--color__main);
+  font-weight: bold;
+}
+footer hr {
+  margin-bottom: 56px;
+}
+footer .footer__nav div ul li a {
+  color: var(--color__text);
+  text-decoration: none;
+  cursor: pointer;
+}
+footer div ul li {
+  list-style: none;
+}
+footer .footer__nav .language {
+  margin-top: 36px;
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+}
+footer .footer__nav .language p {
+  color: var(--color__text);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+footer .footer__site-info {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+footer .footer__site-info .social-media ul {
+  width: 60%;
+  max-width: 364px;
+  display: flex;
+  justify-content: space-between;
+}
+footer .footer__site-info div ul li a {
+  color: var(--color__text);
+  text-decoration: none;
+  cursor: pointer;
+}
+footer .footer__site-info .copyright {
+  color: var(--color__text);
+}
+
+@media (min-width: 1024px) {
+  footer .footer__nav {
+    grid-template-columns: 1fr 4fr 4fr 4fr 1fr;
+    grid-template-rows: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+  footer .footer__nav div {
+    padding: 0 8px;
+  }
+  footer .footer__nav div:nth-child(1) {
+    grid-column-start: 2;
+  }
+  footer .footer__site-info {
+    grid-template-columns: 1fr 5fr 3fr 1fr;
+  }
+  footer .footer__site-info .social-media {
+    grid-column-start: 3;
+    grid-row-start: 1;
+  }
+  footer .footer__site-info .content {
+    grid-column-start: 2;
+    display: flex;
+    justify-content: space-between;
+  }
+  footer .footer__site-info .content .copyright {
+    width: 30%;
+  }
+  footer .footer__site-info .content .legal {
+    width: 70%;
+  }
+  footer .footer__site-info .content .legal ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  footer .footer__site-info .social-media ul {
+    margin-left: 20%;
   }
 }
