@@ -13,7 +13,7 @@ export const Details = () => {
     tags: "Médicas, enfermedades y salud",
     donations: 8450,
     goal: 9200,
-    name: " Walter",
+    name: " Walter White",
     campaignReason: "su lucha contra el cáncer del pulmón",
     commentsDb: [
       {
