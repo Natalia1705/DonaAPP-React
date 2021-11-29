@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
 
-import { Details } from "./views/Details";
+import { Donate } from "./views/Donate";
 
 function App() {
   return (
     <div className="App">
-      <Details />
+      <Donate />
     </div>
   );
 }
