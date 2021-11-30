@@ -33,7 +33,6 @@ const Campaigns2 = () => {
                   transacción de pago, incluidos cargos por operaciones con
                   tarjetas de crédito y débito.
                 </p>
-
                 <p>¿Cuál es la fecha límite de recaudación?</p>
                 <input
                   type="date"
