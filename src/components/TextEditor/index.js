@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import "./styles.scss";
-
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 export default class TextEditor extends Component {
