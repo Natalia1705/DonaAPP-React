@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { CommentCard } from "../CommentCard";
 import "./style.scss";
 
 export const Comments = ({ name, campaignReason, commentsDb }) => {
+  let navigate = useNavigate();
   const [commentsInfo, setCommentsInfo] = useState([]);
   useEffect(() => {
     setCommentsInfo(commentsDb);
@@ -20,7 +22,10 @@ export const Comments = ({ name, campaignReason, commentsDb }) => {
           Tu tambien puedes tomar acción y ayudar a
           <span className="cta__name">{name}</span> con {campaignReason}
         </p>
-        <button className="cta__button boton btn btn-primary btn-sm">
+        <button
+          className="cta__button boton btn btn-primary btn-sm"
+          onClick={() => navigate("/donate")}
+        >
           Continuar
         </button>
       </div>
