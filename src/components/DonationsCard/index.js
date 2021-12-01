@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 export const DonationsCard = ({ commentsDb, goal }) => {
+  let navigate = useNavigate();
   return (
     <div className="donations">
       <div className="donations__progress progress">
@@ -40,7 +42,12 @@ export const DonationsCard = ({ commentsDb, goal }) => {
         >
           Compartir
         </button>
-        <button className="boton btn btn-primary btn-lg">Donar</button>
+        <button
+          className="boton btn btn-primary btn-lg"
+          onClick={() => navigate("/donate")}
+        >
+          Donar
+        </button>
       </div>
     </div>
   );

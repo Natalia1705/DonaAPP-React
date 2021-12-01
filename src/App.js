@@ -1,14 +1,23 @@
 import "./App.css";
 import React from "react";
-
-// import { Donate } from "./views/Donate";
-import Campaigns3 from "./views/Campaigns/campaigns3";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Donate } from "./views/Donate";
+import { Details } from "./views/Details";
+import Login from "./views/Login";
+import Register from "./views/Register";
+import YourCampaigns from "./views/YourCampaigns";
 
 function App() {
   return (
-    <div className="App">
-      <Campaigns3></Campaigns3>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/donate" element={<Donate />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/your-campaigns" element={<YourCampaigns />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
