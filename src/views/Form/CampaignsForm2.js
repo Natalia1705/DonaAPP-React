@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import "./style.scss";
 import { useNavigate } from "react-router";
+import "./style.scss";
+import React, { useState } from "react";
 
 const CampaignsForm2 = () => {
   let navigate = useNavigate();
@@ -62,7 +62,7 @@ const CampaignsForm2 = () => {
                   className="step__button step__button--back"
                   data-to_step="1"
                   data-step="2"
-                  onClick={() => navigate("/CampaignsForm")}
+                  onClick={() => navigate("/campaigns-form")}
                 >
                   Regresar
                 </button>
@@ -71,7 +71,7 @@ const CampaignsForm2 = () => {
                   className="step__button step__button--next"
                   data-to_step="2"
                   data-step="1"
-                  onClick={() => navigate("/CampaignsForm3")}
+                  onClick={() => navigate("/campaigns-form3")}
                 >
                   Siguiente
                 </button>

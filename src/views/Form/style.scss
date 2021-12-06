@@ -31,7 +31,7 @@
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  border-radius: 18px;
+  border-radius: 18px var(--color-header-step);
 }
 
 /* Progressbar */
@@ -42,7 +42,7 @@
   counter-reset: step;
   margin-top: 15px;
   padding: 15px;
-  border: solid 1px var(--color-bg-2);
+  border: solid 1px white;
 }
 
 .progressbar__option {
@@ -54,15 +54,12 @@
 
 .progressbar__option:before {
   display: flex;
-  content: counter(step);
   counter-increment: step;
   width: 20px;
   height: 20px;
   background-color: white;
   margin: 0 auto 5px;
   border-radius: 3px;
-  justify-content: center;
-  align-items: center;
   position: relative;
   z-index: 2;
   content: "";
@@ -89,7 +86,7 @@
 .progressbar__option.active:before,
 .progressbar__option.active:after {
   background-color: var(--color-header-step);
-  border: solid 1px var(--color-bg-2);
+  border: solid 1px var(--color-header-step);
 }
 
 /* Título del formulario */

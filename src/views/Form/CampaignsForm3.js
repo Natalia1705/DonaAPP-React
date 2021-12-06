@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./style.scss";
 import TextEditor from "../../components/TextEditor";
 import { useNavigate } from "react-router";
+import "./style.scss";
+import React, { useState } from "react";
 
 const CampaignsForm3 = () => {
   let navigate = useNavigate();
@@ -52,7 +52,7 @@ const CampaignsForm3 = () => {
                   className="step__button step__button--back"
                   data-to_step="2"
                   data-step="3"
-                  onClick={() => navigate("/CampaignsForm2")}
+                  onClick={() => navigate("/campaigns-form2")}
                 >
                   Regresar
                 </button>
