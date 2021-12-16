@@ -1,12 +1,16 @@
-import React from "react";
-import "./style.scss";
 import TextEditor from "../../components/TextEditor";
+import { useNavigate } from "react-router";
+import "./style.scss";
+import React, { useState } from "react";
 
 const Campaigns3 = () => {
+  let navigate = useNavigate();
+  let [title, setTitle] = useState("");
+
   return (
     <>
       <div className="root">
-        <form action="" className="form-register">
+        <form className="form-register">
           <div className="form-register__header">
             <ul className="progressbar">
               <li className="progressbar__option active"></li>
@@ -23,6 +27,8 @@ const Campaigns3 = () => {
                 <input
                   type="text"
                   name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   id="title"
                   placeholder="Título"
                   className="step__input"
@@ -38,12 +44,15 @@ const Campaigns3 = () => {
                 <button
                   type="button"
                   className="step__button step__button--back"
-                  data-to_step="2"
-                  data-step="3"
+                  onClick={() => navigate("/campaigns-form2")}
                 >
                   Regresar
                 </button>
-                <button type="submit" className="step__button">
+                <button
+                  type="submit"
+                  className="step__button"
+                  onClick={() => navigate("/")}
+                >
                   Terminar
                 </button>
               </div>

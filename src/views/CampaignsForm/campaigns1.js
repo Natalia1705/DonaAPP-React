@@ -1,7 +1,13 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import React, { useState } from "react";
 
 const Campaigns = () => {
+  let navigate = useNavigate();
+  let [name, setName] = useState("");
+  let [place, setPlace] = useState("");
+  let [category, setCategory] = useState("");
+
   return (
     <>
       <div className="root">
@@ -21,6 +27,8 @@ const Campaigns = () => {
                 <input
                   type="text"
                   name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   id="name"
                   placeholder="Tu nombre ej:Juan Pérez"
                   className="step__input"
@@ -29,31 +37,29 @@ const Campaigns = () => {
                 <input
                   type="text"
                   name="place"
-                  id="place"
-                  placeholder=""
-                  className="step__input"
-                />
-                <input
-                  type="text"
-                  name="place"
+                  value={place}
+                  onChange={(e) => setPlace(e.target.value)}
                   id="place"
                   placeholder=""
                   className="step__input"
                 />
                 <p>¿Para que estás recaudando fondos?</p>
-                <select className="step__input" name="categoría">
-                  <option value="Salud">Salud</option>
-                  <option value="Emergencia">Educación</option>
-                  <option value="Sepelio">In memoriam</option>
-                  <option value="Sepelio">Animales</option>
+                <select
+                  className="step__input"
+                  name={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="health">Salud</option>
+                  <option value="emergency">Emergency</option>
+                  <option value="funerals">In memoriam</option>
+                  <option value="animals">Animales</option>
                 </select>
               </div>
               <div className="step__footer">
                 <button
                   type="button"
                   className="step__button step__button--next"
-                  data-to_step="2"
-                  data-step="1"
+                  onClick={() => navigate("/campaigns-form2")}
                 >
                   Siguiente
                 </button>

@@ -1,7 +1,12 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import React, { useState } from "react";
 
 const Campaigns2 = () => {
+  let navigate = useNavigate();
+  let [money, setMoney] = useState("");
+  let [date, setDate] = useState("");
+
   return (
     <>
       <div className="root">
@@ -24,6 +29,8 @@ const Campaigns2 = () => {
                 <input
                   type="text"
                   name="money"
+                  value={money}
+                  onChange={(e) => setMoney(e.target.value)}
                   id="money"
                   placeholder="USD"
                   className="step__input"
@@ -37,6 +44,8 @@ const Campaigns2 = () => {
                 <input
                   type="date"
                   name="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   id="date"
                   placeholder=""
                   className="step__input"
@@ -46,16 +55,14 @@ const Campaigns2 = () => {
                 <button
                   type="button"
                   className="step__button step__button--back"
-                  data-to_step="1"
-                  data-step="2"
+                  onClick={() => navigate("/campaigns-form")}
                 >
                   Regresar
                 </button>
                 <button
                   type="button"
                   className="step__button step__button--next"
-                  data-to_step="2"
-                  data-step="1"
+                  onClick={() => navigate("/campaigns-form3")}
                 >
                   Siguiente
                 </button>
