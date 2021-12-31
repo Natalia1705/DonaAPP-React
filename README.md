@@ -1,3 +1,33 @@
+# Views
+
+## Category
+
+| Route                 | Description                            |
+|-----------------------|----------------------------------------|
+| /categories           | Discover campaigns for categories view |
+| /categories/medical   | List of medical campaigns view         |
+| /categories/emergency | List of emergency campaigns view       |
+| /categories/animal    | List of animal campaigns view          |
+| ...                   | ...                                    |
+
+## Campaigns
+
+| Route                                 | Description                      |
+|---------------------------------------|----------------------------------|
+| /**:campaignId**                      | Campaign details view            |
+| /campaigns                            | List of your campaigns view      |
+| /campaings/create/details/**:userId** | Campaign details form view       |
+| /campaigns/create/goal/**:userId**    | Goal of your campaign form view  |
+| /campaigns/create/story/**:userId**   | Story of your campaign form view |
+
+## Authenticate
+
+| Route     | Description                  |
+|-----------|------------------------------|
+| /sign-up  | Register form view           |
+| /sign-in  | Sign in form view            |
+| /sign-out | Sign out view, close session |
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
