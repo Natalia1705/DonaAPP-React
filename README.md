@@ -1,3 +1,15 @@
+# Project folder structure
+
+    ├── src
+    │   ├── api
+    │   ├── common
+    │   ├── config
+    │   ├── utils
+    │   ├── environments
+    │   ├── pages
+    │   ├── state
+    │   └── thunkAction
+
 # Views
 
 ## Category
