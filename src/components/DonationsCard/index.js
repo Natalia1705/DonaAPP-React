@@ -1,37 +1,37 @@
-import React from "react";
-import { useNavigate } from "react-router";
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const DonationsCard = ({ commentsDb, goal }) => {
-  let navigate = useNavigate();
+const DonationsCard = ({ commentsDb, goal }) => {
+  const navigate = useNavigate();
+  const customWidth = () => {
+    const commentMap = commentsDb.map((e) => e.amount);
+    const commentReduce = commentMap.reduce(
+      (acc, e) => Number(acc) + Number(e),
+    );
+    return `${(commentReduce / goal) * 100} %`;
+  };
   return (
     <div className="donations">
       <div className="donations__progress progress">
         <div
-          style={{
-            width: `${
-              (commentsDb
-                .map((e) => e.amount)
-                .reduce((acc, e) => Number(acc) + Number(e)) /
-                goal) *
-              100
-            }%`,
-          }}
+          style={{ width: customWidth }}
           className="progress-bar"
           role="progressbar"
           aria-valuemin="0"
           aria-valuemax="100"
-        ></div>
+        />
       </div>
       <p className="donations__collection">
         <span className="amount">
-          S./{" "}
+          S./
           {commentsDb
             .map((e) => e.amount)
             .reduce((acc, e) => Number(acc) + Number(e))}
         </span>
         {` Recaudados del objetivo de S./ ${goal}`}
         <br />
-        <span className="total">{commentsDb.length}</span> donantes
+        {`${(<span className="total">{commentsDb.length}</span>)} donantes`}
       </p>
       <div className="donations__buttons">
         <button
@@ -43,8 +43,9 @@ export const DonationsCard = ({ commentsDb, goal }) => {
           Compartir
         </button>
         <button
+          type="button"
           className="boton btn btn-primary btn-lg"
-          onClick={() => navigate("/donate")}
+          onClick={() => navigate('/donate')}
         >
           Donar
         </button>
@@ -52,3 +53,5 @@ export const DonationsCard = ({ commentsDb, goal }) => {
     </div>
   );
 };
+
+export default DonationsCard;
