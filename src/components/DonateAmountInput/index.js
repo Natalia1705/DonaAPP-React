@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-export const DonateAmountInput = ({ donateAmount, setDonateAmount }) => {
-  const blockInvalidChar = (e) =>
-    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
+const DonateAmountInput = ({ donateAmount, setDonateAmount }) => {
+  // prettier-ignore
+  const blockInvalidChar = (e) => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
 
   return (
     <div className="donate__amount">
@@ -10,7 +10,7 @@ export const DonateAmountInput = ({ donateAmount, setDonateAmount }) => {
       <label htmlFor="donate__amount" className="donate__exchange">
         USD
       </label>
-      <label htmlFor="" className="donate__decimal">
+      <label htmlFor="donate__amount" className="donate__decimal">
         .00
       </label>
       <input
@@ -24,3 +24,5 @@ export const DonateAmountInput = ({ donateAmount, setDonateAmount }) => {
     </div>
   );
 };
+
+export default DonateAmountInput;

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Donate } from './views/Donate';
-import { Details } from './views/Details';
+import Donate from './views/Donate';
+import Details from './views/Details';
 import CampaignsForm1 from './views/CampaignsForm/campaigns1';
 import CampaignsForm2 from './views/CampaignsForm/campaigns2';
 import CampaignsForm3 from './views/CampaignsForm/campaigns3';
