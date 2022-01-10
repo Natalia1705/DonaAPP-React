@@ -6,7 +6,7 @@ const useSignup = () => {
   useEffect(() => {
     setValidationSchema(
       Yup.object({
-        username: Yup.string()
+        name: Yup.string()
           .max(15, 'Debe tener 15 caracteres o menos')
           .required('Nombre de Usuario es requerido'),
         email: Yup.string()

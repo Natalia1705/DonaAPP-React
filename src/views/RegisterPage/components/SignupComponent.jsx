@@ -1,35 +1,39 @@
 import { Formik } from 'formik';
 import { Form, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { postSignUp } from '../../../thunkAction/authThunk';
 import useSignup from '../hooks/useSignup';
 
 const SignupFormComponent = () => {
   const { validationSchema } = useSignup();
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{
-        username: '',
+        name: '',
+        surname: 'fake',
         email: '',
         password: '',
         confirmPassword: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+      onSubmit={(values) => dispatch(postSignUp(values))}
     >
       {(formik) => (
         <Form onSubmit={formik.handleSubmit}>
           <Row className="mb-3">
-            <Form.Group controlId="username">
+            <Form.Group controlId="name">
               <Form.Label>Nombre de Usuario</Form.Label>
               <Form.Control
-                name="username"
+                name="name"
                 type="text"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.firstName}
-                isInvalid={formik.touched.username && formik.errors.username}
+                value={formik.values.name}
+                isInvalid={formik.touched.name && formik.errors.name}
               />
               <Form.Control.Feedback type="invalid">
-                {formik.errors.username}
+                {formik.errors.name}
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
