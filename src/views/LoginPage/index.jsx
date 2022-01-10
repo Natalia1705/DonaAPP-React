@@ -1,4 +1,4 @@
-const Login = () => (
+const LoginPage = () => (
   <div className="container">
     <div className="mt-5 row justify-content-center">
       <div className="border border-light bg-light p-4 col-10 col-sm-8 col-md-6 col-lg-6 col-xl-6">
@@ -42,4 +42,4 @@ const Login = () => (
   </div>
 );
 
-export default Login;
+export default LoginPage;

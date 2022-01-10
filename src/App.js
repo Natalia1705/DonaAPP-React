@@ -6,8 +6,8 @@ import Details from './views/Details';
 import CampaignsForm1 from './views/CampaignsForm/campaigns1';
 import CampaignsForm2 from './views/CampaignsForm/campaigns2';
 import CampaignsForm3 from './views/CampaignsForm/campaigns3';
-import Login from './views/Login';
-import Register from './views/Register';
+import LoginPage from './views/LoginPage';
+import RegisterPage from './views/RegisterPage';
 import YourCampaigns from './views/YourCampaigns';
 
 const App = () => (
@@ -18,8 +18,8 @@ const App = () => (
       <Route path="/campaigns-form3" element={<CampaignsForm3 />} />
       <Route path="/donate" element={<Donate />} />
       <Route path="/details" element={<Details />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/your-campaigns" element={<YourCampaigns />} />
     </Routes>
   </BrowserRouter>
