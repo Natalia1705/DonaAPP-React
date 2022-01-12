@@ -1,5 +1,5 @@
 const LoginPage = () => (
-  <div className="container">
+  <div className="container" data-testid="login-page">
     <div className="mt-5 row justify-content-center">
       <div className="border border-light bg-light p-4 col-10 col-sm-8 col-md-6 col-lg-6 col-xl-6">
         <h2 className="mb-4 text-center">Iniciar sesión</h2>
@@ -9,7 +9,7 @@ const LoginPage = () => (
               htmlFor="exampleFormControlInput1"
               className="col-xl-4 col-form-label"
             >
-              Correo
+              Correo Electrónico
             </label>
             <div className="col-xl-8">
               <input

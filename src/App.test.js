@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from './test/setup';
 import App from './App';
 
-test('renders learn react link', () => {
+const setup = (path) => {
+  window.history.pushState({}, '', path);
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+};
+
+describe('Routing', () => {
+  it.each`
+    path           | pageTestId
+    ${'/login'}    | ${'login-page'}
+    ${'/register'} | ${'register-page'}
+  `('displays $pageTestId when path is $path', ({ path, pageTestId }) => {
+    setup(path);
+    const page = screen.queryByTestId(pageTestId);
+    expect(page).toBeInTheDocument();
+  });
 });
