@@ -9,6 +9,7 @@ import CampaignsForm3 from './views/CampaignsForm/campaigns3';
 import LoginPage from './views/LoginPage';
 import RegisterPage from './views/RegisterPage';
 import YourCampaigns from './views/YourCampaigns';
+import PrivateRoute from './common/PrivateRoute';
 
 const App = () => (
   <BrowserRouter>
@@ -20,7 +21,14 @@ const App = () => (
       <Route path="/details" element={<Details />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/your-campaigns" element={<YourCampaigns />} />
+      <Route
+        path="/campaigns"
+        element={
+          <PrivateRoute>
+            <YourCampaigns />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   </BrowserRouter>
 );
