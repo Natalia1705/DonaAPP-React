@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 :root {
@@ -20,7 +20,6 @@
   align-items: center;
   min-height: 100vh;
   font-size: 16px;
-
   overflow: hidden;
 }
 
@@ -63,14 +62,14 @@
   align-items: center;
   position: relative;
   z-index: 2;
-  content: "";
+  content: '';
   border-radius: 50%;
   border: 1px solid var(--color-header-step);
 }
 
 .progressbar__option:after {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   height: 1.3px;
   background-color: white;
@@ -92,9 +91,14 @@
 
 /* Título del formulario */
 .form-register__title {
-  font-size: 1.4rem;
+  font-size: 1rem;
   text-align: center;
   margin-bottom: 0;
+}
+
+h1 {
+  font-size: 1.8rem;
+  text-align: center;
 }
 
 /* body del formulario */
@@ -178,6 +182,7 @@
 /* step botones */
 .step__button {
   display: inline-block;
+  margin-left: auto;
   padding: 10px;
   background-color: var(--color-btn);
   border: none;
@@ -185,6 +190,7 @@
   border-radius: 3px;
   cursor: pointer;
   margin: 5px;
+  justify-content: center;
 }
 
 .smalltext {
@@ -208,10 +214,7 @@
 }
 
 p {
+  margin: 5px;
   padding: 10px;
   text-align: justify;
-}
-
-.TextEditor {
-  width: 50px;
 }

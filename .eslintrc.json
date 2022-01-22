@@ -4,10 +4,7 @@
     "es2021": true,
     "jest/globals": true
   },
-  "extends": [
-    "plugin:prettier/recommended",
-    "airbnb"
-  ],
+  "extends": ["plugin:prettier/recommended", "airbnb"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -15,20 +12,12 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "prettier",
-    "react",
-    "testing-library",
-    "jest"
-  ],
+  "plugins": ["prettier", "react", "testing-library", "jest"],
   "rules": {
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "react/react-in-jsx-scope": "off",
@@ -48,10 +37,7 @@
       "error",
       {
         "required": {
-          "some": [
-            "nesting",
-            "id"
-          ]
+          "some": ["nesting", "id"]
         }
       }
     ],
@@ -59,10 +45,7 @@
       "error",
       {
         "required": {
-          "some": [
-            "nesting",
-            "id"
-          ]
+          "some": ["nesting", "id"]
         }
       }
     ],
@@ -92,6 +75,8 @@
           "minProperties": 3
         }
       }
-    ]
+    ],
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
