@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 /* eslint-disable react/function-component-definition */
@@ -5,10 +6,10 @@
 /* eslint-disable arrow-body-style */
 import { useState } from 'react';
 import './style.scss';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-export default function App() {
+export default function CampaignForm() {
   const [data, setData] = useState({
     name: '',
     country: '',
@@ -41,143 +42,228 @@ export default function App() {
   };
 
   const steps = [
-    <Step1 next={handleNextStep} data={data} />,
-    <Step2 next={handleNextStep} prev={handlePrevStep} data={data} />,
-    <Step3 next={handleNextStep} prev={handlePrevStep} data={data} />,
+    <StepOne next={handleNextStep} data={data} />,
+    <StepTwo next={handleNextStep} prev={handlePrevStep} data={data} />,
+    <StepThree next={handleNextStep} prev={handlePrevStep} data={data} />,
   ];
 
   console.log('data', data);
 
-  return <div className="App">{steps[currentStep]}</div>;
+  return <div>{steps[currentStep]}</div>;
 }
 
-// const step1ValidationSchema = Yup.object({
-//   first_name: Yup.string().required().label('First name'),
-//   last_name: Yup.string().required().label('Last name'),
-// });
+const stepOneValidationSchema = Yup.object({
+  name: Yup.string().required().label('Name is '),
+  country: Yup.string().required().label('Your Country'),
+  category: Yup.string().required('Select a Category'),
+});
 
-const Step1 = () => {
-  // const handleSubmit = (values) => {
-  //   props.next(values);
-  // };
+const StepOne = (props) => {
+  const handleSubmit = (values) => {
+    props.next(values);
+  };
   return (
-    <div className="root">
-      <form action="" className="form-register">
-        <div className="form-register__header">
-          <ul className="progressbar">
-            <li className="progressbar__option active" />
-            <li className="progressbar__option" />
-            <li className="progressbar__option" />
-          </ul>
-          <h1 className="form-register__title">Inicia tu campaña</h1>
-        </div>
-        <div className="form-register__body">
-          <div className="step active" id="step-1">
-            <div className="step__body">
-              <p>Nombre</p>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Tu nombre ej:Juan Pérez"
-                className="step__input"
-              />
-              <p>¿Dónde vives?</p>
-              <input />
-              <p>¿Para que estás recaudando fondos?</p>
-              <select>
-                <option value="health">Salud</option>
-                <option value="emergency">Emergency</option>
-                <option value="funerals">In memoriam</option>
-                <option value="animals">Animales</option>
-              </select>
+    <Formik
+      validationSchema={stepOneValidationSchema}
+      initialValues={props.data}
+      onSubmit={handleSubmit}
+    >
+      {() => (
+        <div className="root">
+          <Form action="" className="form-register">
+            <div className="form-register__header">
+              <ul className="progressbar">
+                <li className="progressbar__option active" />
+                <li className="progressbar__option" />
+                <li className="progressbar__option" />
+              </ul>
+              <h1 className="form-register__title">Inicia tu campaña</h1>
             </div>
-            <div className="step__footer">
-              <button className="step__button step__button--next">
-                Siguiente
-              </button>
+            <div className="form-register__body">
+              <div className="step active" id="step-1">
+                <div className="step__body">
+                  <p>Nombre</p>
+                  <Field
+                    type="text"
+                    name="name"
+                    placeholder="Ej. Juan Perez"
+                    className="step__input"
+                  />
+                  <ErrorMessage name="Name" />
+                  <p>¿Dónde vives?</p>
+                  <Field
+                    type="text"
+                    name="country"
+                    placeholder="Ingresa el nombre de tu país"
+                    className="step__input"
+                  />
+                  <ErrorMessage name="country" />
+                  <p>¿Para que estás recaudando fondos?</p>
+                  <Field as="select" className="step__input" name="category">
+                    <option value="health">Salud</option>
+                    <option value="emergency">Emergency</option>
+                    <option value="funerals">In memoriam</option>
+                    <option value="animals">Animales</option>
+                  </Field>
+                  <ErrorMessage name="category" />
+                </div>
+                <div className="step__footer">
+                  <button type="submit" className="step__button">
+                    Siguiente
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          </Form>
         </div>
-      </form>
-    </div>
+      )}
+    </Formik>
   );
 };
 
-const Step2 = () => {
+const stepTwoValidationSchema = Yup.object({
+  objetive: Yup.number().required().label('Objetive'),
+  targetdate: Yup.date().min(
+    Yup.ref('originalEndDate'),
+    ({ min }) => `Date needs to be before ${formatDate(min)}!!`,
+  ),
+});
+
+const StepTwo = (props) => {
+  const handleSubmit = (values) => {
+    props.next(values, true);
+  };
+
   return (
-    <div className="form-register__body">
-      <div className="step active" id="step-2">
-        <div className="step__header" />
-        <div className="step__body">
-          <p>¿Cuánto te gustaría recaudar?</p>
-          <input
-            type="number"
-            name="objetive"
-            // value={data.objetive}
-            // onChange={(e) => {
-            //   setData({ ...data, objetive: e.target.value });
-            // }}
-            id="objetive"
-            placeholder="USD"
-            className="step__input"
-          />
-          <p className="smalltext">
-            Ten en cuenta que de cada donativo se deducen comisiones por
-            transacción de pago, incluidos cargos por operaciones con tarjetas
-            de crédito y débito.
-          </p>
-          <p>¿Cuál es la fecha límite de recaudación?</p>
-          <input
-            type="date"
-            name="targetdate"
-            // value={data.targetdate}
-            // onChange={(e) => {
-            //   setData({ ...data, targetdate: e.target.value });
-            // }}
-            id="targetdate"
-            placeholder=""
-            className="step__input"
-          />
+    <Formik
+      validationSchema={stepTwoValidationSchema}
+      initialValues={props.data}
+      onSubmit={handleSubmit}
+    >
+      {({ values }) => (
+        <div className="root">
+          <Form action="" className="form-register">
+            <div className="form-register__header">
+              <ul className="progressbar">
+                <li className="progressbar__option active" />
+                <li className="progressbar__option active" />
+                <li className="progressbar__option" />
+              </ul>
+              <h1 className="form-register__title">
+                Establece el objetivo de tu campaña
+              </h1>
+            </div>
+            <div className="form-register__body">
+              <div className="step active" id="step-1">
+                <div className="step__header" />
+                <div className="step__body">
+                  <p>¿Cuánto te gustaría recaudar?</p>
+                  <Field
+                    type="number"
+                    name="objetive"
+                    placeholder="USD"
+                    className="step__input"
+                  />
+                  <ErrorMessage name="country" />
+                  <p className="smalltext">
+                    Ten en cuenta que de cada donativo se deducen comisiones por
+                    transacción de pago, incluidos cargos por operaciones con
+                    tarjetas de crédito y débito.
+                  </p>
+                  <p>¿Cuál es la fecha límite de recaudación?</p>
+                  <input
+                    type="date"
+                    name="targetdate"
+                    className="step__input"
+                  />
+                  <ErrorMessage name="targetdate" />
+                </div>
+                <div className="step__footer">
+                  <button
+                    type="button"
+                    onClick={() => props.prev(values)}
+                    className="step__button step__button--next"
+                  >
+                    Regresar
+                  </button>
+                  <button
+                    type="submit"
+                    className="step__button step__button--back"
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Form>
         </div>
-      </div>
-    </div>
+      )}
+    </Formik>
   );
 };
-const Step3 = () => {
+const stepThreeValidationSchema = Yup.object({
+  title: Yup.string().required().email().label('Title'),
+  img: Yup.string().required().label('Img'),
+});
+
+const StepThree = (props) => {
+  const handleSubmit = (values) => {
+    props.next(values, true);
+  };
+
   return (
-    <div className="form-register__body">
-      <div className="step active" id="step-3">
-        <div className="step__header" />
-        <div className="step__body">
-          <p>¿Cuál es el titulo de tu campaña?</p>
-          <input
-            type="text"
-            name="title"
-            // value={data.title}
-            // onChange={(e) => {
-            //   setdata({ ...data, title: e.target.value });
-            // }}
-            id="title"
-            placeholder="Título"
-            className="step__input"
-          />
-          <p>¿Porque vas a recaudar fondos? </p>
-          <div className="editor de texto">
-            <textarea />
-          </div>
-          <p>Recuerda agregar una imagen</p>
-          <input
-            type="file"
-            name="img"
-            // value={data.img}
-            // onChange={(e) => {
-            //   setFormData({ ...data, img: e.target.value });
-            // }}
-            id="img"
-          />
+    <Formik
+      validationSchema={stepThreeValidationSchema}
+      initialValues={props.data}
+      onSubmit={handleSubmit}
+    >
+      {() => (
+        <div className="root">
+          <form className="form-register">
+            <div className="form-register__header">
+              <ul className="progressbar">
+                <li className="progressbar__option active" />
+                <li className="progressbar__option active" />
+                <li className="progressbar__option active" />
+              </ul>
+              <h1 className="form-register__title">Cuenta tu historia</h1>
+            </div>
+            <div className="form-register__body">
+              <div className="step active" id="step-1">
+                <div className="step__header" />
+                <div className="step__body">
+                  <p>¿Cuál es el titulo de tu campaña?</p>
+                  <Field
+                    type="text"
+                    name="title"
+                    placeholder="Título"
+                    className="step__input"
+                  />
+                  <ErrorMessage name="title" />
+                  <p>
+                    ¿Porque vas a recaudar fondos? *Recuerda agregar una imagen
+                  </p>
+                  <div className="editor de texto">
+                    <textarea />
+                  </div>
+                </div>
+                <div className="step__footer">
+                  <button
+                    type="button"
+                    className="step__button step__button--back"
+                    onClick={() => props.prev(values)}
+                  >
+                    Regresar
+                  </button>
+                  <button type="submit" className="step__button">
+                    Terminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
-    </div>
+      )}
+    </Formik>
   );
 };
