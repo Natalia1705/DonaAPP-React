@@ -6,6 +6,7 @@
 /* eslint-disable arrow-body-style */
 import { useState } from 'react';
 import './style.scss';
+import axios from 'axios';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
@@ -23,24 +24,18 @@ export default function CampaignForm() {
   });
   const [currentStep, setCurrentStep] = useState(0);
 
-  const makeRequest = (formData) => {
-    console.log('Form Submitted', formData);
-  };
-
-  const handleNextStep = (newData, final = false) => {
+  const handleNextStep = async (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
-
-    if (final) {
-      makeRequest(newData);
-      return;
-    }
-
     setCurrentStep((prev) => prev + 1);
   };
 
-  const handlePrevStep = (newData) => {
+  const handlePrevStep = async (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);
+  };
+  const SubmitHandler = async (formData) => {
+    axios.post('localhost/donapp/create', formData);
+    // submit data...
   };
 
   const steps = [
@@ -53,7 +48,7 @@ export default function CampaignForm() {
     />,
     <StepThree
       key="StepThree"
-      next={handleNextStep}
+      next={SubmitHandler}
       prev={handlePrevStep}
       data={data}
     />,

@@ -56,12 +56,7 @@ const StepThree = (props) => {
                   </div>
                 </div>
                 <div className="step__footer">
-                  <input
-                    id="file"
-                    name="file"
-                    type="file"
-                    className="step__input"
-                  />
+                  <input name="img" type="file" className="step__input" />
                   <button
                     type="button"
                     className="step__button step__button--back"
