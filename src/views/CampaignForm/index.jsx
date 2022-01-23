@@ -53,7 +53,7 @@ export default function CampaignForm() {
 }
 
 const stepOneValidationSchema = Yup.object({
-  name: Yup.string().required().label('Name is '),
+  name: Yup.string().required().label('Name '),
   country: Yup.string().required().label('Your Country'),
   category: Yup.string().required('Select a Category'),
 });
@@ -89,7 +89,7 @@ const StepOne = (props) => {
                     placeholder="Ej. Juan Perez"
                     className="step__input"
                   />
-                  <ErrorMessage name="Name" />
+                  <ErrorMessage name="name" />
                   <p>¿Dónde vives?</p>
                   <Field
                     type="text"
@@ -99,7 +99,12 @@ const StepOne = (props) => {
                   />
                   <ErrorMessage name="country" />
                   <p>¿Para que estás recaudando fondos?</p>
-                  <Field as="select" className="step__input" name="category">
+                  <Field
+                    name="category"
+                    as="select"
+                    select
+                    className="step__input"
+                  >
                     <option value="health">Salud</option>
                     <option value="emergency">Emergency</option>
                     <option value="funerals">In memoriam</option>
@@ -164,7 +169,7 @@ const StepTwo = (props) => {
                     placeholder="USD"
                     className="step__input"
                   />
-                  <ErrorMessage name="country" />
+                  <ErrorMessage name="objetive" />
                   <p className="smalltext">
                     Ten en cuenta que de cada donativo se deducen comisiones por
                     transacción de pago, incluidos cargos por operaciones con
