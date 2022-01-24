@@ -15,12 +15,6 @@
   "plugins": ["prettier", "react", "testing-library", "jest"],
   "rules": {
     "react/jsx-one-expression-per-line": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
     "linebreak-style": "off",
     "react/jsx-filename-extension": [
       1,
@@ -84,7 +78,6 @@
         }
       }
     ],
-    "linebreak-style": ["error", "windows"],
     "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
