@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
@@ -33,8 +34,23 @@ export default function CampaignForm() {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);
   };
-  const SubmitHandler = async (formData) => {
-    axios.post('localhost/donapp/create', formData);
+
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const { formData } = axios({
+        method: 'post',
+        url: 'localhost/donapp/create',
+      });
+
+      if (!data) {
+        return console.err('Error');
+      }
+
+      console.log(formData);
+    } catch (err) {
+      console.err(err.message);
+    }
   };
 
   const steps = [
@@ -47,7 +63,7 @@ export default function CampaignForm() {
     />,
     <StepThree
       key="StepThree"
-      next={SubmitHandler}
+      next={submitHandler}
       prev={handlePrevStep}
       data={data}
     />,
