@@ -1,7 +1,68 @@
 import React from 'react';
+import styled from 'styled-components';
 
-function index() {
-  return <div />;
-}
+const Navbar = () => (
+  <Container>
+    <a href="/" className="logo">
+      DonApp
+      <span>.</span>
+    </a>
+    <List>
+      <li>
+        <a href="/">Para particulares</a>
+      </li>
+      <li>
+        <a href="/">Para organizaciones benéficas</a>
+      </li>
+      <li>
+        <a href="/">Acerca de</a>
+      </li>
+      <li>
+        <button className="boton" type="submit">
+          Iniciar sesión
+        </button>
+      </li>
+      <li>
+        <button type="submit" className="boton">
+          Registrarse
+        </button>
+      </li>
+    </List>
+  </Container>
+);
 
-export default index;
+export default Navbar;
+
+const Container = styled.header`
+  position: Absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 100px;
+  z-index: 10000;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  .logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2em;
+    text-decoration: none;
+    margin-bottom: 20px;
+  }
+`;
+const List = styled.div`
+  position: relative;
+  display: flex;
+  li {
+    list-style: none;
+
+    margin-left: 30px;
+  }
+  li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+  }
+`;
