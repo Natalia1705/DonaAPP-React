@@ -57,7 +57,7 @@ const StepOne = (props) => {
                     className="step__input"
                   >
                     <option value="health">Salud</option>
-                    <option value="emergency">Emergency</option>
+                    <option value="emergency">Emergencias</option>
                     <option value="funerals">In memoriam</option>
                     <option value="animals">Animales</option>
                   </Field>

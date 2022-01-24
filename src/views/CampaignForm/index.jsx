@@ -35,7 +35,6 @@ export default function CampaignForm() {
   };
   const SubmitHandler = async (formData) => {
     axios.post('localhost/donapp/create', formData);
-    // submit data...
   };
 
   const steps = [
@@ -53,8 +52,6 @@ export default function CampaignForm() {
       data={data}
     />,
   ];
-
-  console.log('data', data);
 
   return <div>{steps[currentStep]}</div>;
 }
