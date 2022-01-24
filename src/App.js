@@ -10,10 +10,12 @@ import LoginPage from './views/LoginPage';
 import RegisterPage from './views/RegisterPage';
 import YourCampaigns from './views/YourCampaigns';
 import PrivateRoute from './common/PrivateRoute';
+import HomePage from './views/HomePage';
 
 const App = () => (
   <BrowserRouter>
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route path="/campaigns-form" element={<CampaignsForm1 />} />
       <Route path="/campaigns-form2" element={<CampaignsForm2 />} />
       <Route path="/campaigns-form3" element={<CampaignsForm3 />} />
