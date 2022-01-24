@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Progres from '../Progress';
 
 const Card = () => {
   const cardData = [
@@ -9,6 +10,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 4000,
+      valor: '40%',
     },
     {
       title: 'Lorem Ipsum',
@@ -16,6 +18,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 8000,
+      valor: '80%',
     },
     {
       title: 'Lorem Ipsum',
@@ -23,6 +26,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 1500,
+      valor: '15%',
     },
     {
       title: 'Lorem Ipsum',
@@ -30,6 +34,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 2500,
+      valor: '25%',
     },
     {
       title: 'Lorem Ipsum',
@@ -37,6 +42,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 200,
+      valor: '2%',
     },
     {
       title: 'Lorem Ipsum',
@@ -44,6 +50,7 @@ const Card = () => {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
       amount: 10000,
       collected: 5000,
+      valor: '50%',
     },
   ];
   return (
@@ -73,6 +80,10 @@ const Card = () => {
               </p>
               <p>Último donativo hace...</p>
             </div>
+            <Progres cardData={data.valor} />
+            <h5>
+              ${data.collected} recolectados de ${data.amount}
+            </h5>
           </div>
         ))}
       </div>
@@ -124,5 +135,9 @@ const Cards = styled.section`
   .content .box .text h3 {
     font-weight: 400;
     color: #111;
+  }
+  .box h5 {
+    margin-top: 20px;
+    font-size: 14px;
   }
 `;
