@@ -83,6 +83,8 @@
           "minProperties": 3
         }
       }
-    ]
+    ],
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
