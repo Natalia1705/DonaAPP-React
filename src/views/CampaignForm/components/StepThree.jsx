@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -5,12 +6,13 @@ import * as Yup from 'yup';
 
 const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
-  img: Yup.string().required().label('Img'),
+  img: Yup.string().label('Img'),
 });
 
 const StepThree = (props) => {
   const handleSubmit = (values) => {
-    props.next(values, true);
+    props.next(values);
+    console.log(values);
   };
 
   return (
@@ -38,6 +40,7 @@ const StepThree = (props) => {
                   <Field
                     type="text"
                     name="title"
+                    id="title"
                     placeholder="Título"
                     className="step__input"
                   />
@@ -48,6 +51,7 @@ const StepThree = (props) => {
                   </p>
                   <div className="editor de texto">
                     <Field
+                      id="description"
                       type="document"
                       name="description"
                       className="step__input"
@@ -56,7 +60,12 @@ const StepThree = (props) => {
                   </div>
                 </div>
                 <div className="step__footer">
-                  <input name="img" type="file" className="step__input" />
+                  <input
+                    id="img"
+                    name="img"
+                    type="file"
+                    className="step__input"
+                  />
                   <button
                     type="button"
                     className="step__button step__button--back"

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable consistent-return */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/button-has-type */
@@ -7,7 +8,7 @@
 /* eslint-disable arrow-body-style */
 import { useState } from 'react';
 import './style.scss';
-import axios from 'axios';
+// import axios from 'axios';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
@@ -35,22 +36,8 @@ export default function CampaignForm() {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const submitHandler = async (e) => {
-    try {
-      e.preventDefault();
-      const { formData } = axios({
-        method: 'post',
-        url: 'localhost/donapp/create',
-      });
-
-      if (!data) {
-        return console.err('Error');
-      }
-
-      console.log(formData);
-    } catch (err) {
-      console.err(err.message);
-    }
+  const submitHandler = async (newData) => {
+    axios.post('http://localhost:5000/api/campaigns', newData);
   };
 
   const steps = [
@@ -68,6 +55,6 @@ export default function CampaignForm() {
       data={data}
     />,
   ];
-
+  console.log(data);
   return <div>{steps[currentStep]}</div>;
 }
