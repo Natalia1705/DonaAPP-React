@@ -13,7 +13,6 @@ import HomePage from './views/HomePage';
 const App = () => (
   <BrowserRouter>
     <Routes>
-
       <Route path="/" element={<HomePage />} />
       <Route path="/campaignform" element={<CampaignsForm />} />
       <Route path="/donate" element={<Donate />} />

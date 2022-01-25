@@ -35,6 +35,7 @@ const StepOne = (props) => {
                 <div className="step__body">
                   <p>Nombre</p>
                   <Field
+                    id="name"
                     type="text"
                     name="name"
                     placeholder="Ej. Juan Perez"
@@ -44,6 +45,7 @@ const StepOne = (props) => {
                   <p>¿Dónde vives?</p>
                   <Field
                     type="text"
+                    id="country"
                     name="country"
                     placeholder="Ingresa el nombre de tu país"
                     className="step__input"
@@ -53,6 +55,7 @@ const StepOne = (props) => {
                   <Field
                     name="category"
                     as="select"
+                    id="category"
                     select
                     className="step__input"
                   >

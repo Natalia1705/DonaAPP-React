@@ -10,7 +10,7 @@ const stepTwoValidationSchema = Yup.object({
 
 const StepTwo = (props) => {
   const handleSubmit = (values) => {
-    props.next(values, true);
+    props.next(values);
   };
 
   return (
@@ -39,6 +39,7 @@ const StepTwo = (props) => {
                   <p>¿Cuánto te gustaría recaudar?</p>
                   <Field
                     type="number"
+                    id="objetive"
                     name="objetive"
                     placeholder="USD"
                     className="step__input"
@@ -52,6 +53,7 @@ const StepTwo = (props) => {
                   <p>¿Cuál es la fecha límite de recaudación?</p>
                   <Field
                     type="date"
+                    id="targetdate"
                     name="targetdate"
                     className="step__input"
                   />
