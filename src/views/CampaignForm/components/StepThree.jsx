@@ -1,18 +1,23 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+// import axios from 'axios';
+
 const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
-  img: Yup.string().label('Img'),
 });
 
 const StepThree = (props) => {
   const handleSubmit = (values) => {
     props.next(values);
-    console.log(values);
   };
 
   return (
@@ -21,7 +26,7 @@ const StepThree = (props) => {
       initialValues={props.data}
       onSubmit={handleSubmit}
     >
-      {({ values }) => (
+      {({ values, setFieldValue }) => (
         <div className="root">
           <Form className="form-register">
             <div className="form-register__header">
@@ -62,9 +67,11 @@ const StepThree = (props) => {
                 <div className="step__footer">
                   <input
                     id="img"
-                    name="img"
                     type="file"
-                    className="step__input"
+                    name="img"
+                    onChange={(e) => {
+                      setFieldValue('img', e.target.files[0]);
+                    }}
                   />
                   <button
                     type="button"
