@@ -38,10 +38,12 @@ export default function CampaignForm() {
 
   const submitHandler = async (newData) => {
     console.log(newData);
-    // const formData = new FormData();
-    // formData.append('file', imageSelected);
-    // formData.append('upload_preset', 'qz5j8z6s');
-    // axios.post('http://localhost:5000/api/camapigns', newData);
+    // axios.post('http://localhost:5000/api/campaigns', newData, {
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
   };
 
   const steps = [
@@ -59,6 +61,6 @@ export default function CampaignForm() {
       data={data}
     />,
   ];
-  console.log(data);
+
   return <div>{steps[currentStep]}</div>;
 }

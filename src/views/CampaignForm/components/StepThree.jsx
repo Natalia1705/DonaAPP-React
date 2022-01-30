@@ -1,3 +1,9 @@
+/* eslint-disable no-var */
+/* eslint-disable indent */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable prefer-template */
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
@@ -8,16 +14,45 @@
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
-// import axios from 'axios';
+import { useState } from 'react';
+import axios from 'axios';
 
 const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
 });
 
 const StepThree = (props) => {
+  const [previewSource, setPreviewSource] = useState();
+
+  const uploadImage = async (files) => {
+    var config = {
+      headers: {
+        'Content-type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': '*',
+        'cache-control': 'no-cache',
+      },
+    };
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('uploal_preset', 'donapp');
+    try {
+      axios.post('http://localhost:5000/campaigns', FormData, config);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (values) => {
+    uploadImage(previewSource);
     props.next(values);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => setPreviewSource(reader.result);
   };
 
   return (
@@ -65,14 +100,25 @@ const StepThree = (props) => {
                   </div>
                 </div>
                 <div className="step__footer">
+                  {previewSource && (
+                    <img
+                      src={previewSource}
+                      alt="chose image"
+                      style={{ height: '140px', width: '290px' }}
+                    />
+                  )}
                   <input
                     id="img"
                     type="file"
                     name="img"
+                    value={values.img.filename}
                     onChange={(e) => {
-                      setFieldValue('img', e.target.files[0]);
+                      const file = e.target.files[0];
+                      setFieldValue('img', file);
+                      previewFile(file);
                     }}
                   />
+
                   <button
                     type="button"
                     className="step__button step__button--back"
