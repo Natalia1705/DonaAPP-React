@@ -67,7 +67,7 @@ const Card = () => {
       </div>
       <div className="content">
         {cardData.map((data) => (
-          <div className="box">
+          <div className="box" key={data.index}>
             <div className="imgBx">
               <img src="/" alt="" />
             </div>
