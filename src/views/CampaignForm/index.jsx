@@ -38,18 +38,22 @@ export default function CampaignForm() {
   };
 
   const submitHandler = async (newData) => {
-    console.log(newData);
-    axios.post(
-      'https://fast-shelf-59848.herokuapp.com/api/campaigns',
-      newData,
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          usertoken: Auth.getSession().token,
+    console.log('newData :', newData);
+    axios
+      .post(
+        'https://fast-shelf-59848.herokuapp.com/api/campaigns' /* 'http://localhost:5000/api/campaigns' */,
+        newData,
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            usertoken: Auth.getSession().token,
+          },
         },
-      },
-    );
+      )
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const steps = [

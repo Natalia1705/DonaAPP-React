@@ -146,6 +146,11 @@ header .navigation li:hover .sub-menu-1 ul li {
   color: #fff;
   text-decoration: none;
 }
+
+/* Card de boostrapxd */
+img.card-img-top {
+  max-height: 244px;
+}
 /* SECTION 3 */
 
 /* .title {
