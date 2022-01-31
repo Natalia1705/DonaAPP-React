@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Donate from './views/Donate';
 import Details from './views/Details';
 import CampaignsForm from './views/CampaignForm';
@@ -9,9 +10,12 @@ import RegisterPage from './views/RegisterPage';
 import YourCampaigns from './views/YourCampaigns';
 import PrivateRoute from './common/PrivateRoute';
 import HomePage from './views/HomePage';
+import Navbar from './components/navbar';
 
 const App = () => (
   <BrowserRouter>
+    <Navbar />
+
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/campaignform" element={<CampaignsForm />} />

@@ -8,6 +8,7 @@
   display: grid;
   grid-template-columns: 1fr;
   padding: 16px 24px;
+  margin-top: 150px;
   .donate {
     &__text {
       text-align: left;
@@ -76,7 +77,7 @@
           letter-spacing: -0.07em;
           text-shadow: white 2px 2px 2px;
         }
-        input[type="range"] {
+        input[type='range'] {
           display: block;
           -webkit-appearance: none;
           background-color: #bdc3c7;
@@ -86,7 +87,7 @@
           margin: 0 auto;
           outline: 0;
         }
-        input[type="range"]::-webkit-slider-thumb {
+        input[type='range']::-webkit-slider-thumb {
           -webkit-appearance: none;
           background-color: var(--color__main);
           width: 30px;
@@ -96,11 +97,11 @@
           cursor: pointer;
           transition: 0.3s ease-in-out;
         }
-        ​ input[type="range"]::-webkit-slider-thumb:hover {
+        ​ input[type='range']::-webkit-slider-thumb:hover {
           background-color: white;
           border: 2px solid var(--color__main);
         }
-        input[type="range"]::-webkit-slider-thumb:active {
+        input[type='range']::-webkit-slider-thumb:active {
           transform: scale(1.6);
         }
       }
@@ -131,7 +132,6 @@
       margin: 0;
     }
   }
-  
 }
 //remove input arrows
 input::-webkit-outer-spin-button,
@@ -139,7 +139,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
