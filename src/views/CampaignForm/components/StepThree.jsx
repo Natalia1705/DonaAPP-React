@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -8,11 +9,66 @@ const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
 });
 const StepThree = (props) => {
-  const handleSubmit = (values) => {
-    props.next(values);
+  /*   const [fileInputState, setFileInputState] = useState(''); */
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [secureUrl, setSecureUrl] = useState('');
+  /*   const [successMsg, setSuccessMsg] = useState('');
+  const [errMsg, setErrMsg] = useState(''); */
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => setPreviewSource(reader.result);
+  };
+  /*   const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  }; */
+
+  const uploadImage = async (base64EncodedImage) => {
+    const base64 = JSON.stringify({ data: base64EncodedImage });
+    /* console.log('stringify :', base64); */
+    try {
+      const response = await fetch(
+        'https://fast-shelf-59848.herokuapp.com/api/files' /* 'http://localhost:5000/api/files' */,
+        {
+          method: 'POST',
+          body: base64,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
+      const rta = await response.json();
+      await setSecureUrl(rta.secureUrl);
+      await console.log(rta.secureUrl);
+      /* setFileInputState(''); */
+      /* setPreviewSource(''); */
+      console.log('Image uploaded successfully');
+    } catch (err) {
+      console.error(err);
+      console.log('Something went wrong!');
+    }
   };
 
-  const [previewSource, setPreviewSource] = useState();
+  const handleSubmitFile = () => {
+    /*     e.preventDefault(); */
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error('AHHHHHHHH!!');
+      console.log('something went wrong!');
+    };
+  };
+  const handleSubmit = async (values) => {
+    await props.next(values);
+    /*     await handleSubmitFile(); */
+  };
 
   //   const data = new FormData();
   //   console.log(FormData);
@@ -33,12 +89,6 @@ const StepThree = (props) => {
   //   uploadImage(previewSource);
   //   props.next(values);
   // };
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => setPreviewSource(reader.result);
-  };
 
   return (
     <Formik
@@ -97,10 +147,13 @@ const StepThree = (props) => {
                     type="file"
                     name="img"
                     value={values.img.filename}
-                    onChange={(e) => {
+                    onChange={async (e) => {
+                      await handleSubmitFile();
+                      await setFieldValue('img', secureUrl);
                       const file = e.target.files[0];
-                      setFieldValue('img', file);
                       previewFile(file);
+                      setSelectedFile(file);
+                      /* setFileInputState(e.target.value); */
                     }}
                   />
 
