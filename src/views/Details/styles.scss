@@ -32,6 +32,7 @@
   margin-top: 16px;
   display: grid;
   grid-template-columns: 1fr;
+  margin-top: 150px;
   .campaign {
     display: flex;
     flex-direction: column;
@@ -126,7 +127,6 @@
     }
   }
 }
-
 
 @media (min-width: 960px) {
   .details__main {

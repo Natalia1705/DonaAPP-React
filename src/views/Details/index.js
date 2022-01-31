@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Comments from '../../components/Comments';
 import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
+
+import Navbar from '../../components/navbar';
 
 const Details = () => {
   const campaignDetails = {
@@ -53,50 +56,56 @@ const Details = () => {
   };
 
   return (
-    <main className="details__main">
-      <div className="campaign">
-        <img className="campaign__img" src={img} alt="" />
-        <p className="campaign__title">{title}</p>
-      </div>
-      <DonationsCard commentsDb={commentsDb} goal={goal} />
-      <div className="description">
-        <div className="description__tags">
-          <p>
-            <i className="fas fa-tags" />
-            {tags}
-          </p>
+    <Container>
+      <Navbar />
+
+      <main className="details__main">
+        <div className="campaign">
+          <img className="campaign__img" src={img} alt="" />
+          <p className="campaign__title">{title}</p>
         </div>
-        <div className="description__content">
-          <p>
-            {description.split(' ').slice(0, 19).join(' ')}
-            {showMore ? (
-              <span id="dots">...</span>
-            ) : (
-              <span id="more">
-                {description
-                  .split(' ')
-                  .slice(20, description.split(' ').length)
-                  .join(' ')}
-              </span>
-            )}
-          </p>
-          <button
-            type="button"
-            className="boton btn btn-secondary btn-sm"
-            onClick={showMoreToggle}
-          >
-            {showMore ? 'Read more' : 'Read less'}
-          </button>
+        <DonationsCard commentsDb={commentsDb} goal={goal} />
+        <div className="description">
+          <div className="description__tags">
+            <p>
+              <i className="fas fa-tags" />
+              {tags}
+            </p>
+          </div>
+          <div className="description__content">
+            <p>
+              {description.split(' ').slice(0, 19).join(' ')}
+              {showMore ? (
+                <span id="dots">...</span>
+              ) : (
+                <span id="more">
+                  {description
+                    .split(' ')
+                    .slice(20, description.split(' ').length)
+                    .join(' ')}
+                </span>
+              )}
+            </p>
+            <button
+              type="button"
+              className="boton btn btn-secondary btn-sm"
+              onClick={showMoreToggle}
+            >
+              {showMore ? 'Read more' : 'Read less'}
+            </button>
+          </div>
+          <Comments
+            name={name}
+            campaignReason={campaignReason}
+            commentsDb={commentsDb}
+          />
+          <ShareModal />
         </div>
-        <Comments
-          name={name}
-          campaignReason={campaignReason}
-          commentsDb={commentsDb}
-        />
-        <ShareModal />
-      </div>
-    </main>
+      </main>
+    </Container>
   );
 };
 
 export default Details;
+
+const Container = styled.body``;
