@@ -36,6 +36,7 @@ export default Navbar;
 const Container = styled.header`
   position: Absolute;
   top: 0;
+
   left: 0;
   width: 100%;
   padding: 40px 100px;

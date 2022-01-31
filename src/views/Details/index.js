@@ -5,7 +5,7 @@ import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
 
-import Navbar from '../../components/navbar';
+// import Navbar from '../../components/navbar';
 
 const Details = () => {
   const campaignDetails = {
@@ -57,7 +57,7 @@ const Details = () => {
 
   return (
     <Container>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <main className="details__main">
         <div className="campaign">
