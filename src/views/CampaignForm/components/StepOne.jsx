@@ -56,13 +56,13 @@ const StepOne = (props) => {
                     name="category"
                     as="select"
                     id="category"
-                    select
+                    select="health"
                     className="step__input"
                   >
-                    <option value="health">Salud</option>
-                    <option value="emergency">Emergencias</option>
-                    <option value="funerals">In memoriam</option>
-                    <option value="animals">Animales</option>
+                    <option value="Salud">Salud</option>
+                    <option value="In memorium">In memoriam</option>
+                    <option value="Mascotas">Animales</option>
+                    <option value="Otros">Otros</option>
                   </Field>
                   <ErrorMessage name="category" />
                 </div>

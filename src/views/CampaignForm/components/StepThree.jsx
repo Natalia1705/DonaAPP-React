@@ -1,53 +1,38 @@
-/* eslint-disable no-var */
-/* eslint-disable indent */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable prefer-template */
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-undef */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
-import axios from 'axios';
 
 const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
 });
-
 const StepThree = (props) => {
-  const [previewSource, setPreviewSource] = useState();
-
-  const uploadImage = async (files) => {
-    var config = {
-      headers: {
-        'Content-type': 'application/json; charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': '*',
-        'cache-control': 'no-cache',
-      },
-    };
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('uploal_preset', 'donapp');
-    try {
-      axios.post('http://localhost:5000/campaigns', FormData, config);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleSubmit = (values) => {
-    uploadImage(previewSource);
     props.next(values);
   };
+
+  const [previewSource, setPreviewSource] = useState();
+
+  //   const data = new FormData();
+  //   console.log(FormData);
+  //   data.append('file', files[0]);
+  //   data.append('uploal_preset', 'donapp');
+  //   try {
+  //     axios.post(
+  //       'https://fast-shelf-59848.herokuapp.com/api/campaigns',
+  //       FormData,
+  //       config,
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // const handleSubmit = (values) => {
+  //   uploadImage(previewSource);
+  //   props.next(values);
+  // };
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -103,7 +88,7 @@ const StepThree = (props) => {
                   {previewSource && (
                     <img
                       src={previewSource}
-                      alt="chose image"
+                      alt="file name"
                       style={{ height: '140px', width: '290px' }}
                     />
                   )}

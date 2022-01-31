@@ -8,7 +8,8 @@
 /* eslint-disable arrow-body-style */
 import { useState } from 'react';
 import './style.scss';
-// import axios from 'axios';
+import axios from 'axios';
+import Auth from '../../utils/Auth';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
@@ -38,12 +39,17 @@ export default function CampaignForm() {
 
   const submitHandler = async (newData) => {
     console.log(newData);
-    // axios.post('http://localhost:5000/api/campaigns', newData, {
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
+    axios.post(
+      'https://fast-shelf-59848.herokuapp.com/api/campaigns',
+      newData,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          usertoken: Auth.getSession().token,
+        },
+      },
+    );
   };
 
   const steps = [

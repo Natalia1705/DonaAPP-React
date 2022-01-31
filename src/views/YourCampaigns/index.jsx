@@ -8,7 +8,7 @@ import Auth from '../../utils/Auth';
 const YourCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/api/campaigns/my-campaigns', {
+    fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/my-campaigns', {
       headers: { usertoken: Auth.getSession().token },
     })
       .then((resp) => resp.json())

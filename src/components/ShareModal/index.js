@@ -65,9 +65,8 @@ const ShareModal = () => (
               </button>
             </div>
             <p className="modal__tip">
-              {`${(
-                <span>Consejo:</span>
-              )} Pega el enlace de esta recaudación de fondos en cualquier lugar.`}
+              <span>Consejo:</span>
+              Pega el enlace de esta recaudación de fondos en cualquier lugar.
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-const URL_BASE = 'http://localhost:5000/api';
+const URL_BASE = 'https://fast-shelf-59848.herokuapp.com/api';
 
 export const signIn = (user) => {
   const query = fetch(`${URL_BASE}/user/signin`, {
