@@ -86,9 +86,7 @@ header.sticky .navigation li a {
   font-family: Poppins;
   border-radius: 5px;
 }
-.boton:hover {
-  color: #000;
-}
+
 .sub-menu-1 {
   display: none;
 }

@@ -18,14 +18,14 @@ const Navbar = () => (
         <a href="/">Acerca de</a>
       </li>
       <li>
-        <button className="boton" type="submit">
-          Iniciar sesión
-        </button>
+        <a href="/login" className="boton">
+          Iniciar Sesión
+        </a>
       </li>
       <li>
-        <button type="submit" className="boton">
+        <a href="/register" className="boton">
           Registrarse
-        </button>
+        </a>
       </li>
     </List>
   </Container>
@@ -44,7 +44,7 @@ const Container = styled.header`
   justify-content: space-between;
   align-items: baseline;
   .logo {
-    color: #fff;
+    color: #444;
     font-weight: 700;
     font-size: 2em;
     text-decoration: none;
@@ -61,8 +61,15 @@ const List = styled.div`
   }
   li a {
     text-decoration: none;
-    color: #fff;
+    color: #444;
     font-weight: 700;
     text-align: center;
+  }
+  .boton {
+    color: #fff;
+    font-weight: 400;
+    :hover {
+      color: black;
+    }
   }
 `;

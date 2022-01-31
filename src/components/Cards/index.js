@@ -65,7 +65,7 @@ const Card = () => {
           praesentium, facere suscipit at repellendus consectetur.
         </p>
       </div>
-      <div className="content">
+      <Content>
         {cardData.map((data) => (
           <div className="box" key={data.index}>
             <div className="imgBx">
@@ -86,7 +86,7 @@ const Card = () => {
             </h5>
           </div>
         ))}
-      </div>
+      </Content>
     </Cards>
   );
 };
@@ -101,14 +101,14 @@ const Cards = styled.section`
     align-items: center;
     flex-direction: column;
   }
-  .content {
-    display: flex;
-    justify-content: center;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    margin-top: 40px;
-  }
-  .content .box {
+`;
+const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  .box {
     width: 340px;
     margin: 20px;
     display: flex;
@@ -116,12 +116,12 @@ const Cards = styled.section`
     border: 15px solid #fff;
     box-shadow: 0 5px 35px rgba(0, 0, 0, 0.08);
   }
-  .content .box .imgBx {
+  .box .imgBx {
     position: relative;
     width: 100%;
     height: 150px;
   }
-  .content .box .imgBx img {
+  .box .imgBx img {
     position: absolute;
     top: 0;
     left: 0;
@@ -129,12 +129,13 @@ const Cards = styled.section`
     height: 100%;
     object-fit: cover;
   }
-  .content .box .text {
+  .box .text {
     padding: 15px 0 5px;
   }
-  .content .box .text h3 {
+  .box .text h3 {
     font-weight: 400;
     color: #111;
+    padding: 0 12px;
   }
   .box h5 {
     margin-top: 20px;

@@ -34,18 +34,22 @@ const Banner = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(https://image.freepik.com/foto-gratis/tiro-escala-grises-lindo-perro-cansado-hogar-durmiendo-calle-tarde_181624-4738.jpg);
+  background: url(https://cdn.pixabay.com/photo/2016/07/07/17/36/orange-1502864_960_720.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   .content {
     max-width: 900px;
     text-align: center;
   }
   .content h2 {
     font-size: 5em;
-    color: #fff;
+    color: #444;
+    font-weight: 800;
   }
   .content p {
     font-size: 1em;
-    color: #fff;
+    color: black;
+    font-weight: 400;
   }
 `;
