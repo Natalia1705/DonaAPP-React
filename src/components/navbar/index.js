@@ -1,35 +1,68 @@
-import React from 'react';
+/* eslint-disable react/jsx-indent */
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setLogOut } from '../../state/auth/navBarLoginSlice';
+import Auth from '../../utils/Auth';
 
-const Navbar = () => (
-  <Container>
-    <a href="/" className="logo">
-      DonApp
-      <span>.</span>
-    </a>
-    <List>
-      <li>
-        <a href="/">Para particulares</a>
-      </li>
-      <li>
-        <a href="/">Para organizaciones benéficas</a>
-      </li>
-      <li>
-        <a href="/">Acerca de</a>
-      </li>
-      <li>
-        <a href="/login" className="boton">
-          Iniciar Sesión
-        </a>
-      </li>
-      <li>
-        <a href="/register" className="boton">
-          Registrarse
-        </a>
-      </li>
-    </List>
-  </Container>
-);
+const Navbar = () => {
+  const isLogged = useSelector((state) => state.navBarLoginSlice.isLogged);
+  const dispatch = useDispatch();
+  const [navLoger, setNavLoger] = useState(false);
+  useEffect(() => {
+    if (isLogged) {
+      setNavLoger(true);
+    } else {
+      setNavLoger(false);
+    }
+  }, [isLogged]);
+  const handleLogOut = () => {
+    Auth.deleteSession();
+    dispatch(setLogOut());
+  };
+  return (
+    <Container>
+      <a href="/" className="logo">
+        DonApp
+        <span>.</span>
+      </a>
+      <List>
+        <li>
+          <a href="/">Para particulares</a>
+        </li>
+        <li>
+          <a href="/">Para organizaciones benéficas</a>
+        </li>
+        <li>
+          <a href="/">Acerca de</a>
+        </li>
+        {navLoger ? (
+          <li>
+            <Link to="/">
+              <text className="boton" onClick={handleLogOut}>
+                Cerrar sesión
+              </text>
+            </Link>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">
+                <text className="boton">Iniciar Sesión</text>
+              </Link>
+            </li>
+            <li>
+              <Link to="/register">
+                <text className="boton">Registrarse</text>
+              </Link>
+            </li>
+          </>
+        )}
+      </List>
+    </Container>
+  );
+};
 
 export default Navbar;
 
