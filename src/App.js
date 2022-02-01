@@ -11,6 +11,7 @@ import YourCampaigns from './views/YourCampaigns';
 import PrivateRoute from './common/PrivateRoute';
 import HomePage from './views/HomePage';
 import Navbar from './components/navbar';
+import PaymentPage from './views/PaymentPage';
 
 const App = () => (
   <BrowserRouter>
@@ -28,6 +29,14 @@ const App = () => (
         element={
           <PrivateRoute>
             <YourCampaigns />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <PrivateRoute>
+            <PaymentPage />
           </PrivateRoute>
         }
       />
