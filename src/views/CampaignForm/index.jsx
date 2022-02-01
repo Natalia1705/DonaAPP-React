@@ -38,6 +38,7 @@ export default function CampaignForm() {
   };
 
   const submitHandler = async (newData) => {
+    console.log('sesion :', Auth.getSession());
     console.log('newData :', newData);
     axios
       .post(
