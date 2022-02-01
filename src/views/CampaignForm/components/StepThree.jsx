@@ -9,28 +9,16 @@ const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
 });
 const StepThree = (props) => {
-  /*   const [fileInputState, setFileInputState] = useState(''); */
   const [previewSource, setPreviewSource] = useState('');
-  const [selectedFile, setSelectedFile] = useState();
-  const [secureUrl, setSecureUrl] = useState('');
-  /*   const [successMsg, setSuccessMsg] = useState('');
-  const [errMsg, setErrMsg] = useState(''); */
-
+  const [secureUrl, setSecureUrl] = useState('holi');
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => setPreviewSource(reader.result);
   };
-  /*   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    previewFile(file);
-    setSelectedFile(file);
-    setFileInputState(e.target.value);
-  }; */
 
   const uploadImage = async (base64EncodedImage) => {
     const base64 = JSON.stringify({ data: base64EncodedImage });
-    /* console.log('stringify :', base64); */
     try {
       const response = await fetch(
         'https://fast-shelf-59848.herokuapp.com/api/files' /* 'http://localhost:5000/api/files' */,
@@ -41,10 +29,7 @@ const StepThree = (props) => {
         },
       );
       const rta = await response.json();
-      await setSecureUrl(rta.secureUrl);
-      await console.log(rta.secureUrl);
-      /* setFileInputState(''); */
-      /* setPreviewSource(''); */
+      setSecureUrl(rta.secureUrl);
       console.log('Image uploaded successfully');
     } catch (err) {
       console.error(err);
@@ -52,11 +37,12 @@ const StepThree = (props) => {
     }
   };
 
-  const handleSubmitFile = () => {
-    /*     e.preventDefault(); */
-    if (!selectedFile) return;
+  const handleSubmitFile = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    console.log('HandleSubmitFile');
     const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
       uploadImage(reader.result);
     };
@@ -66,29 +52,9 @@ const StepThree = (props) => {
     };
   };
   const handleSubmit = async (values) => {
+    console.log('HandleSubmit');
     await props.next(values);
-    /*     await handleSubmitFile(); */
   };
-
-  //   const data = new FormData();
-  //   console.log(FormData);
-  //   data.append('file', files[0]);
-  //   data.append('uploal_preset', 'donapp');
-  //   try {
-  //     axios.post(
-  //       'https://fast-shelf-59848.herokuapp.com/api/campaigns',
-  //       FormData,
-  //       config,
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // const handleSubmit = (values) => {
-  //   uploadImage(previewSource);
-  //   props.next(values);
-  // };
 
   return (
     <Formik
@@ -148,12 +114,7 @@ const StepThree = (props) => {
                     name="img"
                     value={values.img.filename}
                     onChange={async (e) => {
-                      await handleSubmitFile();
-                      await setFieldValue('img', secureUrl);
-                      const file = e.target.files[0];
-                      previewFile(file);
-                      setSelectedFile(file);
-                      /* setFileInputState(e.target.value); */
+                      handleSubmitFile(e);
                     }}
                   />
 
@@ -164,7 +125,11 @@ const StepThree = (props) => {
                   >
                     Regresar
                   </button>
-                  <button type="submit" className="step__button">
+                  <button
+                    type="submit"
+                    className="step__button"
+                    onClick={() => setFieldValue('img', secureUrl)}
+                  >
                     Terminar
                   </button>
                 </div>
