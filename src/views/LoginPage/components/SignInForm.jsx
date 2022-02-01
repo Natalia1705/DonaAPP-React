@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '../../../common/LoaderComponent';
 import MessageComponent from '../../../common/MessageComponent';
 import { postSignIn } from '../../../thunkAction/authThunk';
+import { setLogin } from '../../../state/auth/navBarLoginSlice';
 import Auth from '../../../utils/Auth';
 import useSignin from '../hook/useSignin';
 
@@ -37,6 +38,7 @@ const SignInForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignIn(values));
+          dispatch(setLogin());
           resetForm({ values: '' });
         }}
       >
