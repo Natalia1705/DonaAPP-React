@@ -4,7 +4,11 @@
     "es2021": true,
     "jest/globals": true
   },
-  "extends": ["plugin:prettier/recommended", "airbnb"],
+  "extends": [
+    "plugin:prettier/recommended",
+    "airbnb",
+    "plugin:cypress/recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
