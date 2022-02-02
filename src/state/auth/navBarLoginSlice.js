@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Auth from '../../utils/Auth';
 
 const navBarLoginSlice = createSlice({
   name: 'navBarLoginSlice',
-  initialState: { isLogged: false },
+  initialState: { isLogged: Auth.isLogin() },
   reducers: {
     setLogin: (state) => {
       state.isLogged = true;

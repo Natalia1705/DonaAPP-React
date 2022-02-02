@@ -24,7 +24,7 @@ const SignInForm = () => {
     }
     if (user) {
       Auth.saveSession(user);
-      navigate('/campaigns');
+      navigate('/');
     }
   }, [user]);
 

@@ -5,6 +5,7 @@ import Progres from '../Progress';
 const Card = () => {
   const cardData = [
     {
+      id: 1,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -13,6 +14,7 @@ const Card = () => {
       valor: '40%',
     },
     {
+      id: 2,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -21,6 +23,7 @@ const Card = () => {
       valor: '80%',
     },
     {
+      id: 3,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -29,6 +32,7 @@ const Card = () => {
       valor: '15%',
     },
     {
+      id: 4,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -37,6 +41,7 @@ const Card = () => {
       valor: '25%',
     },
     {
+      id: 5,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -45,6 +50,7 @@ const Card = () => {
       valor: '2%',
     },
     {
+      id: 6,
       title: 'Lorem Ipsum',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
@@ -67,7 +73,7 @@ const Card = () => {
       </div>
       <Content>
         {cardData.map((data) => (
-          <div className="box" key={data.index}>
+          <div className="box" key={data.id}>
             <div className="imgBx">
               <img src="/" alt="" />
             </div>
