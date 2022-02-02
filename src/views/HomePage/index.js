@@ -23,7 +23,7 @@ const HomePage = () => (
 );
 
 export default HomePage;
-const Container = styled.body``;
+const Container = styled.div``;
 const Banner = styled.section`
   position: relative;
   width: 100%;
