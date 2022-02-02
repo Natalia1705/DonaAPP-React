@@ -8,14 +8,24 @@ import Auth from '../../utils/Auth';
 
 const YourCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
+
+  const deleteHandler = (e) => {
+    const campaingId = e.target.attributes.campaingid.nodeValue;
+    /* console.log(e.target.attributes.campaingid.nodeValue); */
+    fetch(
+      `https://fast-shelf-59848.herokuapp.com/api/campaigns/${campaingId}`,
+      {
+        method: 'DELETE',
+      },
+    );
+  };
   useEffect(() => {
     fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/my-campaigns', {
       headers: { usertoken: Auth.getSession().token },
     })
       .then((resp) => resp.json())
       .then((data) => setCampaigns(data.data.campaigns));
-  }, []);
-
+  }, [deleteHandler]);
   return (
     <Container>
       <div className="container">
@@ -51,6 +61,15 @@ const YourCampaigns = () => {
                         <a href="/" className="btn btn-outline-primary">
                           Editar
                         </a>
+                        <button
+                          className="btn btn-outline-primary"
+                          type="button"
+                          data-cy="login"
+                          onClick={deleteHandler}
+                          campaingid={e._id}
+                        >
+                          Eliminar
+                        </button>
                       </div>
                     </div>
                   </div>

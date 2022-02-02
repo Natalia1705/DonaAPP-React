@@ -40,25 +40,25 @@ const Navbar = () => {
         {navLoger ? (
           <li>
             <Link to="/">
-              <text className="boton" onClick={handleLogOut}>
+              <button className="boton" type="button" onClick={handleLogOut}>
                 Cerrar sesión
-              </text>
+              </button>
             </Link>
           </li>
         ) : (
           <>
             <li>
               <Link to="/login">
-                <text className="boton" data-cy="login">
+                <button className="boton" type="button" data-cy="login">
                   Iniciar Sesión
-                </text>
+                </button>
               </Link>
             </li>
             <li>
               <Link to="/register">
-                <text className="boton" data-cy="register">
+                <button className="boton" type="button" data-cy="register">
                   Registrarse
-                </text>
+                </button>
               </Link>
             </li>
           </>
