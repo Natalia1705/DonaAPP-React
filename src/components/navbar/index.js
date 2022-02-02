@@ -9,7 +9,7 @@ import Auth from '../../utils/Auth';
 const Navbar = () => {
   const isLogged = useSelector((state) => state.navBarLoginSlice.isLogged);
   const dispatch = useDispatch();
-  const [navLoger, setNavLoger] = useState(false);
+  const [navLoger, setNavLoger] = useState(isLogged);
   useEffect(() => {
     if (isLogged) {
       setNavLoger(true);
@@ -49,12 +49,16 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/login">
-                <text className="boton">Iniciar Sesión</text>
+                <text className="boton" data-cy="login">
+                  Iniciar Sesión
+                </text>
               </Link>
             </li>
             <li>
               <Link to="/register">
-                <text className="boton">Registrarse</text>
+                <text className="boton" data-cy="register">
+                  Registrarse
+                </text>
               </Link>
             </li>
           </>

@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import Card from '../../components/Cards';
 import Footer from '../../components/Footer';
 
-// import Navbar from '../../components/navbar';
-
 const HomePage = () => (
   <Container>
-    {/* <Navbar /> */}
     <Banner>
       <div className="content">
         <h2>Apoya una noble causa.</h2>
