@@ -73,10 +73,11 @@ export default Navbar;
 const Container = styled.header`
   position: Absolute;
   top: 0;
-
+  box-shadow: 2px 45px 24px -34px rgba(0, 0, 0, 0.02);
   left: 0;
   width: 100%;
-  padding: 40px 100px;
+
+  padding: 20px 100px;
   z-index: 10000;
   display: flex;
   justify-content: space-between;
