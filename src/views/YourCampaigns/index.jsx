@@ -51,18 +51,31 @@ const YourCampaigns = () => {
               ? campaigns.map((e) => (
                   <div className="p-0 col-md-6 col-lg-4" key={e._id}>
                     <div className="card m-3 shadow bg-body rounded">
-                      <img src={e.img} className="card-img-top" alt={e.title} />
+                      <img
+                        src={e.img}
+                        className="card-img-top"
+                        alt={e.title}
+                        style={{ height: '200px' }}
+                      />
                       <div className="card-body">
-                        <h5 className="card-title">{e.title}</h5>
+                        <h5 className="card-title ms-3">{e.title}</h5>
                         <p className="card-text fw-light fs-6">
                           Fecha de creación: {e.date}
                         </p>
                         <hr />
-                        <a href="/" className="btn btn-outline-primary">
+                        <button
+                          className="btn btn-outline-primary ms-2"
+                          type="button"
+                          data-cy="login"
+                          campaingid={e._id}
+                        >
+                          Detalles
+                        </button>
+                        <a href="/" className="btn btn-outline-primary ms-2">
                           Editar
                         </a>
                         <button
-                          className="btn btn-outline-primary"
+                          className="btn btn-outline-danger ms-2"
                           type="button"
                           data-cy="login"
                           onClick={deleteHandler}
