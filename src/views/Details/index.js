@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import Comments from '../../components/Comments';
 import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
 
-// import Navbar from '../../components/navbar';
-
 const Details = () => {
+  const { id } = useParams();
+  const [campaignDetail, setCampaignDetail] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://fast-shelf-59848.herokuapp.com/api/campaigns/${id}`, {
+      /* headers: { usertoken: Auth.getSession().token }, */
+    })
+      .then((resp) => resp.json())
+      .then(
+        (data) => {
+          setCampaignDetail(data.data);
+          setLoading(false);
+        },
+        /* setCampaignDetail(data.data.campaigns) */
+      );
+  }, []);
   const campaignDetails = {
     title: 'Ayuda a Walter White en su lucha contra el cáncer del pulmón',
     description:
@@ -39,73 +56,64 @@ const Details = () => {
       },
     ],
   };
-  const {
-    title,
-    description,
-    img,
-    goal,
-    tags,
-    name,
-    campaignReason,
-    commentsDb,
-  } = campaignDetails;
+  const { commentsDb } = campaignDetails;
 
   const [showMore, setShowMore] = useState(true);
   const showMoreToggle = () => {
     setShowMore(!showMore);
   };
-
   return (
     <Container>
-      {/* <Navbar /> */}
-
-      <main className="details__main">
-        <div className="campaign">
-          <img className="campaign__img" src={img} alt="" />
-          <p className="campaign__title">{title}</p>
-        </div>
-        <DonationsCard commentsDb={commentsDb} goal={goal} />
-        <div className="description">
-          <div className="description__tags">
-            <p>
-              <i className="fas fa-tags" />
-              {tags}
-            </p>
+      {loading ? (
+        'cargando'
+      ) : (
+        <main className="details__main">
+          <div className="campaign">
+            <img className="campaign__img" src={campaignDetail.img} alt="" />
+            <p className="campaign__title">{campaignDetail.title}</p>
           </div>
-          <div className="description__content">
-            <p>
-              {description.split(' ').slice(0, 19).join(' ')}
-              {showMore ? (
-                <span id="dots">...</span>
-              ) : (
-                <span id="more">
-                  {description
-                    .split(' ')
-                    .slice(20, description.split(' ').length)
-                    .join(' ')}
-                </span>
-              )}
-            </p>
-            <button
-              type="button"
-              className="boton btn btn-secondary btn-sm"
-              onClick={showMoreToggle}
-            >
-              {showMore ? 'Read more' : 'Read less'}
-            </button>
-          </div>
-          <Comments
-            name={name}
-            campaignReason={campaignReason}
+          <DonationsCard
             commentsDb={commentsDb}
+            goal={campaignDetail.objetive}
           />
-          <ShareModal />
-        </div>
-      </main>
+          <div className="description">
+            <div className="description__tags">
+              <p>
+                <i className="fas fa-tags" />
+                {campaignDetail.category}
+              </p>
+            </div>
+            <div className="description__content">
+              <p>
+                {campaignDetail.description.split(' ').slice(0, 19).join(' ')}
+                {showMore ? (
+                  <span id="dots">...</span>
+                ) : (
+                  <span id="more">
+                    {campaignDetail.description
+                      .split(' ')
+                      .slice(20, campaignDetail.description.split(' ').length)
+                      .join(' ')}
+                  </span>
+                )}
+              </p>
+              <button
+                type="button"
+                className="boton btn btn-secondary btn-sm"
+                onClick={showMoreToggle}
+              >
+                {showMore ? 'Read more' : 'Read less'}
+              </button>
+            </div>
+            <Comments name={campaignDetail.name} commentsDb={commentsDb} />
+            <ShareModal />
+          </div>
+        </main>
+      )}
     </Container>
   );
 };
 
 export default Details;
 
-const Container = styled.body``;
+const Container = styled.div``;

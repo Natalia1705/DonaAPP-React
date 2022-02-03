@@ -31,7 +31,8 @@ const DonationsCard = ({ commentsDb, goal }) => {
         </span>
         {` Recaudados del objetivo de S./ ${goal}`}
         <br />
-        {`${(<span className="total">{commentsDb.length}</span>)} donantes`}
+        <span className="total">{commentsDb.length}</span>
+        {' donantes'}
       </p>
       <div className="donations__buttons">
         <button
