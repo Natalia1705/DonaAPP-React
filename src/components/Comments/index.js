@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CommentCard from '../CommentCard';
 import './style.scss';
 
-const Comments = ({ name, campaignReason, commentsDb }) => {
+const Comments = ({ name, commentsDb }) => {
   const navigate = useNavigate();
   const [commentsInfo, setCommentsInfo] = useState([]);
   useEffect(() => {
@@ -13,7 +13,7 @@ const Comments = ({ name, campaignReason, commentsDb }) => {
   return (
     <div className="comments">
       <p className="comments__title">
-        {`Comentarios ${(<span>{commentsInfo.length})</span>)}`}
+        {'Comentarios '}(<span>{commentsInfo.length}</span>)
       </p>
       {commentsInfo.map((e) => (
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -23,8 +23,6 @@ const Comments = ({ name, campaignReason, commentsDb }) => {
         <p className="cta__text">
           Tu tambien puedes tomar acción y ayudar a
           <span className="cta__name">{name}</span>
-          con
-          {campaignReason}
         </p>
         <button
           type="button"

@@ -65,14 +65,14 @@ const YourCampaigns = () => {
                           Fecha de creación: {timeAgo(e.date)}
                         </p>
                         <hr />
-                        <button
+                        <Link
+                          to={`/details/${e._id}`}
                           className="btn btn-outline-primary ms-2"
                           type="button"
                           data-cy="login"
-                          campaingid={e._id}
                         >
                           Detalles
-                        </button>
+                        </Link>
                         <a href="/" className="btn btn-outline-primary ms-2">
                           Editar
                         </a>
