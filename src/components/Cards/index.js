@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Progres from '../Progress';
-import { timeAgo } from '../../utils/timer';
 
 const Card = () => {
   const [campaignsData, setCampaignsData] = useState([]);
@@ -38,7 +37,7 @@ const Card = () => {
                 <h3>{data.title}</h3>
                 <p>{data.name}</p>
                 <p>{data.description}</p>
-                <p>Último donativo {timeAgo(data.date)}</p>
+                <p>Último donativo {/* {timeAgo(data.date)} */} hace 2 horas</p>
               </div>
               <Progres
                 cardData={`${(data.donations / data.objetive) * 100}%`}
