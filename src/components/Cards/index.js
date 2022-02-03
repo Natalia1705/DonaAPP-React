@@ -1,64 +1,20 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Progres from '../Progress';
+import { timeAgo } from '../../utils/timer';
 
 const Card = () => {
-  const cardData = [
-    {
-      id: 1,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 4000,
-      valor: '40%',
-    },
-    {
-      id: 2,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 8000,
-      valor: '80%',
-    },
-    {
-      id: 3,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 1500,
-      valor: '15%',
-    },
-    {
-      id: 4,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 2500,
-      valor: '25%',
-    },
-    {
-      id: 5,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 200,
-      valor: '2%',
-    },
-    {
-      id: 6,
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit praesentium, facere suscipit at repellendus consectetur',
-      amount: 10000,
-      collected: 5000,
-      valor: '50%',
-    },
-  ];
+  const [campaignsData, setCampaignsData] = useState([]);
+  useEffect(() => {
+    fetch('http://localhost:5000/api/campaigns/', {
+      headers: { limit: 6 },
+    })
+      .then((resp) => resp.json())
+      .then((data) => setCampaignsData(data.data));
+    /* setCampaignsData(data.data.campaigns) */
+  }, []);
+
   return (
     <Cards>
       <div className="title">
@@ -72,26 +28,26 @@ const Card = () => {
         </p>
       </div>
       <Content>
-        {cardData.map((data) => (
-          <div className="box" key={data.id}>
-            <div className="imgBx">
-              <img src="/" alt="" />
+        {campaignsData &&
+          campaignsData.map((data) => (
+            <div className="box" key={data._id}>
+              <div className="imgBx">
+                <img src={data.img} alt={data.title} />
+              </div>
+              <div className="text">
+                <h3>{data.title}</h3>
+                <p>{data.name}</p>
+                <p>{data.description}</p>
+                <p>Último donativo {timeAgo(data.date)}</p>
+              </div>
+              <Progres
+                cardData={`${(data.donations / data.objetive) * 100}%`}
+              />
+              <h5>
+                ${data.donations} recolectados de ${data.objetive}
+              </h5>
             </div>
-            <div className="text">
-              <h3>{data.title}</h3>
-              <p>{data.title}</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
-                enim.
-              </p>
-              <p>Último donativo hace...</p>
-            </div>
-            <Progres cardData={data.valor} />
-            <h5>
-              ${data.collected} recolectados de ${data.amount}
-            </h5>
-          </div>
-        ))}
+          ))}
       </Content>
     </Cards>
   );

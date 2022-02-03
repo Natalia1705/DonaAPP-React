@@ -10,7 +10,7 @@ const Progres = ({ cardData }) => (
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      {cardData}
+      {`${Math.round(cardData.split('%')[0])}%`}
     </div>
   </div>
 );
