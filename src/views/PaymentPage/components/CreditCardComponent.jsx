@@ -18,9 +18,9 @@ const initialState = {
 const CreditCardComponent = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.paymentReducer.loading);
-  const response = useSelector((state) => state.paymentReducer.dataPayment);
+  // const response = useSelector((state) => state.paymentReducer.dataPayment);
   // const [startDate, setStartDate] = useState(null);
-  console.log(response);
+  // console.log(response);
   const [data, setData] = useState(initialState);
   const handleInputChange = (e) => {
     setData({
@@ -34,14 +34,14 @@ const CreditCardComponent = () => {
   };
   const handleSubmitContinue = (e) => {
     e.preventDefault();
-    console.log('Enviando...');
+    // console.log('Enviando...');
     const cardData = {
       cardNumber: data.cardNumber,
       cardExpYear: data.expiry.getFullYear(),
       cardExpMonth: data.expiry.getMonth() + 1,
       cardCvc: data.cardCvc,
     };
-    console.log(cardData);
+    // console.log(cardData);
     // create credit card
     dispatch(createCardTokenThunk(cardData));
     // create a customer
