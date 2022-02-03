@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setLogOut } from '../../state/auth/navBarLoginSlice';
+import { cleaningUser } from '../../state/auth/authSlice';
 import Auth from '../../utils/Auth';
 
 const Navbar = () => {
@@ -13,13 +14,15 @@ const Navbar = () => {
   useEffect(() => {
     if (isLogged) {
       setNavLoger(true);
-    } else {
+    }
+    if (!isLogged) {
       setNavLoger(false);
     }
   }, [isLogged]);
   const handleLogOut = () => {
     Auth.deleteSession();
     dispatch(setLogOut());
+    dispatch(cleaningUser());
   };
   return (
     <Container>
