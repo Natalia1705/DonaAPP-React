@@ -8,6 +8,11 @@ const authSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    cleaningUser: (state) => {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(postSignUp.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -33,5 +38,5 @@ const authSlice = createSlice({
     });
   },
 });
-
+export const { cleaningUser } = authSlice.actions;
 export default authSlice.reducer;
