@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Auth from '../../utils/Auth';
+import { timeAgo } from '../../utils/timer';
 
 const YourCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -61,7 +62,7 @@ const YourCampaigns = () => {
                       <div className="card-body">
                         <h5 className="card-title ms-3">{e.title}</h5>
                         <p className="card-text fw-light fs-6">
-                          Fecha de creación: {e.date}
+                          Fecha de creación: {timeAgo(e.date)}
                         </p>
                         <hr />
                         <button
