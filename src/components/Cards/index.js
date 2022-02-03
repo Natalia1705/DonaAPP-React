@@ -7,7 +7,7 @@ import { timeAgo } from '../../utils/timer';
 const Card = () => {
   const [campaignsData, setCampaignsData] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000/api/campaigns/', {
+    fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/', {
       headers: { limit: 6 },
     })
       .then((resp) => resp.json())
