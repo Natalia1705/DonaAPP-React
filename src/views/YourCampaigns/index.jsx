@@ -8,16 +8,17 @@ import Auth from '../../utils/Auth';
 
 const YourCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
+  const [isDelete, setIsDelete] = useState(false);
 
-  const deleteHandler = (e) => {
+  const deleteHandler = async (e) => {
     const campaingId = e.target.attributes.campaingid.nodeValue;
-    /* console.log(e.target.attributes.campaingid.nodeValue); */
-    fetch(
+    await fetch(
       `https://fast-shelf-59848.herokuapp.com/api/campaigns/${campaingId}`,
       {
         method: 'DELETE',
       },
     );
+    setIsDelete(!isDelete);
   };
   useEffect(() => {
     fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/my-campaigns', {
@@ -25,7 +26,7 @@ const YourCampaigns = () => {
     })
       .then((resp) => resp.json())
       .then((data) => setCampaigns(data.data.campaigns));
-  }, [deleteHandler]);
+  }, [isDelete]);
   return (
     <Container>
       <div className="container">
