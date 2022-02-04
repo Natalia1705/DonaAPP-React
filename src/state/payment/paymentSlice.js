@@ -1,42 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  createCardTokenThunk,
-  createCustomerThunk,
+  createCardAndCustomerThunk,
   makePaymentThunk,
 } from '../../thunkAction/paymentThunk';
 
 const paymentSlice = createSlice({
   name: 'payment',
   initialState: {
-    dataPayment: null,
+    resPayment: null,
+    resCard: null,
     loading: false,
+    success: false,
     error: null,
   },
   extraReducers: (builder) => {
-    builder.addCase(createCardTokenThunk.fulfilled, (state, action) => {
-      state.dataPayment = action.payload;
+    builder.addCase(createCardAndCustomerThunk.fulfilled, (state, action) => {
+      state.resCard = action.payload;
       state.loading = false;
+      state.success = true;
     });
-    builder.addCase(createCardTokenThunk.pending, (state) => {
+    builder.addCase(createCardAndCustomerThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(createCardTokenThunk.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    builder.addCase(createCustomerThunk.fulfilled, (state, action) => {
-      state.dataPayment = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(createCustomerThunk.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(createCustomerThunk.rejected, (state) => {
+    builder.addCase(createCardAndCustomerThunk.rejected, (state) => {
       state.loading = false;
       state.error = true;
     });
     builder.addCase(makePaymentThunk.fulfilled, (state, action) => {
-      state.dataPayment = action.payload;
+      state.resPayment = action.payload;
       state.loading = false;
     });
     builder.addCase(makePaymentThunk.pending, (state) => {
