@@ -12,11 +12,11 @@ import PrivateRoute from './common/PrivateRoute';
 import HomePage from './views/HomePage';
 import Navbar from './components/navbar';
 import PaymentPage from './views/PaymentPage';
+import Error404 from './views/Error404';
 
 const App = () => (
   <BrowserRouter>
     <Navbar />
-
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/campaignform" element={<CampaignsForm />} />
@@ -40,6 +40,7 @@ const App = () => (
           </PrivateRoute>
         }
       />
+      <Route path="*" element={<Error404 />} />
     </Routes>
   </BrowserRouter>
 );
