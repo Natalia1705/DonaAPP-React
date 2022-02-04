@@ -8,6 +8,7 @@
 /* eslint-disable arrow-body-style */
 import { useState } from 'react';
 import './style.scss';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../utils/Auth';
 import StepOne from './components/StepOne';
@@ -15,6 +16,7 @@ import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
 
 export default function CampaignForm() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: '',
     country: '',
@@ -55,6 +57,7 @@ export default function CampaignForm() {
       .catch((error) => {
         console.log(error);
       });
+    navigate('/campaigns');
   };
 
   const steps = [

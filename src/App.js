@@ -13,6 +13,7 @@ import HomePage from './views/HomePage';
 import Navbar from './components/navbar';
 import PaymentPage from './views/PaymentPage';
 import Error404 from './views/Error404';
+import Edit from './views/Edit';
 
 const App = () => (
   <BrowserRouter>
@@ -22,6 +23,14 @@ const App = () => (
       <Route path="/campaignform" element={<CampaignsForm />} />
       <Route path="/donate" element={<Donate />} />
       <Route path="/details/:id" element={<Details />} />
+      <Route
+        path="/details/edit/:id"
+        element={
+          <PrivateRoute>
+            <Edit />
+          </PrivateRoute>
+        }
+      />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route

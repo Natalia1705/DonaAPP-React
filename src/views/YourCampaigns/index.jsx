@@ -72,9 +72,12 @@ const YourCampaigns = () => {
                         >
                           Detalles
                         </Link>
-                        <a href="/" className="btn btn-outline-primary ms-2">
+                        <Link
+                          to={`/details/edit/${e._id}`}
+                          className="btn btn-outline-primary ms-2"
+                        >
                           Editar
-                        </a>
+                        </Link>
                         <button
                           className="btn btn-outline-danger ms-2"
                           type="button"
