@@ -1,17 +1,31 @@
 import { Formik } from 'formik';
 import { Form, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '../../../common/LoaderComponent';
+import { setLogin } from '../../../state/auth/navBarLoginSlice';
 import MessageComponent from '../../../common/MessageComponent';
 import { postSignUp } from '../../../thunkAction/authThunk';
 import useSignup from '../hooks/useSignup';
+import Auth from '../../../utils/Auth';
 
 const SignupFormComponent = () => {
   const { validationSchema } = useSignup();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
   const user = useSelector((state) => state.authReducer.user);
   const error = useSelector((state) => state.authReducer.error);
+  useEffect(() => {
+    if (Auth.isLogin()) {
+      navigate('/campaigns');
+    }
+    if (user) {
+      Auth.saveSession(user);
+      navigate('/campaigns');
+    }
+  }, [user]);
   return (
     <>
       <Formik
@@ -25,6 +39,7 @@ const SignupFormComponent = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignUp(values));
+          dispatch(setLogin());
           resetForm({ values: '' });
         }}
       >

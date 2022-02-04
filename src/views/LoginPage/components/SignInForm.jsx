@@ -20,11 +20,11 @@ const SignInForm = () => {
 
   useEffect(() => {
     if (Auth.isLogin()) {
-      navigate('/');
+      navigate('/campaigns');
     }
     if (user) {
       Auth.saveSession(user);
-      navigate('/');
+      navigate('/campaigns');
     }
   }, [user]);
 
