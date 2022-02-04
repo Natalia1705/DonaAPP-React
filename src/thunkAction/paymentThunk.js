@@ -12,9 +12,17 @@ export const createCardTokenThunk = createAsyncThunk('payment/createCardToken', 
 });
 
 // prettier-ignore
-export const createCustomerThunk = createAsyncThunk('payment/createCustomer', async (customer) => {
-  const res = await createCustomer(customer);
+export const createCustomerThunk = createAsyncThunk('payment/createCustomer', async () => {
+  const res = await createCustomer();
   return res.json();
+});
+
+// prettier-ignore
+export const createCardAndCustomerThunk = createAsyncThunk('payment/createCardAndCustomer', async (creditCard) => {
+  const card = await createCardToken(creditCard);
+  const customer = await createCustomer();
+
+  return { card: await card.json(), customer: await customer.json() };
 });
 
 // prettier-ignore
