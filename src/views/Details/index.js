@@ -73,6 +73,7 @@ const Details = () => {
             <p className="campaign__title">{campaignDetail.title}</p>
           </div>
           <DonationsCard
+            campaignid={id}
             commentsDb={commentsDb}
             goal={campaignDetail.objetive}
           />

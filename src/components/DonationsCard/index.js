@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const DonationsCard = ({ commentsDb, goal }) => {
+const DonationsCard = ({ commentsDb, goal, campaignid }) => {
   const navigate = useNavigate();
   const customWidth = () => {
     const commentMap = commentsDb.map((e) => e.amount);
@@ -46,7 +46,7 @@ const DonationsCard = ({ commentsDb, goal }) => {
         <button
           type="button"
           className="boton btn btn-primary btn-lg"
-          onClick={() => navigate('/donate')}
+          onClick={() => navigate(`/donate/${campaignid}`)}
         >
           Donar
         </button>
