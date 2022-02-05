@@ -12,7 +12,11 @@ const HomePage = () => (
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae,
           eveniet? Non dolorem voluptatibus quod rem?
         </p>
-        <a href="/campaignform" className="boton2">
+        <a
+          href="/campaignform"
+          className="boton2"
+          data-cy="new-campaign-button"
+        >
           Inicia tu campaña ahora
         </a>
       </div>

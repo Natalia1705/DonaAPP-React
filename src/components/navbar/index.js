@@ -26,10 +26,10 @@ const Navbar = () => {
   };
   return (
     <Container>
-      <a href="/" className="logo">
+      <Link to="/" className="logo">
         DonApp
         <span>.</span>
-      </a>
+      </Link>
       <List>
         <li>
           <a href="/">Cómo funciona</a>
@@ -41,14 +41,23 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/campaigns">
-                <button className="boton" type="button">
+                <button
+                  className="boton"
+                  type="button"
+                  data-cy="go-to-campaigns-button"
+                >
                   Ve a tus campañas
                 </button>
               </Link>
             </li>
             <li>
               <Link to="/">
-                <button className="boton" type="button" onClick={handleLogOut}>
+                <button
+                  className="boton"
+                  type="button"
+                  onClick={handleLogOut}
+                  data-cy="log-out-button"
+                >
                   Cerrar sesión
                 </button>
               </Link>
@@ -58,14 +67,18 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/login">
-                <button className="boton" type="button" data-cy="login">
+                <button className="boton" type="button" data-cy="login-button">
                   Iniciar Sesión
                 </button>
               </Link>
             </li>
             <li>
               <Link to="/register">
-                <button className="boton" type="button" data-cy="register">
+                <button
+                  className="boton"
+                  type="button"
+                  data-cy="register-button"
+                >
                   Registrarse
                 </button>
               </Link>
