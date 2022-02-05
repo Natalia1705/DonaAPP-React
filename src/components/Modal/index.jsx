@@ -9,33 +9,35 @@ const Modal = ({ state }) => {
   return (
     <>
       {state && (
-        <Overlay>
-          <ModalContainer>
-            <div className="content">
-              <img
-                src="https://n5b3y8j5.rocketcdn.me/wp-content/uploads/2020/10/donaciones-1024x358.png"
-                alt="404 error"
-              />
-              <h1 className="Title1">Tu historia se ha publicado</h1>
-              <p>Gracias por confiar en DonApp.</p>
-              <button
-                className="boton"
-                onClick={() => {
-                  navigate('/');
-                }}
-              >
-                Ve a campañas
-              </button>
-            </div>
-          </ModalContainer>
-        </Overlay>
+        <Container>
+          <Overlay>
+            <ModalContainer>
+              <div className="content">
+                <img
+                  src="https://n5b3y8j5.rocketcdn.me/wp-content/uploads/2020/10/donaciones-1024x358.png"
+                  alt="404 error"
+                />
+                <h1 className="Title1">Tu historia se ha publicado</h1>
+                <p>Gracias por confiar en DonApp.</p>
+                <button
+                  className="boton"
+                  onClick={() => {
+                    navigate('/campaigns');
+                  }}
+                >
+                  Ve a tus campañas
+                </button>
+              </div>
+            </ModalContainer>
+          </Overlay>
+        </Container>
       )}
     </>
   );
 };
 
 export default Modal;
-
+const Container = styled.div``;
 const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
@@ -47,8 +49,12 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
   z-index: 999999;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const ModalContainer = styled.section`
   width: 500px;
@@ -58,6 +64,7 @@ const ModalContainer = styled.section`
   align-items: center;
   border-radios: 5px;
   z-index: 9999;
+  border-radius: 15px;
 
   .content img {
     justify-content: center;
@@ -73,8 +80,10 @@ const ModalContainer = styled.section`
   .content p {
     text-align: center;
   }
-  .content button {
-    color: #fff;
+  .content button.boton {
+    color: #blue;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     :hover {
       color: black;

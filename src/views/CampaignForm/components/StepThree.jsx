@@ -10,10 +10,11 @@ const stepThreeValidationSchema = Yup.object({
   title: Yup.string()
     .min(5, 'El título debe tener al menos 5 caracteres')
     .required('El título es necesario')
-    .max(100, 'Tu nombre no debe contener mas de 100 caracteres'),
+    .max(72, 'Tu nombre no debe contener mas de 72 caracteres'),
   description: Yup.string()
-    .min(15, 'tu historia debe contener al menos 15 caracteres ')
-    .required('La descripción de tu campaña es necesaria'),
+    .min(10, 'tu historia debe contener al menos 10 caracteres ')
+    .required('La descripción de tu campaña es necesaria')
+    .max(280, 'Tu nombre no debe contener mas de 280 caracteres'),
   img: Yup.string().required('Por favor ingresa una imagen'),
 });
 const StepThree = (props) => {
