@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '../../../common/LoaderComponent';
 import MessageComponent from '../../../common/MessageComponent';
 import { postSignIn } from '../../../thunkAction/authThunk';
-import { setLogin } from '../../../state/auth/navBarLoginSlice';
+/* import { setLogin } from '../../../state/auth/navBarLoginSlice'; */
 import Auth from '../../../utils/Auth';
 import useSignin from '../hook/useSignin';
 
@@ -16,6 +16,8 @@ const SignInForm = () => {
   const loading = useSelector((state) => state.authReducer.loading);
   const user = useSelector((state) => state.authReducer.user);
   const error = useSelector((state) => state.authReducer.error);
+  const matchFailed = { msg: 'The email or password are incorrect' };
+  const nonExistentUser = { msg: 'The user does not exists' };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +29,6 @@ const SignInForm = () => {
       navigate('/campaigns');
     }
   }, [user]);
-
   return (
     <>
       <Formik
@@ -38,7 +39,7 @@ const SignInForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignIn(values));
-          dispatch(setLogin());
+          /*   dispatch(setLogin()); */
           resetForm({ values: '' });
         }}
       >
@@ -99,7 +100,12 @@ const SignInForm = () => {
       {error && (
         <MessageComponent
           variant="danger"
-          message="Ocurrio un problema, intente de nuevo mas tarde"
+          message={
+            JSON.stringify(error) === JSON.stringify(matchFailed) ||
+            JSON.stringify(nonExistentUser)
+              ? 'Email o contraseña incorrectos'
+              : 'Ocurrio un problema, intente de nuevo mas tarde'
+          }
         />
       )}
     </>
