@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 const stepOneValidationSchema = Yup.object({
   name: Yup.string()
-    .min(5, 'Tu nombre debecontener al menos 5 caracteres ')
+    .min(2, 'Tu nombre debecontener al menos 2 caracteres ')
     .required('Por favor ingresa tu nombre')
     .matches(
       /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
@@ -19,7 +19,7 @@ const stepOneValidationSchema = Yup.object({
       'Tu país no debe contener simbolos ni numeros',
     )
     .max(20, 'Tu país no debe contener mas de 20 caracteres'),
-  category: Yup.string().required('Por favor ingresa una categoría '),
+  category: Yup.string().required('Por favor selecciona una categoría '),
 });
 
 const StepOne = (props) => {
@@ -75,7 +75,6 @@ const StepOne = (props) => {
                     id="category"
                     select="health"
                     className="step__input"
-                    placeholder="Selecciona una categoría"
                   >
                     <option>Selecciona una categoría</option>
                     <option value="Salud">Salud</option>
