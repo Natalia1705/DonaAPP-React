@@ -4,9 +4,22 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 const stepOneValidationSchema = Yup.object({
-  name: Yup.string().required().label('Name '),
-  country: Yup.string().required().label('Your Country'),
-  category: Yup.string().required('Select a Category'),
+  name: Yup.string()
+    .min(5, 'Tu nombre debecontener al menos 5 caracteres ')
+    .required('Por favor ingresa tu nombre')
+    .matches(
+      /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
+      'Tu nombre no debe contener símbolos ni numeros',
+    )
+    .max(40, 'Tu nombre no debe contener mas de 40 caracteres'),
+  country: Yup.string()
+    .required('Por favor ingresa tu país')
+    .matches(
+      /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
+      'Tu país no debe contener simbolos ni numeros',
+    )
+    .max(20, 'Tu país no debe contener mas de 20 caracteres'),
+  category: Yup.string().required('Por favor ingresa una categoría '),
 });
 
 const StepOne = (props) => {
@@ -41,7 +54,9 @@ const StepOne = (props) => {
                     placeholder="Ej. Juan Perez"
                     className="step__input"
                   />
-                  <ErrorMessage name="name" />
+                  <ErrorMessage name="name">
+                    {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                  </ErrorMessage>
                   <p>¿Dónde vives?</p>
                   <Field
                     type="text"
@@ -50,7 +65,9 @@ const StepOne = (props) => {
                     placeholder="Ingresa el nombre de tu país"
                     className="step__input"
                   />
-                  <ErrorMessage name="country" />
+                  <ErrorMessage name="country">
+                    {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                  </ErrorMessage>
                   <p>¿Para que estás recaudando fondos?</p>
                   <Field
                     name="category"
@@ -58,13 +75,17 @@ const StepOne = (props) => {
                     id="category"
                     select="health"
                     className="step__input"
+                    placeholder="Selecciona una categoría"
                   >
+                    <option>Selecciona una categoría</option>
                     <option value="Salud">Salud</option>
                     <option value="In memorium">In memoriam</option>
                     <option value="Mascotas">Animales</option>
                     <option value="Otros">Otros</option>
                   </Field>
-                  <ErrorMessage name="category" />
+                  <ErrorMessage name="category">
+                    {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                  </ErrorMessage>
                 </div>
                 <div className="step__footer">
                   <button type="submit" className="step__button">
