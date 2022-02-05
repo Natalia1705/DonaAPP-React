@@ -20,7 +20,14 @@ const App = () => (
     <Navbar />
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/campaignform" element={<CampaignsForm />} />
+      <Route
+        path="/campaignform"
+        element={
+          <PrivateRoute>
+            <CampaignsForm />
+          </PrivateRoute>
+        }
+      />
       <Route path="/donate/:id" element={<Donate />} />
       <Route path="/details/:id" element={<Details />} />
       <Route
