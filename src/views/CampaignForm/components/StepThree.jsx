@@ -4,13 +4,23 @@ import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import Modal from '../../../components/Modal';
 
 const stepThreeValidationSchema = Yup.object({
-  title: Yup.string().required().label('Title'),
+  title: Yup.string()
+    .min(5, 'El título debe tener al menos 5 caracteres')
+    .required('El título es necesario')
+    .max(100, 'Tu nombre no debe contener mas de 100 caracteres'),
+  description: Yup.string()
+    .min(15, 'tu historia debe contener al menos 15 caracteres ')
+    .required('La descripción de tu campaña es necesaria'),
+  img: Yup.string().required('Por favor ingresa una imagen'),
 });
 const StepThree = (props) => {
   const [previewSource, setPreviewSource] = useState('');
   const [secureUrl, setSecureUrl] = useState('holi');
+  const [modal, setModal] = useState(false);
+
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -57,88 +67,98 @@ const StepThree = (props) => {
   };
 
   return (
-    <Formik
-      validationSchema={stepThreeValidationSchema}
-      initialValues={props.data}
-      onSubmit={handleSubmit}
-    >
-      {({ values, setFieldValue }) => (
-        <div className="root">
-          <Form className="form-register">
-            <div className="form-register__header">
-              <ul className="progressbar">
-                <li className="progressbar__option active" />
-                <li className="progressbar__option active" />
-                <li className="progressbar__option active" />
-              </ul>
-              <h1 className="form-register__title">Cuenta tu historia</h1>
-            </div>
-            <div className="form-register__body">
-              <div className="step active" id="step-1">
-                <div className="step__header" />
-                <div className="step__body">
-                  <p>¿Cuál es el titulo de tu campaña?</p>
-                  <Field
-                    type="text"
-                    name="title"
-                    id="title"
-                    placeholder="Título"
-                    className="step__input"
-                  />
-                  <ErrorMessage name="title" />
-                  <p>
-                    ¿Porque vas a recaudar fondos?Cuántanos tu historia
-                    *Recuerda agregar una imagen
-                  </p>
-                  <div className="editor de texto">
+    <>
+      <Modal state={modal} turnState={setModal} />
+      <Formik
+        validationSchema={stepThreeValidationSchema}
+        initialValues={props.data}
+        onSubmit={handleSubmit}
+      >
+        {({ values, setFieldValue }) => (
+          <div className="root">
+            <Form className="form-register">
+              <div className="form-register__header">
+                <ul className="progressbar">
+                  <li className="progressbar__option active" />
+                  <li className="progressbar__option active" />
+                  <li className="progressbar__option active" />
+                </ul>
+                <h1 className="form-register__title">Cuenta tu historia</h1>
+              </div>
+              <div className="form-register__body">
+                <div className="step active" id="step-1">
+                  <div className="step__header" />
+                  <div className="step__body">
+                    <p>¿Cuál es el titulo de tu campaña?</p>
                     <Field
-                      id="description"
-                      type="document"
-                      name="description"
+                      type="text"
+                      name="title"
+                      id="title"
+                      placeholder="Título"
                       className="step__input"
                     />
-                    <ErrorMessage name="description" />
+                    <ErrorMessage name="title">
+                      {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                    </ErrorMessage>
+                    <p>
+                      ¿Porque vas a recaudar fondos?Cuántanos tu historia
+                      *Recuerda agregar una imagen
+                    </p>
+                    <div className="editor de texto">
+                      <Field
+                        id="description"
+                        type="document"
+                        name="description"
+                        className="step__input"
+                      />
+                      <ErrorMessage name="description">
+                        {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                      </ErrorMessage>
+                    </div>
+                  </div>
+                  <div className="step__footer">
+                    {previewSource && (
+                      <img
+                        src={previewSource}
+                        alt="file name"
+                        style={{ height: '140px', width: '290px' }}
+                      />
+                    )}
+                    <input
+                      id="img"
+                      type="file"
+                      name="img"
+                      value={values.img.filename}
+                      onChange={async (e) => {
+                        handleSubmitFile(e);
+                      }}
+                    />
+
+                    <button
+                      type="button"
+                      className="step__button step__button--back"
+                      onClick={() => props.prev(values)}
+                    >
+                      Regresar
+                    </button>
+                    <button
+                      type="submit"
+                      className="step__button"
+                      onClick={() => {
+                        setFieldValue('img', secureUrl);
+                        setModal(true);
+                      }}
+                    >
+                      Terminar
+                    </button>
                   </div>
                 </div>
-                <div className="step__footer">
-                  {previewSource && (
-                    <img
-                      src={previewSource}
-                      alt="file name"
-                      style={{ height: '140px', width: '290px' }}
-                    />
-                  )}
-                  <input
-                    id="img"
-                    type="file"
-                    name="img"
-                    value={values.img.filename}
-                    onChange={async (e) => {
-                      handleSubmitFile(e);
-                    }}
-                  />
-
-                  <button
-                    type="button"
-                    className="step__button step__button--back"
-                    onClick={() => props.prev(values)}
-                  >
-                    Regresar
-                  </button>
-                  <button
-                    type="submit"
-                    className="step__button"
-                    onClick={() => setFieldValue('img', secureUrl)}
-                  >
-                    Terminar
-                  </button>
-                </div>
               </div>
-            </div>
-          </Form>
-        </div>
-      )}
-    </Formik>
+            </Form>
+          </div>
+        )}
+      </Formik>
+    </>
   );
 };
 

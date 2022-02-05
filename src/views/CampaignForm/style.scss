@@ -11,7 +11,7 @@
   --color-bg-2: #fef9e7;
   --color-btn: #2196f3;
   --color-header-step: #ff0157;
-  --color-border-input: #ddd;
+  --color-border-input: rgb(228, 225, 225);
 }
 /* Contenedor principal */
 .root {
@@ -21,15 +21,18 @@
   min-height: 100vh;
   font-size: 16px;
   overflow: hidden;
+  background-color: rgb(219, 226, 228);
+  z-index: -99999;
 }
 
 /* Formulario */
 .form-register {
   width: 100%;
-  max-width: 400px;
+  width: 400px;
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
-  margin-top: 150px;
+  margin-top: 50px;
+  background-color: white;
 }
 
 /* Progressbar */
@@ -41,6 +44,7 @@
   margin-top: 15px;
   padding: 15px;
   border: solid 1px var(--color-bg-2);
+  background-color: white;
 }
 
 .progressbar__option {
@@ -48,6 +52,7 @@
   text-align: center;
   font-size: 0.7rem;
   position: relative;
+  background-color: white;
 }
 
 .progressbar__option:before {
@@ -95,6 +100,7 @@
   font-size: 1rem;
   text-align: center;
   margin-bottom: 0;
+  background-color: white;
 }
 
 h1 {

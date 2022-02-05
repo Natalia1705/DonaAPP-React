@@ -1,11 +1,25 @@
+/* eslint-disable indent */
+/* eslint-disable func-names */
 /* eslint-disable react/destructuring-assignment */
 import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 const stepTwoValidationSchema = Yup.object({
-  objetive: Yup.number().required().label('Objetive'),
-  targetdate: Yup.date().required().label('Objetive'),
+  objetive: Yup.number()
+    .required('Tu objetivo monetario es necesario')
+    .positive('Tu objetivo debe de ser mayor a 0'),
+  targetdate: Yup.date()
+    .required('Fecha requerida')
+    .test(
+      'La fecha no puede se menor a la fecha actual',
+      'La fecha Objetivo no puede estar vencida',
+      (date) => {
+        const cutoff = new Date();
+        const selectedDate = date;
+        return selectedDate >= cutoff;
+      },
+    ),
 });
 
 const StepTwo = (props) => {
@@ -44,7 +58,9 @@ const StepTwo = (props) => {
                     placeholder="USD"
                     className="step__input"
                   />
-                  <ErrorMessage name="objetive" />
+                  <ErrorMessage name="objetive">
+                    {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                  </ErrorMessage>
                   <p className="smalltext">
                     Ten en cuenta que de cada donativo se deducen comisiones por
                     transacción de pago, incluidos cargos por operaciones con
@@ -57,6 +73,9 @@ const StepTwo = (props) => {
                     name="targetdate"
                     className="step__input"
                   />
+                  <ErrorMessage name="targetdate">
+                    {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+                  </ErrorMessage>
                 </div>
                 <div className="step__footer">
                   <button

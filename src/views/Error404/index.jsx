@@ -24,12 +24,13 @@ export default Error404;
 
 const Container = styled.div``;
 const Error = styled.section`
+  margin-top:70px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .content img {
-    justify-content: center;
+    justify-content: center; 
     width: 30rem;
   }
   .content h2 {
