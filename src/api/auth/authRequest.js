@@ -1,5 +1,6 @@
-const URL_BASE = 'https://fast-shelf-59848.herokuapp.com/api';
+import config from '../../config';
 
+const { URL_BASE } = config;
 export const signIn = (user) => {
   const query = fetch(`${URL_BASE}/user/signin`, {
     method: 'POST',

@@ -4,6 +4,9 @@ import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
+import config from '../../../config';
+
+const { URL_BASE } = config;
 
 const stepThreeValidationSchema = Yup.object({
   title: Yup.string().required().label('Title'),
@@ -20,14 +23,11 @@ const StepThree = (props) => {
   const uploadImage = async (base64EncodedImage) => {
     const base64 = JSON.stringify({ data: base64EncodedImage });
     try {
-      const response = await fetch(
-        'https://fast-shelf-59848.herokuapp.com/api/files' /* 'http://localhost:5000/api/files' */,
-        {
-          method: 'POST',
-          body: base64,
-          headers: { 'Content-Type': 'application/json' },
-        },
-      );
+      const response = await fetch(`${URL_BASE}/files`, {
+        method: 'POST',
+        body: base64,
+        headers: { 'Content-Type': 'application/json' },
+      });
       const rta = await response.json();
       setSecureUrl(rta.secureUrl);
       console.log('Image uploaded successfully');

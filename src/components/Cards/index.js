@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Progres from '../Progress';
+import config from '../../config';
+
+const { URL_BASE } = config;
 
 const Card = () => {
   const [campaignsData, setCampaignsData] = useState([]);
   useEffect(() => {
-    fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/', {
+    fetch(`${URL_BASE}/campaigns/`, {
       headers: { limit: 6 },
     })
       .then((resp) => resp.json())

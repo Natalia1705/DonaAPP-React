@@ -14,6 +14,9 @@ import Auth from '../../utils/Auth';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
+import config from '../../config';
+
+const { URL_BASE } = config;
 
 export default function CampaignForm() {
   // const navigate = useNavigate();
@@ -43,17 +46,13 @@ export default function CampaignForm() {
     console.log('sesion :', Auth.getSession());
     console.log('newData :', newData);
     axios
-      .post(
-        'https://fast-shelf-59848.herokuapp.com/api/campaigns' /* 'http://localhost:5000/api/campaigns' */,
-        newData,
-        {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            usertoken: Auth.getSession().token,
-          },
+      .post(`${URL_BASE}/campaigns`, newData, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          usertoken: Auth.getSession().token,
         },
-      )
+      })
       .catch((error) => {
         console.log(error);
       });

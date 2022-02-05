@@ -13,6 +13,9 @@ import Auth from '../../utils/Auth';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
+import config from '../../config';
+
+const { URL_BASE } = config;
 
 export default function Edit() {
   const navigate = useNavigate();
@@ -30,7 +33,7 @@ export default function Edit() {
   });
   useEffect(() => {
     setLoading(true);
-    fetch(`https://fast-shelf-59848.herokuapp.com/api/campaigns/${id}`, {
+    fetch(`${URL_BASE}/campaigns/${id}`, {
       /* headers: { usertoken: Auth.getSession().token }, */
     })
       .then((resp) => resp.json())
@@ -75,19 +78,16 @@ export default function Edit() {
   const submitHandler = async (newData) => {
     console.log('sesion :', Auth.getSession());
     console.log('newData :', newData);
-    await fetch(
-      `https://fast-shelf-59848.herokuapp.com/api/campaigns/${id}` /* `http://localhost:5000/api/campaigns/${id}` */,
-      {
-        method: 'PUT', // or 'PUT'
-        body: JSON.stringify(newData), // data can be `string` or {object}!
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-          usertoken: Auth.getSession().token,
-        },
+    await fetch(`${URL_BASE}/campaigns/${id}`, {
+      method: 'PUT', // or 'PUT'
+      body: JSON.stringify(newData), // data can be `string` or {object}!
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+        usertoken: Auth.getSession().token,
       },
-    )
+    })
       .then((res) => res.json())
       .catch((error) => console.error('Error:', error))
       .then((response) => console.log('Success:', response));
