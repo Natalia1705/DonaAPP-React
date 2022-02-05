@@ -14,6 +14,7 @@ const SignupFormComponent = () => {
   const { validationSchema } = useSignup();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userExists = { msg: 'The user already exists' };
   const loading = useSelector((state) => state.authReducer.loading);
   const user = useSelector((state) => state.authReducer.user);
   const error = useSelector((state) => state.authReducer.error);
@@ -134,7 +135,11 @@ const SignupFormComponent = () => {
       {error && (
         <MessageComponent
           variant="danger"
-          message="Ocurrio un problema, intente de nuevo mas tarde"
+          message={
+            JSON.stringify(error) === JSON.stringify(userExists)
+              ? 'El usuario ya existe, por favor inicia sesión'
+              : 'Ocurrio un problema, intente de nuevo mas tarde'
+          }
         />
       )}
     </>

@@ -2,13 +2,22 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable no-underscore-dangle */
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { setLogin } from '../../state/auth/navBarLoginSlice';
 import Auth from '../../utils/Auth';
 
 const YourCampaigns = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.authReducer.user);
   const [campaigns, setCampaigns] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
+  useEffect(() => {
+    if (user) {
+      dispatch(setLogin());
+    }
+  }, []);
 
   const deleteHandler = async (e) => {
     const campaingId = e.target.attributes.campaingid.nodeValue;
