@@ -32,22 +32,28 @@ const Navbar = () => {
       </a>
       <List>
         <li>
-          <a href="/">Para particulares</a>
-        </li>
-        <li>
-          <a href="/">Para organizaciones benéficas</a>
+          <a href="/">Cómo funciona</a>
         </li>
         <li>
           <a href="/">Acerca de</a>
         </li>
         {navLoger ? (
-          <li>
-            <Link to="/">
-              <button className="boton" type="button" onClick={handleLogOut}>
-                Cerrar sesión
-              </button>
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to="/campaigns">
+                <button className="boton" type="button">
+                  Ve a tus campañas
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/">
+                <button className="boton" type="button" onClick={handleLogOut}>
+                  Cerrar sesión
+                </button>
+              </Link>
+            </li>
+          </>
         ) : (
           <>
             <li>

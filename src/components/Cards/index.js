@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Progres from '../Progress';
 
@@ -31,7 +32,9 @@ const Card = () => {
           campaignsData.map((data) => (
             <div className="box" key={data._id}>
               <div className="imgBx">
-                <img src={data.img} alt={data.title} />
+                <Link to={`/details/${data._id}`}>
+                  <img src={data.img} alt={data.title} />
+                </Link>
               </div>
               <div className="text">
                 <h3>{data.title}</h3>

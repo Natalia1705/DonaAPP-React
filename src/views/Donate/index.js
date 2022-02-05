@@ -53,12 +53,14 @@ const Donate = () => {
               voluntaryInput={voluntaryInput}
               setVoluntaryInput={setVoluntaryInput}
             />
-            <button
-              className="btn btn-primary checkout__show-button"
-              type="button"
-            >
-              Continuar
-            </button>
+            <Link to="/payment">
+              <button
+                className="btn btn-primary checkout__show-button"
+                type="button"
+              >
+                Continuar
+              </button>
+            </Link>
             <div className="warranty">
               <i className="fas fa-check-circle fa-2x warranty__icon" />
               <div className="warranty__text">
