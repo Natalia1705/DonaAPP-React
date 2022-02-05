@@ -4,8 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import DonateAmountInput from '../../components/DonateAmountInput';
 import SummaryCard from '../../components/SummaryCard';
 import VoluntaryInput from '../../components/VoluntaryInput';
-
+import config from '../../config';
 import './styles.scss';
+
+const { URL_BASE } = config;
 
 const Donate = () => {
   const { id } = useParams();
@@ -13,7 +15,7 @@ const Donate = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
-    fetch(`https://fast-shelf-59848.herokuapp.com/api/campaigns/${id}`, {
+    fetch(`${URL_BASE}/campaigns/${id}`, {
       /* headers: { usertoken: Auth.getSession().token }, */
     })
       .then((resp) => resp.json())

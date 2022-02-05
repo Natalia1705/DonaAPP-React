@@ -1,6 +1,7 @@
 import Auth from '../../utils/Auth';
+import config from '../../config';
 
-const URL_BASE = 'https://fast-shelf-59848.herokuapp.com/api';
+const { URL_BASE } = config;
 
 export const createCardToken = (card) => {
   const session = Auth.getSession();

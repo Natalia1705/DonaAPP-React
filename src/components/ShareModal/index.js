@@ -1,10 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './style.scss';
+import config from '../../config';
+
+const { NETLIFY_BASE } = config;
 
 const ShareModal = () => {
   const location = useLocation();
-  const currentPath = `https://modest-darwin-5fa285.netlify.app${location.pathname}`;
+  const currentPath = `${NETLIFY_BASE}${location.pathname}`;
   return (
     <div
       className="modal fade"

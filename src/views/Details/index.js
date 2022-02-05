@@ -5,6 +5,9 @@ import Comments from '../../components/Comments';
 import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
+import config from '../../config';
+
+const { URL_BASE } = config;
 
 const Details = () => {
   const { id } = useParams();
@@ -13,7 +16,7 @@ const Details = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://fast-shelf-59848.herokuapp.com/api/campaigns/${id}`, {
+    fetch(`${URL_BASE}/campaigns/${id}`, {
       /* headers: { usertoken: Auth.getSession().token }, */
     })
       .then((resp) => resp.json())
@@ -26,15 +29,6 @@ const Details = () => {
       );
   }, []);
   const campaignDetails = {
-    title: 'Ayuda a Walter White en su lucha contra el cáncer del pulmón',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.',
-    img: 'https://images.pexels.com/photos/6647037/pexels-photo-6647037.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    tags: 'Médicas, enfermedades y salud',
-    donations: 8450,
-    goal: 9200,
-    name: ' Walter White',
-    campaignReason: 'su lucha contra el cáncer del pulmón',
     commentsDb: [
       {
         name: 'Fabrizzio DBC',

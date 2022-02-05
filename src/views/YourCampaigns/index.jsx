@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { setLogin } from '../../state/auth/navBarLoginSlice';
 import Auth from '../../utils/Auth';
+import config from '../../config';
+
+const { URL_BASE } = config;
 
 const YourCampaigns = () => {
   const dispatch = useDispatch();
@@ -21,16 +24,13 @@ const YourCampaigns = () => {
 
   const deleteHandler = async (e) => {
     const campaingId = e.target.attributes.campaingid.nodeValue;
-    await fetch(
-      `https://fast-shelf-59848.herokuapp.com/api/campaigns/${campaingId}`,
-      {
-        method: 'DELETE',
-      },
-    );
+    await fetch(`${URL_BASE}/campaigns/${campaingId}`, {
+      method: 'DELETE',
+    });
     setIsDelete(!isDelete);
   };
   useEffect(() => {
-    fetch('https://fast-shelf-59848.herokuapp.com/api/campaigns/my-campaigns', {
+    fetch(`${URL_BASE}/campaigns/my-campaigns`, {
       headers: { usertoken: Auth.getSession().token },
     })
       .then((resp) => resp.json())
