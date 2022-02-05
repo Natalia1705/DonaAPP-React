@@ -33,7 +33,7 @@ const Card = () => {
       <Content>
         {campaignsData &&
           campaignsData.map((data) => (
-            <div className="box" key={data._id}>
+            <div className="box" key={data._id} data-cy="campaign-home-cards">
               <div className="imgBx">
                 <Link to={`/details/${data._id}`}>
                   <img src={data.img} alt={data.title} />
