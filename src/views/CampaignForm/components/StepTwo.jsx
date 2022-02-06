@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 const stepTwoValidationSchema = Yup.object({
-  objetive: Yup.number()
+  objective: Yup.number()
     .required('Tu objetivo monetario es necesario')
     .positive('Tu objetivo debe de ser mayor a 0'),
   targetdate: Yup.date()
@@ -53,13 +53,13 @@ const StepTwo = (props) => {
                   <p>¿Cuánto te gustaría recaudar?</p>
                   <Field
                     type="number"
-                    id="objetive"
-                    name="objetive"
+                    id="objective"
+                    name="objective"
                     placeholder="USD"
                     className="step__input"
                     data-cy="new-campaign-objective-input"
                   />
-                  <ErrorMessage name="objetive">
+                  <ErrorMessage name="objective">
                     {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                   <p className="smalltext">

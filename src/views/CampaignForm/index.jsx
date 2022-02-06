@@ -24,7 +24,7 @@ export default function CampaignForm() {
     name: '',
     country: '',
     category: '',
-    objetive: '',
+    objective: '',
     targetdate: '',
     title: '',
     description: '',
