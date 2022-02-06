@@ -56,6 +56,7 @@ const SignupFormComponent = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.name}
                   isInvalid={formik.touched.name && formik.errors.name}
+                  data-cy="register-name-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.name}
@@ -72,6 +73,7 @@ const SignupFormComponent = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   isInvalid={formik.touched.email && formik.errors.email}
+                  data-cy="register-email-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.email}
@@ -88,6 +90,7 @@ const SignupFormComponent = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   isInvalid={formik.touched.password && formik.errors.password}
+                  data-cy="register-password-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.password}
@@ -107,6 +110,7 @@ const SignupFormComponent = () => {
                     formik.touched.confirmPassword &&
                     formik.errors.confirmPassword
                   }
+                  data-cy="register-repeat-password-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.confirmPassword}
@@ -118,6 +122,7 @@ const SignupFormComponent = () => {
                 className="btn btn-primary"
                 type="submit"
                 disabled={!(formik.isValid && formik.dirty)}
+                data-cy="register-submmit-button"
               >
                 Registrarse
               </button>
@@ -140,6 +145,7 @@ const SignupFormComponent = () => {
               ? 'El usuario ya existe, por favor inicia sesión'
               : 'Ocurrio un problema, intente de nuevo mas tarde'
           }
+          data-cy="register-error-text"
         />
       )}
     </>
