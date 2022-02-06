@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Auth from '../../../utils/Auth';
 import config from '../../../config';
 
