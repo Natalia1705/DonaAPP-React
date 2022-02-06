@@ -63,7 +63,6 @@ const StepThree = (props) => {
     };
   };
   const handleSubmit = async (values) => {
-    console.log('HandleSubmit');
     await props.next(values);
   };
 
@@ -134,6 +133,7 @@ const StepThree = (props) => {
                       value={values.img.filename}
                       data-cy="new-campaign-img-input"
                       onChange={async (e) => {
+                        e.preventDefault();
                         handleSubmitFile(e);
                       }}
                     />
