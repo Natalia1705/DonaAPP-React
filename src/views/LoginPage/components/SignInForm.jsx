@@ -55,6 +55,7 @@ const SignInForm = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   isInvalid={formik.touched.email && formik.errors.email}
+                  data-cy="login-email-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.email}
@@ -71,6 +72,7 @@ const SignInForm = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   isInvalid={formik.touched.password && formik.errors.password}
+                  data-cy="login-password-input"
                 />
                 <Form.Control.Feedback type="invalid">
                   {formik.errors.password}
@@ -83,8 +85,9 @@ const SignInForm = () => {
                 className="btn btn-primary"
                 type="submit"
                 disabled={!(formik.isValid && formik.dirty)}
+                data-cy="login-submmit-button"
               >
-                Iniciar Sesion
+                Iniciar Sesión
               </button>
             </div>
           </Form>
