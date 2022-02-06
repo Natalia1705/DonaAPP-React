@@ -9,13 +9,15 @@ const DonationsCard = ({ commentsDb, goal, campaignid }) => {
     const commentReduce = commentMap.reduce(
       (acc, e) => Number(acc) + Number(e),
     );
-    return `${(commentReduce / goal) * 100} %`;
+    return `${
+      (commentReduce / goal) * 100 >= 100 ? 100 : (commentReduce / goal) * 100
+    }%`;
   };
   return (
     <div className="donations">
       <div className="donations__progress progress">
         <div
-          style={{ width: customWidth }}
+          style={{ width: customWidth() }}
           className="progress-bar"
           role="progressbar"
           aria-valuemin="0"
