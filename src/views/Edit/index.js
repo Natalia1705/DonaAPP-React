@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Comments from '../../components/Comments';
 import EditDonationsCard from '../../components/EditDonationsCard';
 import ShareModal from '../../components/ShareModal';
+import usePUT from './Hooks/usePUT';
 import './styles.scss';
 import config from '../../config';
 
@@ -11,8 +12,48 @@ const { URL_BASE } = config;
 
 const Edit = () => {
   const { id } = useParams();
+  const [imgEditMode, setImgEditMode] = useState(false);
+  const [secureUrl, setSecureUrl] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
   const [campaignDetail, setCampaignDetail] = useState({});
+  const [currentImg, setCurrentImg] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => setPreviewSource(reader.result);
+  };
+  const uploadImage = async (base64EncodedImage) => {
+    const base64 = JSON.stringify({ data: base64EncodedImage });
+    try {
+      const response = await fetch(`${URL_BASE}/files`, {
+        method: 'POST',
+        body: base64,
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const rta = await response.json();
+      setSecureUrl(rta.secureUrl);
+      console.log('Image uploaded successfully');
+    } catch (err) {
+      console.error(err);
+      console.log('Something went wrong!');
+    }
+  };
+  const handleSubmitFile = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    console.log('HandleSubmitFile');
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error('AHHHHHHHH!!');
+      console.log('something went wrong!');
+    };
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +64,7 @@ const Edit = () => {
       .then(
         (data) => {
           setCampaignDetail(data.data);
+          /* setcurrentImg(data.data.img); */
           setLoading(false);
         },
         /* setCampaignDetail(data.data.campaigns) */
@@ -56,6 +98,12 @@ const Edit = () => {
   const showMoreToggle = () => {
     setShowMore(!showMore);
   };
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+    await usePUT(id, { img: secureUrl });
+    setCurrentImg(secureUrl);
+    setImgEditMode(false);
+  };
   return (
     <Container>
       {loading ? (
@@ -63,7 +111,46 @@ const Edit = () => {
       ) : (
         <main className="details__main">
           <div className="campaign">
-            <img className="campaign__img" src={campaignDetail.img} alt="" />
+            {imgEditMode ? (
+              <form onSubmit={(e) => formSubmitHandler(e)}>
+                {previewSource && (
+                  <img
+                    src={previewSource}
+                    alt="file name"
+                    style={{ height: '140px', width: '290px' }}
+                  />
+                )}
+                <input
+                  id="img"
+                  type="file"
+                  name="img"
+                  /* value={currentImg} */
+                  onChange={async (e) => {
+                    e.preventDefault();
+                    handleSubmitFile(e);
+                  }}
+                />
+                <button type="submit">Guardar</button>
+              </form>
+            ) : (
+              <>
+                {' '}
+                <img
+                  className="campaign__img"
+                  src={currentImg || campaignDetail.img}
+                  alt={campaignDetail.title}
+                />
+                <i
+                  className="fas fa-pen"
+                  role="switch"
+                  aria-checked="false"
+                  aria-labelledby="foo"
+                  tabIndex={0}
+                  onClick={() => setImgEditMode(true)}
+                />
+              </>
+            )}
+
             <p className="campaign__title">{campaignDetail.title}</p>
           </div>
           <EditDonationsCard

@@ -4,10 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-import Auth from '../../utils/Auth';
-import config from '../../config';
-
-const { URL_BASE } = config;
+import usePUT from '../../views/Edit/Hooks/usePUT';
 
 const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
   const [editMode, setEditMode] = useState(false);
@@ -41,20 +38,7 @@ const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
               goal: values.goal,
             });
             setEditMode(false);
-            await fetch(`${URL_BASE}/campaigns/${campaignid}`, {
-              method: 'PUT',
-              body: JSON.stringify({ objective: values.goal }),
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Methods':
-                  'GET, POST, OPTIONS, PUT, DELETE',
-                usertoken: Auth.getSession().token,
-              },
-            })
-              .then((res) => res.json())
-              .catch((error) => console.error('Error:', error))
-              .then((response) => console.log('Success:', response));
+            usePUT(campaignid, { objective: values.goal });
           }}
         >
           <Form>
