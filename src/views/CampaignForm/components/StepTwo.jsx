@@ -57,6 +57,7 @@ const StepTwo = (props) => {
                     name="objetive"
                     placeholder="USD"
                     className="step__input"
+                    data-cy="new-campaign-objective-input"
                   />
                   <ErrorMessage name="objetive">
                     {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -72,6 +73,7 @@ const StepTwo = (props) => {
                     id="targetdate"
                     name="targetdate"
                     className="step__input"
+                    data-cy="new-campaign-date-input"
                   />
                   <ErrorMessage name="targetdate">
                     {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -85,7 +87,11 @@ const StepTwo = (props) => {
                   >
                     Regresar
                   </button>
-                  <button type="submit" className="step__button">
+                  <button
+                    type="submit"
+                    className="step__button"
+                    data-cy="new-campaign-next-2-button"
+                  >
                     Siguiente
                   </button>
                 </div>

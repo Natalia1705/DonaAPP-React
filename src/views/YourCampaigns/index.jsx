@@ -50,7 +50,11 @@ const YourCampaigns = () => {
         >
           <h4>Tus campañas</h4>
           <Link to="/campaignform">
-            <button className="btn btn-outline-primary m-2" type="button">
+            <button
+              className="btn btn-outline-primary m-2"
+              type="button"
+              data-cy="new-campaign-button"
+            >
               + Nueva recaudacion de fondos
             </button>
           </Link>
@@ -90,7 +94,7 @@ const YourCampaigns = () => {
                         <button
                           className="btn btn-outline-danger ms-2"
                           type="button"
-                          data-cy="login"
+                          data-cy="your-campaigns-delete-button"
                           onClick={deleteHandler}
                           campaingid={e._id}
                         >

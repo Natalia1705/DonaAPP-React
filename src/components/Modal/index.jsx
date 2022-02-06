@@ -21,6 +21,7 @@ const Modal = ({ state }) => {
                 <p>Gracias por confiar en DonApp.</p>
                 <button
                   className="boton"
+                  data-cy="new-campaign-modal-button"
                   onClick={() => {
                     navigate('/campaigns');
                   }}
@@ -62,7 +63,7 @@ const ModalContainer = styled.section`
   background: #fff;
   justify-content: center;
   align-items: center;
-  border-radios: 5px;
+  border-radius: 5px;
   z-index: 9999;
   border-radius: 15px;
 
@@ -81,7 +82,7 @@ const ModalContainer = styled.section`
     text-align: center;
   }
   .content button.boton {
-    color: #blue;
+    color: blue;
     justify-content: center;
     align-items: center;
     cursor: pointer;
