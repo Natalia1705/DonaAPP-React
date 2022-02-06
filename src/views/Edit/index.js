@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Comments from '../../components/Comments';
-import DonationsCard from '../../components/DonationsCard';
+import EditDonationsCard from '../../components/EditDonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
 import config from '../../config';
 
 const { URL_BASE } = config;
 
-const Details = () => {
+const Edit = () => {
   const { id } = useParams();
   const [campaignDetail, setCampaignDetail] = useState({});
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,7 @@ const Details = () => {
             <img className="campaign__img" src={campaignDetail.img} alt="" />
             <p className="campaign__title">{campaignDetail.title}</p>
           </div>
-          <DonationsCard
+          <EditDonationsCard
             campaignid={id}
             commentsDb={commentsDb}
             goal={campaignDetail.objective}
@@ -109,6 +109,6 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default Edit;
 
 const Container = styled.div``;

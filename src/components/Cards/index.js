@@ -46,10 +46,10 @@ const Card = () => {
                 <p>Último donativo {/* {timeAgo(data.date)} */} hace 2 horas</p>
               </div>
               <Progres
-                cardData={`${(data.donations / data.objetive) * 100}%`}
+                cardData={`${(data.donations / data.objective) * 100}%`}
               />
               <h5>
-                ${data.donations} recolectados de ${data.objetive}
+                ${data.donations} recolectados de ${data.objective}
               </h5>
             </div>
           ))}
