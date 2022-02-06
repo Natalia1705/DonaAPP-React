@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { setLogOut } from '../../state/auth/navBarLoginSlice';
 import { cleaningUser } from '../../state/auth/authSlice';
 import Auth from '../../utils/Auth';
@@ -11,6 +14,7 @@ const Navbar = () => {
   const isLogged = useSelector((state) => state.navBarLoginSlice.isLogged);
   const dispatch = useDispatch();
   const [navLoger, setNavLoger] = useState(isLogged);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (isLogged) {
       setNavLoger(true);
@@ -23,12 +27,14 @@ const Navbar = () => {
     Auth.deleteSession();
     dispatch(setLogOut());
     dispatch(cleaningUser());
+    setVisible(!visible);
   };
   return (
     <Container>
-      <Link to="/" className="logo">
-        DonApp
-        <span>.</span>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <h1 className="logo">
+          DonApp<span>.</span>
+        </h1>
       </Link>
       <List>
         <li>
@@ -38,31 +44,31 @@ const Navbar = () => {
           <a href="/">Acerca de</a>
         </li>
         {navLoger ? (
-          <>
-            <li>
-              <Link to="/campaigns">
-                <button
-                  className="boton"
-                  type="button"
-                  data-cy="go-to-campaigns-button"
-                >
-                  Ve a tus campañas
-                </button>
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <button
-                  className="boton"
-                  type="button"
-                  onClick={handleLogOut}
-                  data-cy="log-out-button"
-                >
-                  Cerrar sesión
-                </button>
-              </Link>
-            </li>
-          </>
+          <UserProfile>
+            <div
+              className="profile"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            >
+              <AccountCircleIcon fontSize="large" />
+            </div>
+            <MenuProfile toggle={visible}>
+              <h3>Someone Famous</h3>
+              <ul>
+                <li>
+                  <Link to="/campaigns">
+                    <span data-cy="go-to-campaigns-button">Ver Campañas</span>
+                  </Link>
+                </li>
+                <li onClick={handleLogOut}>
+                  <Link to="/">
+                    <span data-cy="log-out-button">Logout</span>
+                  </Link>
+                </li>
+              </ul>
+            </MenuProfile>
+          </UserProfile>
         ) : (
           <>
             <li>
@@ -93,7 +99,7 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.header`
-  position: Absolute;
+  position: absolute;
   top: 0;
   box-shadow: 2px 45px 24px -34px rgba(0, 0, 0, 0.02);
   left: 0;
@@ -131,6 +137,83 @@ const List = styled.div`
     font-weight: 400;
     :hover {
       color: black;
+    }
+  }
+`;
+const UserProfile = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const MenuProfile = styled.div`
+  ::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+  }
+  position: absolute;
+  top: 50px;
+  right: -10px;
+  padding: 10px 0px;
+  background: #fff;
+  width: 200px;
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: -1px 3px 24px -1px rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ${(props) => {
+    if (props.toggle) {
+      return `
+      visibility: visible;
+      opacity: 1;
+      `;
+    }
+    return `
+    visibility: hidden;
+    opacity: 0;
+      `;
+  }}
+  h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.2em;
+  }
+
+  ul li {
+    list-style: none;
+    margin-left: -35px;
+
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-weight: 500;
+      :hover {
+        opacity: 1;
+        color: #ff0157;
+      }
     }
   }
 `;
