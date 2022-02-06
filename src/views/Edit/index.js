@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { Formik, Field, Form } from 'formik';
 import Comments from '../../components/Comments';
 import EditDonationsCard from '../../components/EditDonationsCard';
 import ShareModal from '../../components/ShareModal';
@@ -13,6 +15,9 @@ const { URL_BASE } = config;
 const Edit = () => {
   const { id } = useParams();
   const [imgEditMode, setImgEditMode] = useState(false);
+  const [descriptionEditMode, setDescriptionEditMode] = useState(false);
+  const [categoryEditMode, setCategoryEditMode] = useState(false);
+  const [titleEditMode, setTitleEditMode] = useState(false);
   const [secureUrl, setSecureUrl] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [campaignDetail, setCampaignDetail] = useState({});
@@ -150,8 +155,51 @@ const Edit = () => {
                 />
               </>
             )}
-
-            <p className="campaign__title">{campaignDetail.title}</p>
+            {titleEditMode ? (
+              <Formik
+                initialValues={{
+                  title: campaignDetail.title,
+                }}
+                onSubmit={async (values) => {
+                  setCampaignDetail({
+                    ...campaignDetail,
+                    title: values.title,
+                  });
+                  setTitleEditMode(false);
+                  usePUT(id, { title: values.title });
+                }}
+              >
+                <Form>
+                  <label htmlFor="title">Change your title</label>
+                  <Field id="title" name="title" />
+                  <button
+                    type="submit"
+                    className="boton btn btn-secondary btn-lg"
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    className="boton btn btn-primary btn-lg"
+                    onClick={() => setTitleEditMode(false)}
+                  >
+                    Cancelar
+                  </button>
+                </Form>
+              </Formik>
+            ) : (
+              <span>
+                <p className="campaign__title">{campaignDetail.title}</p>
+                <i
+                  className="fas fa-pen"
+                  role="switch"
+                  aria-checked="false"
+                  aria-labelledby="foo"
+                  tabIndex={0}
+                  onClick={() => setTitleEditMode(true)}
+                />
+              </span>
+            )}
           </div>
           <EditDonationsCard
             campaignid={id}
@@ -160,32 +208,140 @@ const Edit = () => {
           />
           <div className="description">
             <div className="description__tags">
-              <p>
-                <i className="fas fa-tags" />
-                {campaignDetail.category}
-              </p>
+              {categoryEditMode ? (
+                <Formik
+                  initialValues={{
+                    category: campaignDetail.category,
+                  }}
+                  onSubmit={async (values) => {
+                    setCampaignDetail({
+                      ...campaignDetail,
+                      category: values.category,
+                    });
+                    setCategoryEditMode(false);
+                    usePUT(id, { category: values.category });
+                  }}
+                >
+                  <Form>
+                    <label htmlFor="category">Change your category</label>
+                    <Field
+                      name="category"
+                      as="select"
+                      id="category"
+                      select={campaignDetail.category}
+                      className="step__input"
+                      data-cy="new-campaign-category-input"
+                    >
+                      <option value="Salud">Salud</option>
+                      <option value="In memorium">In memoriam</option>
+                      <option value="Mascotas">Animales</option>
+                      <option value="Otros">Otros</option>
+                    </Field>
+                    <button
+                      type="submit"
+                      className="boton btn btn-secondary btn-lg"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      type="button"
+                      className="boton btn btn-primary btn-lg"
+                      onClick={() => setCategoryEditMode(false)}
+                    >
+                      Cancelar
+                    </button>
+                  </Form>
+                </Formik>
+              ) : (
+                <p>
+                  <i className="fas fa-tags" />
+                  {campaignDetail.category}{' '}
+                  <i
+                    className="fas fa-pen"
+                    role="switch"
+                    aria-checked="false"
+                    aria-labelledby="foo"
+                    tabIndex={0}
+                    onClick={() => setCategoryEditMode(true)}
+                  />
+                </p>
+              )}
             </div>
             <div className="description__content">
-              <p>
-                {campaignDetail.description.split(' ').slice(0, 19).join(' ')}
-                {showMore ? (
-                  <span id="dots">...</span>
-                ) : (
-                  <span id="more">
+              {descriptionEditMode ? (
+                <Formik
+                  initialValues={{
+                    description: campaignDetail.description,
+                  }}
+                  onSubmit={async (values) => {
+                    setCampaignDetail({
+                      ...campaignDetail,
+                      description: values.description,
+                    });
+                    setDescriptionEditMode(false);
+                    usePUT(id, { description: values.description });
+                  }}
+                >
+                  <Form>
+                    <label htmlFor="description">Change your description</label>
+                    <Field
+                      id="description"
+                      name="description"
+                      type="document"
+                    />
+                    <button
+                      type="submit"
+                      className="boton btn btn-secondary btn-lg"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      type="button"
+                      className="boton btn btn-primary btn-lg"
+                      onClick={() => setDescriptionEditMode(false)}
+                    >
+                      Cancelar
+                    </button>
+                  </Form>
+                </Formik>
+              ) : (
+                <>
+                  <p>
                     {campaignDetail.description
                       .split(' ')
-                      .slice(20, campaignDetail.description.split(' ').length)
+                      .slice(0, 19)
                       .join(' ')}
-                  </span>
-                )}
-              </p>
-              <button
-                type="button"
-                className="boton btn btn-secondary btn-sm"
-                onClick={showMoreToggle}
-              >
-                {showMore ? 'Read more' : 'Read less'}
-              </button>
+                    {showMore ? (
+                      <span id="dots">...</span>
+                    ) : (
+                      <span id="more">
+                        {campaignDetail.description
+                          .split(' ')
+                          .slice(
+                            20,
+                            campaignDetail.description.split(' ').length,
+                          )
+                          .join(' ')}
+                      </span>
+                    )}
+                  </p>
+                  <button
+                    type="button"
+                    className="boton btn btn-secondary btn-sm"
+                    onClick={showMoreToggle}
+                  >
+                    {showMore ? 'Read more' : 'Read less'}
+                  </button>
+                  <i
+                    className="fas fa-pen"
+                    role="switch"
+                    aria-checked="false"
+                    aria-labelledby="foo"
+                    tabIndex={0}
+                    onClick={() => setDescriptionEditMode(true)}
+                  />
+                </>
+              )}
             </div>
             <Comments name={campaignDetail.name} commentsDb={commentsDb} />
             <ShareModal />
