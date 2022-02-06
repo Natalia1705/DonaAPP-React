@@ -53,6 +53,7 @@ const StepOne = (props) => {
                     name="name"
                     placeholder="Ej. Juan Perez"
                     className="step__input"
+                    data-cy="new-campaign-name-input"
                   />
                   <ErrorMessage name="name">
                     {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -64,6 +65,7 @@ const StepOne = (props) => {
                     name="country"
                     placeholder="Ingresa el nombre de tu país"
                     className="step__input"
+                    data-cy="new-campaign-country-input"
                   />
                   <ErrorMessage name="country">
                     {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -75,6 +77,7 @@ const StepOne = (props) => {
                     id="category"
                     select="health"
                     className="step__input"
+                    data-cy="new-campaign-category-input"
                   >
                     <option>Selecciona una categoría</option>
                     <option value="Salud">Salud</option>
@@ -87,7 +90,11 @@ const StepOne = (props) => {
                   </ErrorMessage>
                 </div>
                 <div className="step__footer">
-                  <button type="submit" className="step__button">
+                  <button
+                    type="submit"
+                    className="step__button"
+                    data-cy="new-campaign-next-button"
+                  >
                     Siguiente
                   </button>
                 </div>

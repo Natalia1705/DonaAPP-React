@@ -97,6 +97,7 @@ const StepThree = (props) => {
                       id="title"
                       placeholder="Título"
                       className="step__input"
+                      data-cy="new-campaign-title-input"
                     />
                     <ErrorMessage name="title">
                       {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -111,6 +112,7 @@ const StepThree = (props) => {
                         type="document"
                         name="description"
                         className="step__input"
+                        data-cy="new-campaign-description-input"
                       />
                       <ErrorMessage name="description">
                         {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
@@ -130,6 +132,7 @@ const StepThree = (props) => {
                       type="file"
                       name="img"
                       value={values.img.filename}
+                      data-cy="new-campaign-img-input"
                       onChange={async (e) => {
                         handleSubmitFile(e);
                       }}
@@ -145,6 +148,7 @@ const StepThree = (props) => {
                     <button
                       type="submit"
                       className="step__button"
+                      data-cy="new-campaign-submmit-input"
                       onClick={() => {
                         setFieldValue('img', secureUrl);
                         setModal(true);
