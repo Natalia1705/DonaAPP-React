@@ -117,7 +117,7 @@ const Edit = () => {
         <main className="details__main">
           <div className="campaign">
             {imgEditMode ? (
-              <form onSubmit={(e) => formSubmitHandler(e)}>
+              <ImgInput onSubmit={(e) => formSubmitHandler(e)}>
                 {previewSource && (
                   <img
                     src={previewSource}
@@ -135,25 +135,39 @@ const Edit = () => {
                     handleSubmitFile(e);
                   }}
                 />
-                <button type="submit">Guardar</button>
-              </form>
+                <div>
+                  <button
+                    type="submit"
+                    className="boton btn btn-primary btn-lg"
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    className="boton btn btn-secondary btn-lg"
+                    onClick={() => setImgEditMode(false)}
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </ImgInput>
             ) : (
-              <>
+              <CampaignImgContainer>
                 {' '}
                 <img
                   className="campaign__img"
                   src={currentImg || campaignDetail.img}
                   alt={campaignDetail.title}
                 />
-                <i
-                  className="fas fa-pen"
+                <Pen
+                  className="fas fa-pen img-pen"
                   role="switch"
                   aria-checked="false"
                   aria-labelledby="foo"
                   tabIndex={0}
                   onClick={() => setImgEditMode(true)}
                 />
-              </>
+              </CampaignImgContainer>
             )}
             {titleEditMode ? (
               <Formik
@@ -169,36 +183,42 @@ const Edit = () => {
                   usePUT(id, { title: values.title });
                 }}
               >
-                <Form>
-                  <label htmlFor="title">Change your title</label>
-                  <Field id="title" name="title" />
-                  <button
-                    type="submit"
-                    className="boton btn btn-secondary btn-lg"
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    type="button"
-                    className="boton btn btn-primary btn-lg"
-                    onClick={() => setTitleEditMode(false)}
-                  >
-                    Cancelar
-                  </button>
+                <Form className="CampaignTitleInput">
+                  <label htmlFor="title">Nuevo título</label>
+                  <Field
+                    id="title"
+                    name="title"
+                    className="CampaignTitleInput-input"
+                  />
+                  <div>
+                    <button
+                      type="submit"
+                      className="boton btn btn-primary btn-lg"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      type="button"
+                      className="boton btn btn-secondary btn-lg"
+                      onClick={() => setTitleEditMode(false)}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
                 </Form>
               </Formik>
             ) : (
-              <span>
+              <CampaignTitleContainer>
                 <p className="campaign__title">{campaignDetail.title}</p>
-                <i
-                  className="fas fa-pen"
+                <Pen
+                  className="fas fa-pen title-pen"
                   role="switch"
                   aria-checked="false"
                   aria-labelledby="foo"
                   tabIndex={0}
                   onClick={() => setTitleEditMode(true)}
                 />
-              </span>
+              </CampaignTitleContainer>
             )}
           </div>
           <EditDonationsCard
@@ -223,7 +243,7 @@ const Edit = () => {
                   }}
                 >
                   <Form>
-                    <label htmlFor="category">Change your category</label>
+                    <label htmlFor="category">Nueva categoría</label>
                     <Field
                       name="category"
                       as="select"
@@ -239,13 +259,13 @@ const Edit = () => {
                     </Field>
                     <button
                       type="submit"
-                      className="boton btn btn-secondary btn-lg"
+                      className="boton btn btn-primary btn-lg"
                     >
                       Guardar
                     </button>
                     <button
                       type="button"
-                      className="boton btn btn-primary btn-lg"
+                      className="boton btn btn-secondary btn-lg"
                       onClick={() => setCategoryEditMode(false)}
                     >
                       Cancelar
@@ -256,8 +276,8 @@ const Edit = () => {
                 <p>
                   <i className="fas fa-tags" />
                   {campaignDetail.category}{' '}
-                  <i
-                    className="fas fa-pen"
+                  <Pen
+                    className="fas fa-pen category-pen"
                     role="switch"
                     aria-checked="false"
                     aria-labelledby="foo"
@@ -282,26 +302,30 @@ const Edit = () => {
                     usePUT(id, { description: values.description });
                   }}
                 >
-                  <Form>
-                    <label htmlFor="description">Change your description</label>
+                  <Form className="CampaignDescriptionForm">
+                    <label htmlFor="description">Nueva Descripción</label>
                     <Field
+                      as="textarea"
                       id="description"
                       name="description"
                       type="document"
+                      className="CampaignDescriptionInput"
                     />
-                    <button
-                      type="submit"
-                      className="boton btn btn-secondary btn-lg"
-                    >
-                      Guardar
-                    </button>
-                    <button
-                      type="button"
-                      className="boton btn btn-primary btn-lg"
-                      onClick={() => setDescriptionEditMode(false)}
-                    >
-                      Cancelar
-                    </button>
+                    <div>
+                      <button
+                        type="submit"
+                        className="boton btn btn-primary btn-lg"
+                      >
+                        Guardar
+                      </button>
+                      <button
+                        type="button"
+                        className="boton btn btn-secondary btn-lg"
+                        onClick={() => setDescriptionEditMode(false)}
+                      >
+                        Cancelar
+                      </button>
+                    </div>
                   </Form>
                 </Formik>
               ) : (
@@ -331,9 +355,9 @@ const Edit = () => {
                     onClick={showMoreToggle}
                   >
                     {showMore ? 'Read more' : 'Read less'}
-                  </button>
-                  <i
-                    className="fas fa-pen"
+                  </button>{' '}
+                  <Pen
+                    className="fas fa-pen description-pen"
                     role="switch"
                     aria-checked="false"
                     aria-labelledby="foo"
@@ -354,4 +378,80 @@ const Edit = () => {
 
 export default Edit;
 
-const Container = styled.div``;
+const Pen = styled.div`
+  cursor: pointer;
+`;
+const ImgInput = styled.form`
+  height: 240px;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  div {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+  }
+`;
+const Container = styled.div`
+  .description-pen {
+    margin-left: 8px;
+  }
+  .category-pen {
+    margin-left: 8px;
+  }
+  .fa-tags {
+    margin-right: 8px;
+  }
+  .CampaignTitleInput,
+  .CampaignDescriptionForm {
+    margin-top: 30px;
+    min-height: 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    .CampaignTitleInput-input {
+      width: 100%;
+      padding: 0 8px;
+    }
+    div {
+      width: 30%;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  .CampaignDescriptionInput {
+    width: 100%;
+    padding: 8px;
+    min-height: 120px;
+    margin: 16px 0;
+  }
+`;
+const CampaignTitleContainer = styled.div`
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const CampaignImgContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 362px;
+  img {
+    position: absolute;
+  }
+  .img-pen {
+    position: absolute;
+    right: 80px;
+    top: 30px;
+    background-color: white;
+    padding: 8px;
+    border-radius: 25%;
+  }
+  .img-pen:hover {
+    background-color: red;
+  }
+`;
