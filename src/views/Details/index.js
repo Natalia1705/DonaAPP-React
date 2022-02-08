@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
+import swal from 'sweetalert';
 import Comments from '../../components/Comments';
 import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
@@ -11,10 +12,19 @@ const { URL_BASE } = config;
 
 const Details = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const [campaignDetail, setCampaignDetail] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (searchParams.get('success') === 'true') {
+      // success
+      swal('Se Dono!', 'El pago se realizo correctamente', 'success');
+    }
+    if (searchParams.get('success') === 'false') {
+      // success
+      swal('Ocurrio un problema', 'Intente de nuevo mas tarde', 'error');
+    }
     setLoading(true);
     fetch(`${URL_BASE}/campaigns/${id}`, {
       /* headers: { usertoken: Auth.getSession().token }, */
