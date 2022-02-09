@@ -17,12 +17,9 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(postSignUp.fulfilled, (state, action) => {
       const userExists = { msg: 'The user already exists' };
-      if (JSON.stringify(action.payload) !== JSON.stringify(userExists)) {
-        state.user = action.payload;
-      } else {
+      if (JSON.stringify(action.payload) === JSON.stringify(userExists)) {
         state.error = action.payload;
       }
-
       state.loading = false;
     });
     builder.addCase(postSignUp.pending, (state) => {
@@ -35,10 +32,17 @@ const authSlice = createSlice({
     builder.addCase(postSignIn.fulfilled, (state, action) => {
       const matchFailed = { msg: 'The email or password are incorrect' };
       const nonExistentUser = { msg: 'The user does not exists' };
+      const unverifiedUser = {
+        msg: 'Pending Account. Please Verify Your Email!',
+      };
       if (JSON.stringify(action.payload) === JSON.stringify(nonExistentUser)) {
         state.error = action.payload;
       } else if (
         JSON.stringify(action.payload) === JSON.stringify(matchFailed)
+      ) {
+        state.error = action.payload;
+      } else if (
+        JSON.stringify(action.payload) === JSON.stringify(unverifiedUser)
       ) {
         state.error = action.payload;
       } else {
