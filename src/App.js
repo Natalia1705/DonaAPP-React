@@ -14,6 +14,7 @@ import Navbar from './components/navbar';
 import PaymentPage from './views/PaymentPage';
 import Error404 from './views/Error404';
 import Edit from './views/Edit';
+import Welcome from './components/Welcome';
 
 const App = () => (
   <BrowserRouter>
@@ -40,6 +41,7 @@ const App = () => (
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/confirm/:token" element={<Welcome />} />
       <Route
         path="/campaigns"
         element={
