@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Progres from '../Progress';
 import config from '../../config';
+import { timeAgo } from '../../utils/timer';
 
 const { URL_BASE } = config;
 
@@ -43,7 +44,7 @@ const Card = () => {
                 <h3>{data.title}</h3>
                 <p>{data.name}</p>
                 <p>{data.description}</p>
-                <p>Último donativo {/* {timeAgo(data.date)} */} hace 2 horas</p>
+                <p>Publicado {timeAgo(data.date)}</p>
               </div>
               <Progres
                 cardData={`${(data.donations / data.objective) * 100}%`}
