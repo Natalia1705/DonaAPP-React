@@ -283,7 +283,7 @@ const MenuToggle = styled.div`
     width: 40px;
     height: 40px;
     top: 8px;
-    cursor:pointer;
+    cursor: pointer;
     ${(props) => {
       if (props.toggle) {
         return `
@@ -300,4 +300,5 @@ const MenuToggle = styled.div`
       background-position: center;
       `;
     }}
+  }
 `;

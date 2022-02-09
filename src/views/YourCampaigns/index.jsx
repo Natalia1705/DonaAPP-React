@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { setLogin } from '../../state/auth/navBarLoginSlice';
 import Auth from '../../utils/Auth';
 import config from '../../config';
+import { timeAgo } from '../../utils/timer';
 
 const { URL_BASE } = config;
 
@@ -74,7 +75,7 @@ const YourCampaigns = () => {
                       <div className="card-body">
                         <h5 className="card-title ms-3">{e.title}</h5>
                         <p className="card-text fw-light fs-6">
-                          Fecha de creación:{/*  {timeAgo(e.date) */} ayer
+                          Publicado {timeAgo(e.date)}
                         </p>
                         <hr />
                         <Link

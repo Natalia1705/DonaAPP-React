@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "draft-js": "^0.11.7",
     "formik": "^2.2.9",
+    "luxon": "^2.3.0",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.0",
