@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
@@ -15,12 +16,19 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [navLoger, setNavLoger] = useState(isLogged);
   const [visible, setVisible] = useState(false);
+  const [userName, setUserName] = useState('');
+
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     if (isLogged) {
       setNavLoger(true);
     }
     if (!isLogged) {
       setNavLoger(false);
+    }
+    if (Auth.isLogin()) {
+      setUserName(Auth.getSession().name);
     }
   }, [isLogged]);
   const handleLogOut = () => {
@@ -36,7 +44,13 @@ const Navbar = () => {
           DonApp<span>.</span>
         </h1>
       </Link>
-      <List>
+      <MenuToggle
+        toggle={open}
+        onClick={() => {
+          setOpen(!open);
+        }}
+      />
+      <List toggle={open}>
         <li>
           <a href="/">Cómo funciona</a>
         </li>
@@ -54,7 +68,7 @@ const Navbar = () => {
               <AccountCircleIcon fontSize="large" />
             </div>
             <MenuProfile toggle={visible}>
-              <h3>Someone Famous</h3>
+              <h3>{userName && userName}</h3>
               <ul>
                 <li>
                   <Link to="/campaigns">
@@ -73,7 +87,12 @@ const Navbar = () => {
           <>
             <li>
               <Link to="/login">
-                <button className="boton" type="button" data-cy="login-button">
+                <button
+                  className="boton"
+                  type="button"
+                  data-cy="login-button"
+                  onClick={() => setOpen(!open)}
+                >
                   Iniciar Sesión
                 </button>
               </Link>
@@ -84,6 +103,7 @@ const Navbar = () => {
                   className="boton"
                   type="button"
                   data-cy="register-button"
+                  onClick={() => setOpen(!open)}
                 >
                   Registrarse
                 </button>
@@ -104,12 +124,14 @@ const Container = styled.header`
   box-shadow: 2px 45px 24px -34px rgba(0, 0, 0, 0.02);
   left: 0;
   width: 100%;
-
   padding: 20px 100px;
   z-index: 10000;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+  }
   .logo {
     color: #444;
     font-weight: 700;
@@ -121,16 +143,43 @@ const Container = styled.header`
 const List = styled.div`
   position: relative;
   display: flex;
+  @media (max-width: 768px) {
+    ${(props) => {
+      if (props.toggle) {
+        return `
+        width: 100%;
+        height: calc(100% - 68px);
+        position: fixed;
+        top: 68px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fff;
+        `;
+      }
+      return `
+      display:none;
+      `;
+    }}
+  }
   li {
     list-style: none;
-
     margin-left: 30px;
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
   }
   li a {
     text-decoration: none;
     color: #444;
     font-weight: 700;
     text-align: center;
+    @media (max-width: 768px) {
+      color: #111;
+      font-size: 1.6em;
+    }
   }
   .boton {
     color: #fff;
@@ -144,12 +193,15 @@ const UserProfile = styled.div`
   position: absolute;
   top: -10px;
   right: -50px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 768px) {
+    left: -55px;
+    top: 40px;
+  }
 `;
 
 const MenuProfile = styled.div`
@@ -202,7 +254,6 @@ const MenuProfile = styled.div`
   ul li {
     list-style: none;
     margin-left: -35px;
-
     padding: 10px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     display: flex;
@@ -216,4 +267,37 @@ const MenuProfile = styled.div`
       }
     }
   }
+  @media (max-width: 768px) {
+    ::before {
+      content: '';
+      position: relative;
+    }
+    position: relative;
+    width: 250px;
+  }
+`;
+
+const MenuToggle = styled.div`
+  @media (max-width: 768px) {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    top: 8px;
+    cursor:pointer;
+    ${(props) => {
+      if (props.toggle) {
+        return `
+        background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/OOjs_UI_icon_close.svg/480px-OOjs_UI_icon_close.svg.png");
+        background-size: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        `;
+      }
+      return `
+      background: url("https://www.samueldiosdado.com/wp-content/uploads/2017/08/Menú-hamburguesa-herramienta-practica-o-icono-inutil-900x753.png");
+      background-size: 40px;
+      background-repeat: no-repeat;
+      background-position: center;
+      `;
+    }}
 `;
