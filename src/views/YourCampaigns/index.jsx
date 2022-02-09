@@ -35,7 +35,10 @@ const YourCampaigns = () => {
       headers: { usertoken: Auth.getSession().token },
     })
       .then((resp) => resp.json())
-      .then((data) => setCampaigns(data.data.campaigns));
+      .then((data) => {
+        console.log(data);
+        setCampaigns(data.data.campaigns);
+      });
   }, [isDelete]);
   return (
     <Container>

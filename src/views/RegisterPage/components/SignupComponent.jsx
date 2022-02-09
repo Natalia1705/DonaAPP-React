@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '../../../common/LoaderComponent';
-import { setLogin } from '../../../state/auth/navBarLoginSlice';
+/* import { setLogin } from '../../../state/auth/navBarLoginSlice'; */
 import MessageComponent from '../../../common/MessageComponent';
 import { postSignUp } from '../../../thunkAction/authThunk';
 import useSignup from '../hooks/useSignup';
@@ -22,10 +22,10 @@ const SignupFormComponent = () => {
     if (Auth.isLogin()) {
       navigate('/campaigns');
     }
-    if (user) {
+    /*     if (user) {
       Auth.saveSession(user);
       navigate('/campaigns');
-    }
+    } */
   }, [user]);
   return (
     <>
@@ -40,7 +40,7 @@ const SignupFormComponent = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignUp(values));
-          dispatch(setLogin());
+          /* dispatch(setLogin()); */
           resetForm({ values: '' });
         }}
       >
