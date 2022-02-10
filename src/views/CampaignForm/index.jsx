@@ -45,12 +45,13 @@ export default function CampaignForm() {
   const submitHandler = async (newData) => {
     console.log('sesion :', Auth.getSession());
     console.log('newData :', newData);
+    const session = Auth.getSession();
     axios
       .post(`${URL_BASE}/campaigns`, newData, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          usertoken: Auth.getSession().token,
+          Authorization: `Bearer ${session?.token}`,
         },
       })
       .catch((error) => {
