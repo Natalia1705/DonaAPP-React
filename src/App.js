@@ -29,7 +29,14 @@ const App = () => (
           </PrivateRoute>
         }
       />
-      <Route path="/donate/:id" element={<Donate />} />
+      <Route
+        path="/donate/:id"
+        element={
+          <PrivateRoute>
+            <Donate />
+          </PrivateRoute>
+        }
+      />
       <Route path="/details/:id" element={<Details />} />
       <Route
         path="/details/edit/:id"
