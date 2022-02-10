@@ -2,16 +2,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const DonationsCard = ({ commentsDb, goal, campaignid }) => {
+const DonationsCard = ({ donationTimes = 0, donations, goal, campaignid }) => {
   const navigate = useNavigate();
   const customWidth = () => {
-    const commentMap = commentsDb.map((e) => e.amount);
-    const commentReduce = commentMap.reduce(
-      (acc, e) => Number(acc) + Number(e),
-    );
-    return `${
-      (commentReduce / goal) * 100 >= 100 ? 100 : (commentReduce / goal) * 100
-    }%`;
+    const progress =
+      (donations / goal) * 100 >= 100 ? 100 : (donations / goal) * 100;
+    return `${progress}%`;
   };
   return (
     <div className="donations">
@@ -27,13 +23,11 @@ const DonationsCard = ({ commentsDb, goal, campaignid }) => {
       <p className="donations__collection">
         <span className="amount">
           S./
-          {commentsDb
-            .map((e) => e.amount)
-            .reduce((acc, e) => Number(acc) + Number(e))}
+          {donations}
         </span>
         {` Recaudados del objetivo de S./ ${goal}`}
         <br />
-        <span className="total">{commentsDb.length}</span>
+        <span className="total">{donationTimes}</span>
         {' donantes'}
       </p>
       <div className="donations__buttons">
