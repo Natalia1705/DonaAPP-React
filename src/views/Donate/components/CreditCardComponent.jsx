@@ -10,7 +10,7 @@ import { defaultState } from '../../../state/payment/paymentSlice';
 import CreditCardFormComponent from './CreditCardFormComponent';
 import MakePaymentComponent from './MakePaymentComponent';
 
-const CreditCardComponent = ({ totalAmount, id }) => {
+const CreditCardComponent = ({ totalAmount, donateAmount, id }) => {
   const dispatch = useDispatch();
   const { loading, error, success, resPayment } = useSelector(
     (state) => state.paymentReducer,
@@ -56,7 +56,13 @@ const CreditCardComponent = ({ totalAmount, id }) => {
         />
       )}
       {!success && <CreditCardFormComponent />}
-      {success && <MakePaymentComponent totalAmount={totalAmount} />}
+      {success && (
+        <MakePaymentComponent
+          totalAmount={totalAmount}
+          donateAmount={donateAmount}
+          id={id}
+        />
+      )}
       <LoaderComponent loading={loading} />
     </div>
   );

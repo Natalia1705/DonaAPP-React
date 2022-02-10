@@ -26,9 +26,7 @@ const Details = () => {
       swal('Ocurrio un problema', 'Intente de nuevo mas tarde', 'error');
     }
     setLoading(true);
-    fetch(`${URL_BASE}/campaigns/${id}`, {
-      /* headers: { usertoken: Auth.getSession().token }, */
-    })
+    fetch(`${URL_BASE}/campaigns/${id}`, {})
       .then((resp) => resp.json())
       .then(
         (data) => {
@@ -78,7 +76,8 @@ const Details = () => {
           </div>
           <DonationsCard
             campaignid={id}
-            commentsDb={commentsDb}
+            donationTimes={campaignDetail.donationTimes}
+            donations={campaignDetail.donations}
             goal={campaignDetail.objective}
           />
           <div className="description">

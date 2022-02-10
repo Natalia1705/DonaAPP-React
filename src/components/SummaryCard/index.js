@@ -26,15 +26,16 @@ const SummaryCard = ({ donateAmount, voluntaryInput, id }) => {
         <div className="summary__total">
           <p>Total a pagar</p>
           <p className="sumary__amount">
-            {donateAmount === ''
-              ? '0.00'
-              : Number(donateAmount) + (donateAmount * voluntaryInput) / 100}
-            $
+            {donateAmount === '' ? '0.00' : totalAmount}$
           </p>
         </div>
       </div>
       <div className="summary mt-3">
-        <CreditCardComponent totalAmount={totalAmount * 3965.24} id={id} />
+        <CreditCardComponent
+          totalAmount={totalAmount * 3965.24}
+          donateAmount={donateAmount}
+          id={id}
+        />
       </div>
     </div>
   );
