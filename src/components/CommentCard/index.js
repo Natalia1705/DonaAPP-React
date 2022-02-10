@@ -11,10 +11,7 @@ const CommentCard = ({
     <div className="comment-card__container">
       <p className="comment-card__donator">
         {`${name} donó`}
-        <span>
-          S./
-          {amount}
-        </span>
+        <span>${amount}</span>
       </p>
       <p className="comment-card__text">{comment}</p>
     </div>
