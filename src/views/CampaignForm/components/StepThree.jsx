@@ -123,7 +123,12 @@ const StepThree = (props) => {
                       <img
                         src={previewSource}
                         alt="file name"
-                        style={{ height: '140px', width: '290px' }}
+                        style={{
+                          height: '90px',
+                          width: '180px',
+                          objectFit: 'contain',
+                          margin: '0 0 5px 0 ',
+                        }}
                       />
                     )}
                     <input
