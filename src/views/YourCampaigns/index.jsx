@@ -15,6 +15,7 @@ const { URL_BASE } = config;
 const YourCampaigns = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.user);
+  const session = Auth.getSession();
   const [campaigns, setCampaigns] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
   useEffect(() => {
@@ -32,7 +33,7 @@ const YourCampaigns = () => {
   };
   useEffect(() => {
     fetch(`${URL_BASE}/campaigns/my-campaigns`, {
-      headers: { usertoken: Auth.getSession().token },
+      headers: { Authorization: `Bearer ${session?.token}` },
     })
       .then((resp) => resp.json())
       .then((data) => {
