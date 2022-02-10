@@ -21,11 +21,8 @@ const DonationsCard = ({ donationTimes = 0, donations, goal, campaignid }) => {
         />
       </div>
       <p className="donations__collection">
-        <span className="amount">
-          S./
-          {donations}
-        </span>
-        {` Recaudados del objetivo de S./ ${goal}`}
+        <span className="amount">${donations}</span>
+        {` Recaudados del objetivo de $${goal}`}
         <br />
         <span className="total">{donationTimes}</span>
         {' donantes'}
