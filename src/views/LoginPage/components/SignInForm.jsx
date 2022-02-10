@@ -37,7 +37,10 @@ const SignInForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignIn(values));
-          dispatch(setLogin());
+          if (user) {
+            dispatch(setLogin());
+          }
+
           resetForm({ values: '' });
         }}
       >
