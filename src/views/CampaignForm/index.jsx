@@ -11,6 +11,7 @@ import './style.scss';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Auth from '../../utils/Auth';
+import Modal from '../../components/Modal';
 import StepOne from './components/StepOne';
 import StepTwo from './components/StepTwo';
 import StepThree from './components/StepThree';
@@ -20,6 +21,7 @@ const { URL_BASE } = config;
 
 export default function CampaignForm() {
   // const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
   const [data, setData] = useState({
     name: '',
     country: '',
@@ -45,18 +47,19 @@ export default function CampaignForm() {
   const submitHandler = async (newData) => {
     console.log('sesion :', Auth.getSession());
     console.log('newData :', newData);
-    const session = Auth.getSession();
-    axios
-      .post(`${URL_BASE}/campaigns`, newData, {
+    try {
+      const session = await Auth.getSession();
+      await axios.post(`${URL_BASE}/campaigns`, newData, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.token}`,
         },
-      })
-      .catch((error) => {
-        console.log(error);
       });
+      setModal(true);
+    } catch (error) {
+      console.log(error);
+    }
     // navigate('/campaigns');
   };
 
@@ -76,5 +79,10 @@ export default function CampaignForm() {
     />,
   ];
 
-  return <div>{steps[currentStep]}</div>;
+  return (
+    <div>
+      <Modal state={modal} turnState={setModal} />
+      {steps[currentStep]}
+    </div>
+  );
 }
