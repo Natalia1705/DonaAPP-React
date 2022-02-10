@@ -16,8 +16,6 @@ const SignInForm = () => {
   const loading = useSelector((state) => state.authReducer.loading);
   const user = useSelector((state) => state.authReducer.user);
   const error = useSelector((state) => state.authReducer.error);
-  const matchFailed = { msg: 'The email or password are incorrect' };
-  const nonExistentUser = { msg: 'The user does not exists' };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +25,6 @@ const SignInForm = () => {
     if (user) {
       Auth.saveSession(user);
       navigate('/campaigns');
-      console.log('hay usuario xd', user);
     }
   }, [user]);
   return (
@@ -105,10 +102,9 @@ const SignInForm = () => {
         <MessageComponent
           variant="danger"
           message={
-            JSON.stringify(error) === JSON.stringify(matchFailed) ||
-            JSON.stringify(nonExistentUser)
-              ? 'Email o contraseña incorrectos'
-              : 'Ocurrio un problema, intente de nuevo mas tarde'
+            JSON.stringify(error) === 'true'
+              ? 'Ocurrio un problema, intente de nuevo mas tarde'
+              : error
           }
         />
       )}

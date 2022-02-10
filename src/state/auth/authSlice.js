@@ -30,21 +30,8 @@ const authSlice = createSlice({
       state.error = action.payload;
     });
     builder.addCase(postSignIn.fulfilled, (state, action) => {
-      const matchFailed = { msg: 'The email or password are incorrect' };
-      const nonExistentUser = { msg: 'The user does not exists' };
-      const unverifiedUser = {
-        msg: 'Pending Account. Please Verify Your Email!',
-      };
-      if (JSON.stringify(action.payload) === JSON.stringify(nonExistentUser)) {
-        state.error = action.payload;
-      } else if (
-        JSON.stringify(action.payload) === JSON.stringify(matchFailed)
-      ) {
-        state.error = action.payload;
-      } else if (
-        JSON.stringify(action.payload) === JSON.stringify(unverifiedUser)
-      ) {
-        state.error = action.payload;
+      if (JSON.stringify(action.payload).includes('"msg":')) {
+        state.error = action.payload.msg;
       } else {
         state.user = action.payload;
       }
