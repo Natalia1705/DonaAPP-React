@@ -4,7 +4,6 @@ import '../style.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
-import Modal from '../../../components/Modal';
 import config from '../../../config';
 import LoaderComponent from '../../../common/LoaderComponent';
 
@@ -25,8 +24,6 @@ const StepThree = (props) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [previewSource, setPreviewSource] = useState('');
   const [secureUrl, setSecureUrl] = useState('holi');
-  const [modal, setModal] = useState(false);
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -67,12 +64,9 @@ const StepThree = (props) => {
   };
   const handleSubmit = async (values) => {
     await props.next(values);
-    setModal(true);
   };
-  console.log('imgLoaded :', imgLoaded);
   return (
     <>
-      <Modal state={modal} turnState={setModal} />
       <LoaderComponent loading={imgLoaded} />
       <Formik
         validationSchema={stepThreeValidationSchema}
