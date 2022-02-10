@@ -5,7 +5,6 @@ const useMakePayment = () => {
   const dispatch = useDispatch();
   return {
     dispatchMakePayment: (totalAmount, donateAmount, id) => {
-      console.log('id de la campaña:', id);
       const paymentInfo = {
         docType: 'CC',
         docNumber: '10358519',

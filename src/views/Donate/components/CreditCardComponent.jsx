@@ -55,7 +55,7 @@ const CreditCardComponent = ({ totalAmount, donateAmount, id }) => {
           message="Ocurrio un problema, intente de nuevo mas tarde"
         />
       )}
-      {!success && <CreditCardFormComponent />}
+      {!success && <CreditCardFormComponent totalAmount={totalAmount} />}
       {success && (
         <MakePaymentComponent
           totalAmount={totalAmount}
