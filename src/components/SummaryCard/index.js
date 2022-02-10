@@ -28,6 +28,16 @@ const SummaryCard = ({ donateAmount, voluntaryInput, id }) => {
           <p className="sumary__amount">
             {donateAmount === '' ? '0.00' : totalAmount}$
           </p>
+          {donateAmount !== '' && totalAmount < 30 && (
+            <div className="total-amount-alert">
+              <p>El monto total debe ser superior a 30 USD</p>
+            </div>
+          )}
+          {donateAmount !== '' && totalAmount > 50 && (
+            <div className="total-amount-alert">
+              <p>El monto total debe ser inferior a 50 USD</p>
+            </div>
+          )}
         </div>
       </div>
       <div className="summary mt-3">

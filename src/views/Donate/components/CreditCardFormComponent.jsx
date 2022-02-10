@@ -6,7 +6,7 @@ import useCreditCardSchema from '../hooks/useCreditCardSchema';
 import useCreateCardAndCustomer from '../hooks/useCreateCardAndCustomer';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const CreditCardFormComponent = () => {
+const CreditCardFormComponent = ({ totalAmount }) => {
   const [expiry, setExpiry] = useState(null);
   const { initialValues, validationSchema } = useCreditCardSchema();
   const { dispatchCreateCardAndCustomer } = useCreateCardAndCustomer();
@@ -14,6 +14,9 @@ const CreditCardFormComponent = () => {
     setExpiry(values);
   };
   const handleSubmitContinue = (values, { resetForm }) => {
+    if (totalAmount / 3965.24 < 30 || totalAmount / 3965.24 > 50) {
+      return;
+    }
     dispatchCreateCardAndCustomer(values, expiry);
     resetForm({ values: '' });
   };

@@ -1,6 +1,12 @@
 .summary {
   display: none;
 }
+.total-amount-alert {
+  background-color: #f8d7da;
+  border: solid 0.5 #f5c2c7;
+  color: #84284b;
+  grid-column: 1 / 3;
+}
 @media (min-width: 960px) {
   .summary {
     // position: sticky;
