@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useState } from 'react';
 import Modal from '../../../components/Modal';
 import config from '../../../config';
+import LoaderComponent from '../../../common/LoaderComponent';
 
 const { URL_BASE } = config;
 
@@ -21,6 +22,7 @@ const stepThreeValidationSchema = Yup.object({
   img: Yup.string().required('Por favor ingresa una imagen'),
 });
 const StepThree = (props) => {
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [previewSource, setPreviewSource] = useState('');
   const [secureUrl, setSecureUrl] = useState('holi');
   const [modal, setModal] = useState(false);
@@ -41,6 +43,7 @@ const StepThree = (props) => {
       });
       const rta = await response.json();
       setSecureUrl(rta.secureUrl);
+      setImgLoaded(false);
       console.log('Image uploaded successfully');
     } catch (err) {
       console.error(err);
@@ -50,8 +53,8 @@ const StepThree = (props) => {
 
   const handleSubmitFile = (e) => {
     const file = e.target.files[0];
+    setImgLoaded(true);
     previewFile(file);
-    console.log('HandleSubmitFile');
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -64,11 +67,13 @@ const StepThree = (props) => {
   };
   const handleSubmit = async (values) => {
     await props.next(values);
+    setModal(true);
   };
-
+  console.log('imgLoaded :', imgLoaded);
   return (
     <>
       <Modal state={modal} turnState={setModal} />
+      <LoaderComponent loading={imgLoaded} />
       <Formik
         validationSchema={stepThreeValidationSchema}
         initialValues={props.data}
@@ -153,10 +158,9 @@ const StepThree = (props) => {
                     <button
                       type="submit"
                       className="step__button"
-                      data-cy="new-campaign-submmit-input"
+                      data-cy="new-campaign-submmit-input" // imgLoaded
                       onClick={() => {
                         setFieldValue('img', secureUrl);
-                        setModal(true);
                       }}
                     >
                       Terminar
