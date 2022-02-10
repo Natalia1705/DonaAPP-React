@@ -8,10 +8,11 @@ const HomePage = () => (
     <Banner>
       <div className="content">
         <h2>Apoya una noble causa.</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae,
-          eveniet? Non dolorem voluptatibus quod rem?
-        </p>
+        <h1>
+          Recaudación de fondos confiable para todos los momentos de la vida.
+          <br />
+          Consigue ayuda o bríndala
+        </h1>
         <a
           href="/campaignform"
           className="boton2"
@@ -42,6 +43,12 @@ const Banner = styled.section`
   .content {
     max-width: 900px;
     text-align: center;
+  }
+  .content h1 {
+    font-size: 1.2em;
+    color: #444;
+    font-weight: 00;
+    line-height: 40px;
   }
   .content h2 {
     font-size: 5em;

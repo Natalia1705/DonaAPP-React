@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,30 +11,57 @@ const { URL_BASE } = config;
 
 const Card = () => {
   const [campaignsData, setCampaignsData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
   useEffect(() => {
-    fetch(`${URL_BASE}/campaigns/`, {
-      headers: { limit: 6 },
-    })
+    fetch(`${URL_BASE}/campaigns/`)
       .then((resp) => resp.json())
-      .then((data) => setCampaignsData(data.data));
+      .then((data) => {
+        setCampaignsData(data.data);
+        setFilteredResults(data.data);
+      });
     /* setCampaignsData(data.data.campaigns) */
   }, []);
+
+  const filterData = (category) => {
+    if (category !== 'todas') {
+      const filteredData = campaignsData.filter(
+        (item) => item.category === category,
+      );
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(campaignsData);
+    }
+  };
 
   return (
     <Cards>
       <div className="title">
-        <h2 className="titleText">
-          Lorem. <span>I</span>
-          psus
-        </h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-          praesentium, facere suscipit at repellendus consectetur.
-        </p>
+        {/* <h2 className="titleText">
+          “Hay que unirse, no para estar juntos, sino para hacer algo juntos”
+        </h2> */}
+        <h4>Explora las campañas principales </h4>
       </div>
+      <div className="Menu">
+        <button className="boton" onClick={() => filterData('todas')}>
+          Todas
+        </button>
+        <button className="boton" onClick={() => filterData('Salud')}>
+          Salud
+        </button>
+        <button className="boton" onClick={() => filterData('Mascotas')}>
+          Mascotas
+        </button>
+        <button className="boton" onClick={() => filterData('In memorium')}>
+          Inmemorium
+        </button>
+        <button className="boton" onClick={() => filterData('Otros')}>
+          Otros
+        </button>
+      </div>
+
       <Content>
         {campaignsData &&
-          campaignsData.map((data) => (
+          filteredResults.map((data) => (
             <div className="box" key={data._id} data-cy="campaign-home-cards">
               <div className="imgBx">
                 <Link to={`/details/${data._id}`}>
@@ -62,12 +90,20 @@ const Card = () => {
 export default Card;
 
 const Cards = styled.section`
+  margin-top: 0px;
   .title {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    h4 {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      font-size: 3em;
+      color: #444;
+    }
   }
 `;
 const Content = styled.div`
