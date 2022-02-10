@@ -3,7 +3,7 @@ import React from 'react';
 const Progres = ({ cardData }) => (
   <div className="progress">
     <div
-      className="progress-bar bg-success"
+      className="progress-bar bg-sucess"
       role="progressbar"
       style={{ width: cardData }}
       aria-valuenow="25"
