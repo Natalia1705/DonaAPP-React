@@ -112,7 +112,7 @@ h1 {
 .form-register__body {
   display: flex;
   align-items: flex-start;
-  padding: 15px 0px;
+  padding: 10px 0px;
   font-size: 0.8rem;
 }
 
@@ -167,7 +167,7 @@ h1 {
 
 /* body de step */
 .step__body {
-  padding: 20px 15px 0;
+  padding: 15px 15px 0;
 }
 
 /* step inputs */
@@ -175,14 +175,14 @@ h1 {
   display: block;
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 3px;
   border: 1px solid var(--color-border-input);
 }
 
 /* step footer */
 .step__footer {
-  padding: 10px 15px;
+  padding: 5px 15px;
   text-align: center;
 }
 
