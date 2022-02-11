@@ -15,6 +15,7 @@ const Details = () => {
   const [searchParams] = useSearchParams();
   const [campaignDetail, setCampaignDetail] = useState({});
   const [loading, setLoading] = useState(true);
+  const [newcComment, setNewcComment] = useState(false);
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
@@ -25,6 +26,9 @@ const Details = () => {
       // success
       swal('Ocurrio un problema', 'Intente de nuevo mas tarde', 'error');
     }
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
     fetch(`${URL_BASE}/campaigns/${id}`, {})
       .then((resp) => resp.json())
@@ -35,7 +39,7 @@ const Details = () => {
         },
         /* setCampaignDetail(data.data.campaigns) */
       );
-  }, []);
+  }, [newcComment]);
 
   const [showMore, setShowMore] = useState(true);
   const showMoreToggle = () => {
@@ -87,6 +91,8 @@ const Details = () => {
               </button>
             </div>
             <Comments
+              setNewcComment={setNewcComment}
+              newcComment={newcComment}
               name={campaignDetail.name}
               commentsDb={campaignDetail.commentsDb}
               id={id}

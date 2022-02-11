@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import swal from 'sweetalert';
@@ -9,38 +9,36 @@ import './style.scss';
 import Auth from '../../utils/Auth';
 import LoaderComponent from '../../common/LoaderComponent';
 
-const Comments = ({ name, commentsDb, id }) => {
+const Comments = ({ name, id, commentsDb, setNewcComment }) => {
   const navigate = useNavigate();
-  const [commentPosted, setCommentPosted] = useState(false);
-  const [commentsInfo, setCommentsInfo] = useState([]);
-  useEffect(() => {
-    setCommentsInfo(commentsDb);
-  }, [commentsDb]);
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="comments">
       <p className="comments__title">
-        {'Comentarios '}(<span>{commentsInfo.length}</span>)
+        {'Comentarios '}(<span>{commentsDb.length}</span>)
       </p>
-      {commentsInfo &&
-        commentsInfo.map((e) => (
+      {commentsDb &&
+        commentsDb.map((e) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <CommentCard {...e} key={`${e.name}`} /> // agregar id
+          <CommentCard {...e} key={`${e.name}-${commentsDb.indexOf(e)}`} />
         ))}
-      <LoaderComponent loading={commentPosted} />
+      <LoaderComponent loading={loading} />
       <Formik
         initialValues={{
           firstName: '',
           newComment: '',
         }}
         onSubmit={async (values) => {
-          setCommentPosted(true);
+          setLoading(true);
           if (Auth.isLogin()) {
             await usePUT(id, {
               commentsDb: values.newComment,
             });
-            setCommentPosted(false);
+            await setNewcComment((prev) => !prev);
+            setLoading(false);
           } else {
-            setCommentPosted(false);
+            setLoading(false);
             swal(
               'Upps',
               'Necesitas tener una sesión iniciada para comentar',
@@ -53,9 +51,6 @@ const Comments = ({ name, commentsDb, id }) => {
         }}
       >
         <Form className="comment-form">
-          <label htmlFor="newComment" className="comment-form__label">
-            Comentario
-          </label>
           <Field
             as="textarea"
             type="document"
