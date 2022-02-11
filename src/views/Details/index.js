@@ -36,29 +36,6 @@ const Details = () => {
         /* setCampaignDetail(data.data.campaigns) */
       );
   }, []);
-  const campaignDetails = {
-    commentsDb: [
-      {
-        name: 'Fabrizzio DBC',
-        amount: '1550.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        name: 'Alberto C.',
-        amount: '700.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        name: 'Julieta Rabadilla',
-        amount: '3500.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        amount: '35.00',
-      },
-    ],
-  };
-  const { commentsDb } = campaignDetails;
 
   const [showMore, setShowMore] = useState(true);
   const showMoreToggle = () => {
@@ -109,7 +86,11 @@ const Details = () => {
                 {showMore ? 'Read more' : 'Read less'}
               </button>
             </div>
-            <Comments name={campaignDetail.name} commentsDb={commentsDb} />
+            <Comments
+              name={campaignDetail.name}
+              commentsDb={campaignDetail.commentsDb}
+              id={id}
+            />
             <ShareModal />
           </div>
         </main>
