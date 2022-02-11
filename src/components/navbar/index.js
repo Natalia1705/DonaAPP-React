@@ -121,9 +121,10 @@ export default Navbar;
 const Container = styled.header`
   position: absolute;
   top: 0;
-  box-shadow: 2px 45px 24px -34px rgba(0, 0, 0, 0.02);
+  box-shadow: 2px 45px 24px -34px rgba(0, 0, 0, 0.05);
   left: 0;
   width: 100%;
+  height: 90px;
   padding: 20px 100px;
   z-index: 10000;
   display: flex;

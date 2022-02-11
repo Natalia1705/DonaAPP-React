@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import { useEffect } from 'react';
-import { Form, Row } from 'react-bootstrap';
+// import { Form, Row } from 'react-bootstrap';
+import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoaderComponent from '../../../common/LoaderComponent';
@@ -45,53 +46,45 @@ const SignInForm = () => {
         }}
       >
         {(formik) => (
-          <Form onSubmit={formik.handleSubmit}>
-            <Row className="mb-3">
-              <Form.Group controlId="email">
-                <Form.Label>Correo Electrónico</Form.Label>
-                <Form.Control
-                  name="email"
-                  type="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                  isInvalid={formik.touched.email && formik.errors.email}
-                  data-cy="login-email-input"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group controlId="password">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control
-                  name="password"
-                  type="password"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.password}
-                  isInvalid={formik.touched.password && formik.errors.password}
-                  data-cy="login-password-input"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.password}
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
+          <FormContent onSubmit={formik.handleSubmit}>
+            <div className="inputBx">
+              <span>Correo Electrónico</span>
+              <input
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                data-cy="login-email-input"
+              />
+              {formik?.errors?.email && (
+                <span className="spanError">{formik.errors.email}</span>
+              )}
+            </div>
+            <div className="inputBx">
+              <span>Contraseña</span>
+              <input
+                name="password"
+                type="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                data-cy="login-password-input"
+              />
+              {formik?.errors?.password && (
+                <span className="spanError">{formik.errors.password}</span>
+              )}
+            </div>
             <div>
               {loading && <div>Cargando ...</div>}
-              <button
-                className="btn btn-primary"
+              <Button
+                className=""
                 type="submit"
                 disabled={!(formik.isValid && formik.dirty)}
                 data-cy="login-submmit-button"
               >
                 Iniciar Sesión
-              </button>
+              </Button>
             </div>
-          </Form>
+          </FormContent>
         )}
       </Formik>
       <LoaderComponent loading={loading} />
@@ -116,3 +109,24 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
+
+const FormContent = styled.form``;
+const Button = styled.button`
+  background: #ff0157;
+  color: #fff;
+  font-size: 14px;
+  display: inline-block;
+  border: none;
+  padding: 10px 10px;
+  margin-top: 10px;
+  margin-left: 25%;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  border-radius: 5px;
+  cursor: pointer;
+  :hover {
+    letter-spacing: 1px;
+  }
+`;
