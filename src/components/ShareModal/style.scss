@@ -4,7 +4,15 @@
   text-align: center;
   font-size: 24px;
 }
+.modal-footer {
+  display: flex;
+}
+.modal-footer {
+  justify-content: space-around;
+}
 .modal-body {
+  padding: 16px;
+  z-index: 9999;
   .modal__subtitle {
     text-align: justify;
   }
@@ -54,7 +62,7 @@
 
 @media (min-width: 960px) {
   .modal-body {
-    padding: 32px;
+    padding: 16px;
     max-width: 466px;
     .modal__subtitle {
       text-align: justify;
