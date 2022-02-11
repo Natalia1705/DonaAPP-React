@@ -29,21 +29,35 @@ const Comments = ({ name, commentsDb, id }) => {
         }}
         onSubmit={async (values) => {
           console.log('enviado!', values);
-          usePUT(id, { commentsDb: [values.firstName, values.newComment] });
+          usePUT(id, {
+            commentsDb: { name: values.firstName, comment: values.newComment },
+          });
         }}
       >
-        <Form>
-          <label htmlFor="firstName">Your name</label>
-          <Field id="firstName" name="firstName" placeholder="June" />
-          <label htmlFor="newComment">Comentario</label>
+        <Form className="comment-form">
+          <label htmlFor="firstName" className="comment-form__label">
+            Nombre
+          </label>
+          <Field
+            id="firstName"
+            name="firstName"
+            placeholder="June"
+            className="comment-form__name-input"
+          />
+          <label htmlFor="newComment" className="comment-form__label">
+            Comentario
+          </label>
           <Field
             as="textarea"
             type="document"
             id="newComment"
             name="newComment"
             placeholder="Uno a uno todos somos mortales. Juntos, somos eternos."
+            className="comment-form__comment-input"
           />
-          <button type="submit">Enviar</button>
+          <button type="submit" className="boton btn btn-secondary btn-sm">
+            Enviar
+          </button>
         </Form>
       </Formik>
       <div className="cta">

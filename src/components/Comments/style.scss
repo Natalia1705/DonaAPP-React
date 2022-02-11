@@ -1,4 +1,33 @@
 .comments__title {
-    margin-top: 12px;
-    font-weight: bold;
+  margin-top: 12px;
+  font-weight: bold;
+}
+.comment-form {
+  border-top: solid 1px #767777;
+  padding-top: 8px;
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  .comment-form__label {
+    color: #767777;
+    align-self: flex-start;
   }
+  .comment-form__name-input {
+    padding: 0 8px;
+    width: 100%;
+  }
+
+  .comment-form__comment-input {
+    padding: 8px;
+    width: 100%;
+    min-height: 90px;
+    resize: none;
+  }
+  button {
+    margin-bottom: 16px;
+  }
+}
