@@ -45,7 +45,6 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
               'error',
             ).then(() => {
               swal.close();
-              /* navigate('/login'); */
             });
           }
         }}
@@ -67,14 +66,14 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
       <div className="cta">
         <p className="cta__text">
           Tu tambien puedes tomar acción y ayudar a
-          <span className="cta__name">{name}</span>
+          <span className="cta__name"> {name}</span>
         </p>
         <button
           type="button"
           className="cta__button boton btn btn-primary btn-sm"
-          onClick={() => navigate('/donate')}
+          onClick={() => navigate('/donate:id')}
         >
-          Continuar
+          Donar ahora
         </button>
       </div>
     </div>

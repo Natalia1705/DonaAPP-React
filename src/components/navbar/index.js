@@ -163,7 +163,7 @@ const Container = styled.header`
   width: 100%;
   height: 90px;
   padding: 20px 100px;
-  z-index: 10000;
+  z-index: 600;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
