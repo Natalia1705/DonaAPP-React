@@ -7,9 +7,11 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Button, Badge, Toast } from 'react-bootstrap';
 import { setLogOut } from '../../state/auth/navBarLoginSlice';
 import { cleaningUser } from '../../state/auth/authSlice';
 import Auth from '../../utils/Auth';
+import socket from '../../utils/socket';
 
 const Navbar = () => {
   const isLogged = useSelector((state) => state.navBarLoginSlice.isLogged);
@@ -17,8 +19,20 @@ const Navbar = () => {
   const [navLoger, setNavLoger] = useState(isLogged);
   const [visible, setVisible] = useState(false);
   const [userName, setUserName] = useState('');
-
   const [open, setOpen] = useState(false);
+  const [showA, setShowA] = useState(true);
+  const [notification, setNotification] = useState([]);
+
+  console.log('notification', notification);
+
+  useEffect(() => {
+    if (isLogged) {
+      socket.emit('connection', 'server connected');
+      socket.on(`payment:notification:${Auth.getSession().id}`, (data) => {
+        setNotification((prev) => [...prev, data]);
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     if (isLogged) {
@@ -37,6 +51,7 @@ const Navbar = () => {
     dispatch(cleaningUser());
     setVisible(!visible);
   };
+  const toggleShowA = () => setShowA(!showA);
   return (
     <Container>
       <Link to="/" style={{ textDecoration: 'none' }}>
@@ -57,6 +72,28 @@ const Navbar = () => {
         <li>
           <a href="/">Acerca de</a>
         </li>
+        {navLoger && (
+          <li>
+            <Button onClick={toggleShowA} variant="primary">
+              Notificaciones <Badge bg="secondary">{notification.length}</Badge>
+              <span className="visually-hidden">unread messages</span>
+            </Button>
+            {notification.map((el) => (
+              <Toast show={showA} onClose={toggleShowA} className="mt-3">
+                <Toast.Header>
+                  <img
+                    src="holder.js/20x20?text=%20"
+                    className="rounded me-2"
+                    alt=""
+                  />
+                  <strong className="me-auto">{el.name}</strong>
+                </Toast.Header>
+                <Toast.Body>{`${el.name} te dono ${el.value}`}</Toast.Body>
+              </Toast>
+            ))}
+          </li>
+        )}
+
         {navLoger ? (
           <UserProfile>
             <div
