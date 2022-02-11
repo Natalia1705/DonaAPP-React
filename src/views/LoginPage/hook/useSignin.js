@@ -9,7 +9,7 @@ const useSignin = () => {
         email: Yup.string()
           .email('Correo Electrónico invalido')
           .required('Correo Electrónico es requerido'),
-        password: Yup.string().required('Por favor, introduzca su contraseña'),
+        password: Yup.string().required(), // .required('Por favor, introduzca su contraseña'),
       }),
     );
   }, []);
