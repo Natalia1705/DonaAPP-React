@@ -2,12 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
+import swal from 'sweetalert';
 import CommentCard from '../CommentCard';
 import usePUT from '../../views/Edit/Hooks/usePUT';
 import './style.scss';
+import Auth from '../../utils/Auth';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const Comments = ({ name, commentsDb, id }) => {
   const navigate = useNavigate();
+  const [commentPosted, setCommentPosted] = useState(false);
   const [commentsInfo, setCommentsInfo] = useState([]);
   useEffect(() => {
     setCommentsInfo(commentsDb);
@@ -22,28 +26,33 @@ const Comments = ({ name, commentsDb, id }) => {
           // eslint-disable-next-line react/jsx-props-no-spreading
           <CommentCard {...e} key={`${e.name}`} /> // agregar id
         ))}
+      <LoaderComponent loading={commentPosted} />
       <Formik
         initialValues={{
           firstName: '',
           newComment: '',
         }}
         onSubmit={async (values) => {
-          console.log('enviado!', values);
-          usePUT(id, {
-            commentsDb: { name: values.firstName, comment: values.newComment },
-          });
+          setCommentPosted(true);
+          if (Auth.isLogin()) {
+            await usePUT(id, {
+              commentsDb: values.newComment,
+            });
+            setCommentPosted(false);
+          } else {
+            setCommentPosted(false);
+            swal(
+              'Upps',
+              'Necesitas tener una sesión iniciada para comentar',
+              'error',
+            ).then(() => {
+              swal.close();
+              /* navigate('/login'); */
+            });
+          }
         }}
       >
         <Form className="comment-form">
-          <label htmlFor="firstName" className="comment-form__label">
-            Nombre
-          </label>
-          <Field
-            id="firstName"
-            name="firstName"
-            placeholder="June"
-            className="comment-form__name-input"
-          />
           <label htmlFor="newComment" className="comment-form__label">
             Comentario
           </label>
