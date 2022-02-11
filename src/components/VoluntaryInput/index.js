@@ -6,8 +6,8 @@ const VoluntaryInput = ({ voluntaryInput, setVoluntaryInput }) => (
       Aportación voluntaria a los servicios de Donapp
     </p>
     <p className="voluntary__subtitle">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima fugit id
-      libero atque saepe labore voluptates.
+      La aportación voluntaria es una donación extra y opcional que puede hacer
+      para ayudar a financiar esta aplicación.
     </p>
     <div className="voluntary__input">
       <div className="value">{`${voluntaryInput}%`}</div>

@@ -60,9 +60,11 @@ const Donate = () => {
               <div className="warranty__text">
                 <p className="warranty__title">Garantía Donapp</p>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nihil, eveniet earum, omnis ullam in architecto ex odit sunt
-                  hic,
+                  En DonApp valoramos tu voluntad de apoyar una noble causa, es
+                  por eso que antes de desembolsar cualquier suma de dinero
+                  hacemos una verificación detallada de la campaña en cuestión y
+                  en caso de detectar algún tipo de fraude todo el dinero será
+                  devuelto a los aportantes sin cobrar ningún tipo de comisión
                 </p>
                 <Link to="/">Más información</Link>
               </div>
