@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import swal from 'sweetalert';
 import { setLogin } from '../../state/auth/navBarLoginSlice';
 import Auth from '../../utils/Auth';
 import config from '../../config';
 import { timeAgo } from '../../utils/timer';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const { URL_BASE } = config;
 
@@ -25,11 +27,28 @@ const YourCampaigns = () => {
   }, []);
 
   const deleteHandler = async (e) => {
-    const campaingId = e.target.attributes.campaingid.nodeValue;
-    await fetch(`${URL_BASE}/campaigns/${campaingId}`, {
-      method: 'DELETE',
+    swal({
+      title: '¿Estás seguro?',
+      text: 'Una vez la campaña es eliminada, esta acción no podrá ser revertida',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        setIsDelete(true);
+        const campaingId = e.target.attributes.campaingid.nodeValue;
+        await fetch(`${URL_BASE}/campaigns/${campaingId}`, {
+          method: 'DELETE',
+        });
+        setIsDelete(false);
+        swal.close();
+        swal('Poof! ¡Tu camapaña fue eliminada con éxito!', {
+          icon: 'success',
+        });
+      } else {
+        swal('¡Tu camapaña está segura!');
+      }
     });
-    setIsDelete(!isDelete);
   };
   useEffect(() => {
     fetch(`${URL_BASE}/campaigns/my-campaigns`, {
@@ -42,6 +61,7 @@ const YourCampaigns = () => {
   }, [isDelete]);
   return (
     <Container>
+      <LoaderComponent loading={isDelete} />
       <div className="container">
         <div
           className="
