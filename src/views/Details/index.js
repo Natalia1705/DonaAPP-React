@@ -7,6 +7,7 @@ import DonationsCard from '../../components/DonationsCard';
 import ShareModal from '../../components/ShareModal';
 import './styles.scss';
 import config from '../../config';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const { URL_BASE } = config;
 
@@ -48,7 +49,7 @@ const Details = () => {
   return (
     <Container>
       {loading ? (
-        'cargando'
+        <LoaderComponent loading />
       ) : (
         <main className="details__main">
           <div className="campaign">
