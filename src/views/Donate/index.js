@@ -6,6 +6,7 @@ import SummaryCard from '../../components/SummaryCard';
 import VoluntaryInput from '../../components/VoluntaryInput';
 import config from '../../config';
 import './styles.scss';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const { URL_BASE } = config;
 
@@ -33,7 +34,7 @@ const Donate = () => {
   return (
     <Container>
       {loading ? (
-        'cargando'
+        <LoaderComponent loading />
       ) : (
         <main className="main">
           <div className="donate">
