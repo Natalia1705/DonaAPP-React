@@ -82,7 +82,7 @@ const ModalContainer = styled.section`
     text-align: center;
   }
   .content button.boton {
-    color: blue;
+    color: #fff;
     justify-content: center;
     align-items: center;
     cursor: pointer;
