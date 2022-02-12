@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { Formik, Field, Form } from 'formik';
 // import { Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,74 +55,44 @@ const SignupFormComponent = () => {
           resetForm({ values: '' });
         }}
       >
-        {(formik) => (
-          <FormContent onSubmit={formik.handleSubmit}>
+        {({ errors, touched }) => (
+          <Form>
             <div className="inputBx">
               <span>Nombre de Usuario</span>
-              <input
-                name="name"
-                type="text"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-                isInvalid={formik.touched.name && formik.errors.name}
-                data-cy="register-name-input"
-              />
-              <span>{formik.errors.name}</span>
+              <Field name="name" type="text" data-cy="register-name-input" />
+              {errors.name && touched.name ? <span>{errors.name}</span> : null}
             </div>
             <div className="inputBx">
               <span>Correo Electrónico</span>
-              <input
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                isInvalid={formik.touched.email && formik.errors.email}
-                data-cy="register-email-input"
-              />
-              <span>{formik.errors.email}</span>
+              <Field name="email" type="email" data-cy="register-email-input" />
+              {errors.email && touched.email ? (
+                <span>{errors.email}</span>
+              ) : null}
             </div>
             <div className="inputBx">
               <span>Contraseña</span>
-              <input
+              <Field
                 name="password"
                 type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                isInvalid={formik.touched.password && formik.errors.password}
                 data-cy="register-password-input"
               />
-              <span>{formik.errors.password}</span>
+              {errors.password && touched.password ? (
+                <span>{errors.password}</span>
+              ) : null}
             </div>
             <div className="inputBx">
               <span>Repita Contraseña</span>
-              <input
+              <Field
                 name="confirmPassword"
                 type="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.confirmPassword}
-                isInvalid={
-                  formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword
-                }
                 data-cy="register-repeat-password-input"
               />
-              <span>{formik.errors.confirmPassword}</span>
+              {errors.confirmPassword && touched.confirmPassword ? (
+                <span>{errors.confirmPassword}</span>
+              ) : null}
             </div>
-            <div>
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={!(formik.isValid && formik.dirty)}
-                data-cy="register-submmit-button"
-              >
-                Registrarse
-              </button>
-            </div>
-          </FormContent>
+            <Button type="submit">Registrarse</Button>
+          </Form>
         )}
       </Formik>
       <LoaderComponent loading={loading} />
@@ -149,4 +119,22 @@ const SignupFormComponent = () => {
 
 export default SignupFormComponent;
 
-const FormContent = styled.form``;
+const Button = styled.button`
+  background: #ff0157;
+  color: #fff;
+  font-size: 14px;
+  display: inline-block;
+  border: none;
+  padding: 10px 10px;
+  margin-top: 10px;
+  margin-left: 25%;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  border-radius: 5px;
+  cursor: pointer;
+  :hover {
+    letter-spacing: 1px;
+  }
+`;

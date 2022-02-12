@@ -74,10 +74,10 @@ const FormContent = styled.div`
       letter-spacing: 1px;
     }
     .inputBx {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       span {
         font-size: 16px;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
         display: inline-block;
         color: #607d8b;
         font-weight: 300;
@@ -86,7 +86,7 @@ const FormContent = styled.div`
       }
       input {
         width: 100%;
-        padding: 10px 20px;
+        padding: 8px 20px;
         outline: none;
         font-weight: 400;
         border: 1px solid #607d8b;
