@@ -11,7 +11,7 @@ const stepOneValidationSchema = Yup.object({
       /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
       'Tu nombre no debe contener símbolos ni numeros',
     )
-    .max(40, 'Tu nombre no debe contener mas de 40 caracteres'),
+    .max(60, 'Tu nombre no debe contener mas de 60 caracteres'),
   country: Yup.string()
     .required('Por favor ingresa tu país')
     .matches(
