@@ -24,10 +24,6 @@ const SignupFormComponent = () => {
     if (Auth.isLogin()) {
       navigate('/campaigns');
     }
-    /*     if (user) {
-      Auth.saveSession(user);
-      navigate('/campaigns');
-    } */
   }, [user]);
   return (
     <>
