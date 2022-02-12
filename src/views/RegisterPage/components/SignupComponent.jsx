@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 import LoaderComponent from '../../../common/LoaderComponent';
 /* import { setLogin } from '../../../state/auth/navBarLoginSlice'; */
 import MessageComponent from '../../../common/MessageComponent';
@@ -41,6 +42,15 @@ const SignupFormComponent = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignUp(values));
+          swal({
+            title: '¡Estás a un solo paso de terminar tu registro!',
+            text: 'Revisa tu correo electrónico para validar tu cuenta',
+            icon: 'success',
+            value: true,
+            visible: true,
+            className: 'swal-register-modal',
+            closeModal: true,
+          });
           /* dispatch(setLogin()); */
           resetForm({ values: '' });
         }}
