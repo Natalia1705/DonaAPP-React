@@ -70,7 +70,9 @@ const Navbar = () => {
           <a href="/">Cómo funciona</a>
         </li>
         <li>
-          <a href="/">Acerca de</a>
+          <Link to="/about" style={{ textDecoration: 'none' }}>
+            Acerca de
+          </Link>
         </li>
         {navLoger && (
           <li>
