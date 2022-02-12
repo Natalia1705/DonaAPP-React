@@ -65,8 +65,7 @@ const Details = () => {
           <div className="description">
             <div className="description__tags">
               <p>
-                <i className="fas fa-tags" />
-                {campaignDetail.category}
+                <i className="fas fa-tags" /> {campaignDetail.category}
               </p>
             </div>
             <div className="description__content">
