@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import { useEffect } from 'react';
 // import { Form, Row } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -45,46 +45,28 @@ const SignInForm = () => {
           resetForm({ values: '' });
         }}
       >
-        {(formik) => (
-          <FormContent onSubmit={formik.handleSubmit}>
+        {({ errors, touched }) => (
+          <Form>
             <div className="inputBx">
               <span>Correo Electrónico</span>
-              <input
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                data-cy="login-email-input"
-              />
-              {formik?.errors?.email && (
-                <span className="spanError">{formik.errors.email}</span>
-              )}
+              <Field name="email" type="email" data-cy="register-email-input" />
+              {errors.email && touched.email ? (
+                <span>{errors.email}</span>
+              ) : null}
             </div>
             <div className="inputBx">
               <span>Contraseña</span>
-              <input
+              <Field
                 name="password"
                 type="password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                data-cy="login-password-input"
+                data-cy="register-password-input"
               />
-              {formik?.errors?.password && (
-                <span className="spanError">{formik.errors.password}</span>
-              )}
+              {errors.password && touched.password ? (
+                <span>{errors.password}</span>
+              ) : null}
             </div>
-            <div>
-              {loading && <div>Cargando ...</div>}
-              <Button
-                className=""
-                type="submit"
-                disabled={!(formik.isValid && formik.dirty)}
-                data-cy="login-submmit-button"
-              >
-                Iniciar Sesión
-              </Button>
-            </div>
-          </FormContent>
+            <Button type="submit">Registrarse</Button>
+          </Form>
         )}
       </Formik>
       <LoaderComponent loading={loading} />
@@ -110,7 +92,6 @@ const SignInForm = () => {
 
 export default SignInForm;
 
-const FormContent = styled.form``;
 const Button = styled.button`
   background: #ff0157;
   color: #fff;
