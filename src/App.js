@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import About from './views/About/About';
 import Donate from './views/Donate';
 import Details from './views/Details';
 import CampaignsForm from './views/CampaignForm';
@@ -15,13 +16,14 @@ import PaymentPage from './views/PaymentPage';
 import Error404 from './views/Error404';
 import Edit from './views/Edit';
 import Welcome from './components/Welcome';
-import About from './views/About/About';
+import How from './views/How/How';
 
 const App = () => (
   <BrowserRouter>
     <Navbar />
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<About />} />
       <Route
         path="/campaignform"
         element={
@@ -47,10 +49,11 @@ const App = () => (
           </PrivateRoute>
         }
       />
+      <Route path="/howworks" element={<How />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/confirm/:token" element={<Welcome />} />
-      <Route path="/about" element={<About />} />
+
       <Route
         path="/campaigns"
         element={
