@@ -12,6 +12,9 @@
   justify-content: center;
   align-items: center;
   gap: 16px;
+  .comment-form__spinner {
+    color: #767777;
+  }
   .comment-form__label {
     color: #767777;
     align-self: flex-start;
@@ -27,7 +30,10 @@
     min-height: 90px;
     resize: none;
   }
-  button {
+  .comment-form__button-container {
     margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 }
