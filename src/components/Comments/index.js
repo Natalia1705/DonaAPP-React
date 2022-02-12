@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
+import { Spinner } from 'react-bootstrap';
 import swal from 'sweetalert';
 import CommentCard from '../CommentCard';
 import usePUT from '../../views/Edit/Hooks/usePUT';
 import './style.scss';
 import Auth from '../../utils/Auth';
-import LoaderComponent from '../../common/LoaderComponent';
 
 const Comments = ({ name, id, commentsDb, setNewcComment }) => {
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
           // eslint-disable-next-line react/jsx-props-no-spreading
           <CommentCard {...e} key={`${e.name}-${commentsDb.indexOf(e)}`} />
         ))}
-      <LoaderComponent loading={loading} />
       <Formik
         initialValues={{
           firstName: '',
@@ -58,9 +57,18 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
             placeholder="Uno a uno todos somos mortales. Juntos, somos eternos."
             className="comment-form__comment-input"
           />
-          <button type="submit" className="boton btn btn-secondary btn-sm">
-            Enviar
-          </button>
+          <div className="comment-form__button-container">
+            <button type="submit" className="boton btn btn-secondary btn-sm">
+              Enviar
+            </button>
+            {loading && (
+              <Spinner
+                animation="border"
+                role="status"
+                className="comment-form__spinner"
+              />
+            )}
+          </div>
         </Form>
       </Formik>
       <div className="cta">
