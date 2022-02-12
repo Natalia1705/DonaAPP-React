@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 const About = () => (
   <Container>
     <div className="title">
-      <h1>Acerca de nosotros</h1>
+      <h1>Acerca de nosotros...</h1>
     </div>
     <Section>
       <div className="content">
@@ -32,7 +32,6 @@ const Container = styled.div`
     display: flex;
   }
   h1 {
-    text-align: center;
     font-size: 60px;
     margin-top: 120px;
     margin-left: 100px;

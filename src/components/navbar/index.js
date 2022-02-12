@@ -23,7 +23,7 @@ const Navbar = () => {
   const [showA, setShowA] = useState(true);
   const [notification, setNotification] = useState([]);
 
-  console.log('notification', notification);
+  // console.log('notification', notification);
 
   useEffect(() => {
     if (isLogged) {
@@ -67,7 +67,9 @@ const Navbar = () => {
       />
       <List toggle={open}>
         <li>
-          <a href="/">Cómo funciona</a>
+          <Link to="/howworks" style={{ textDecoration: 'none' }}>
+            Cómo funciona
+          </Link>
         </li>
         <li>
           <Link to="/about" style={{ textDecoration: 'none' }}>
