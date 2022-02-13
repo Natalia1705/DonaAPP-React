@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Button, Badge, Toast } from 'react-bootstrap';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+// import { Button, Badge, Toast } from 'react-bootstrap';
 import { setLogOut } from '../../state/auth/navBarLoginSlice';
 import { cleaningUser } from '../../state/auth/authSlice';
 import Auth from '../../utils/Auth';
@@ -20,10 +21,8 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [userName, setUserName] = useState('');
   const [open, setOpen] = useState(false);
-  const [showA, setShowA] = useState(true);
+  const [showA, setShowA] = useState(false);
   const [notification, setNotification] = useState([]);
-
-  // console.log('notification', notification);
 
   useEffect(() => {
     if (isLogged) {
@@ -51,7 +50,14 @@ const Navbar = () => {
     dispatch(cleaningUser());
     setVisible(!visible);
   };
-  const toggleShowA = () => setShowA(!showA);
+  const toggleShowA = () => {
+    setShowA(!showA);
+    setVisible(false);
+  };
+  const toggleVisible = () => {
+    setVisible(!visible);
+    setShowA(false);
+  };
   return (
     <Container>
       <Link to="/" style={{ textDecoration: 'none' }}>
@@ -78,35 +84,27 @@ const Navbar = () => {
         </li>
         {navLoger && (
           <li>
-            <Button onClick={toggleShowA} variant="primary">
-              Notificaciones <Badge bg="secondary">{notification.length}</Badge>
-              <span className="visually-hidden">unread messages</span>
-            </Button>
-            {notification.map((el) => (
-              <Toast show={showA} onClose={toggleShowA} className="mt-3">
-                <Toast.Header>
-                  <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2"
-                    alt=""
-                  />
-                  <strong className="me-auto">{el.name}</strong>
-                </Toast.Header>
-                <Toast.Body>{`${el.name} te dono ${el.value}`}</Toast.Body>
-              </Toast>
-            ))}
+            <Notification onClick={toggleShowA}>
+              <div>
+                <CircleNotificationsIcon fontSize="large" />
+                <div className="counter">{notification.length}</div>
+              </div>
+              <Notificationdd>
+                <Efecto toggle={notification.length >= 1 && showA}>
+                  {notification &&
+                    notification.map((e) => (
+                      <div className="ntdd">{`${e.name} donó $${e.value}`}</div>
+                    ))}
+                </Efecto>
+              </Notificationdd>
+            </Notification>
           </li>
         )}
 
         {navLoger ? (
           <UserProfile>
-            <div
-              className="profile"
-              onClick={() => {
-                setVisible(!visible);
-              }}
-            >
-              <AccountCircleIcon fontSize="large" data-cy="menu-profile" />
+            <div className="profile" onClick={toggleVisible}>
+              <AccountCircleIcon fontSize="large" />
             </div>
             <MenuProfile toggle={visible}>
               <h3>{userName && userName}</h3>
@@ -208,7 +206,7 @@ const List = styled.div`
   }
   li {
     list-style: none;
-    margin-left: 30px;
+    margin: 0 20px;
     @media (max-width: 768px) {
       margin-left: 0;
     }
@@ -234,10 +232,11 @@ const List = styled.div`
 const UserProfile = styled.div`
   position: absolute;
   top: -10px;
-  right: -50px;
+  right: -60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   align-items: center;
   cursor: pointer;
   @media (max-width: 768px) {
@@ -343,4 +342,78 @@ const MenuToggle = styled.div`
       `;
     }}
   }
+`;
+
+const Notification = styled.div`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  margin-right: 10px;
+  cursor: pointer;
+  .counter {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff0157;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 23px;
+    color: #fff;
+  }
+`;
+const Notificationdd = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  position: absolute;
+  flex-wrap: wrap;
+  align-items: center;
+  position: absolute;
+  .ntdd {
+    position: relative;
+    top: 10px;
+    right: 156px;
+    margin: 5px;
+    padding: 10px 4px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    font-size: 12px;
+    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 6px 5px 2px rgba(0, 0, 0, 0.6);
+
+    z-index: 100;
+    border-radius: 15px;
+  }
+`;
+
+const Efecto = styled.div`
+  ${(props) => {
+    if (props.toggle) {
+      return `
+      visibility: visible;
+      
+      ::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      right: 180px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      transform: rotate(45deg);
+  }
+      `;
+    }
+    return `
+    visibility: hidden;
+    
+      `;
+  }}
 `;
