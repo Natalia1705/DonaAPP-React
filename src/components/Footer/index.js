@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import { Link } from 'react-router-dom';
 
 const Footer = () => (
   <Foot>
@@ -14,7 +11,6 @@ const Footer = () => (
           <span>DonApp</span>
         </div>
         <div className="language">
-          <i className="far fa-flag" />
           <p>Español - Latam</p>
         </div>
       </div>
@@ -35,67 +31,27 @@ const Footer = () => (
           </li>
         </ul>
       </div>
-      <div>
+      <div className="works">
         <p>MÁS INFORMACIÓN</p>
         <ul>
           <li>
-            <a href="/">Cómo funciona DonApp</a>
+            <Link to="/howworks">
+              <span>Cómo funciona DonApp</span>
+            </Link>
           </li>
+
           <li>
-            <a href="/">Preguntas frecuentes</a>
-          </li>
-          <li>
-            <a href="/">Historias de éxito</a>
-          </li>
-          <li>
-            <a href="/">Acerca de</a>
+            <Link to="/about">
+              <span>Acerca de</span>
+            </Link>
           </li>
         </ul>
       </div>
     </section>
     <hr />
     <section className="footer__site-info">
-      <div className="social-media">
-        <ul>
-          <li>
-            <a href="/">
-              <FacebookIcon />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <YouTubeIcon />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <TwitterIcon />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <InstagramIcon />
-            </a>
-          </li>
-        </ul>
-      </div>
       <div className="content">
-        <div className="copyright">
-          <p>© 2021 DonApp</p>
-        </div>
-        <div className="legal">
-          <ul>
-            <li>
-              <a href="/">Condiciones</a>
-            </li>
-            <li>
-              <a href="/">Privacidad</a>
-            </li>
-            <li>
-              <a href="/">Información legal</a>
-            </li>
-          </ul>
-        </div>
+        <div className="legal">Desarrollado en el topV19.</div>
       </div>
     </section>
   </Foot>
@@ -104,9 +60,12 @@ const Footer = () => (
 export default Footer;
 
 const Foot = styled.footer`
-  padding: 8px 16px 80px;
+  padding: 8px 16px 0px;
   section {
-    padding: 40px;
+  }
+  .works ul li span {
+    color: #767777;
+    font-weight: 400;
   }
   .footer__nav {
     display: grid;
@@ -124,11 +83,15 @@ const Foot = styled.footer`
     color: var(--color__main);
     font-weight: bold;
     @media (min-width: 1024px) {
-      padding: 0 8px;
+      padding: 0;
+      margin: 0;
     }
   }
   hr {
-    margin-bottom: 56px;
+    margin-bottom: 30px;
+  }
+  .footer__nav div ul {
+    padding: 0;
   }
   .footer__nav div ul li a {
     color: var(--color__text);
@@ -142,16 +105,26 @@ const Foot = styled.footer`
     margin-top: 36px;
     width: 180px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin-left: 0px;
   }
   .footer__nav .language p {
     color: var(--color__text);
   }
   .footer__site-info {
-    display: grid;
-    grid-template-columns: 1fr;
-    @media (min-width: 1024px) {
-      grid-template-columns: 1fr 5fr 3fr 1fr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .content {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+      .legal {
+        font-size: 20px;
+        color: #767777;
+      }
     }
   }
   .footer__site-info .social-media ul {
@@ -193,7 +166,7 @@ const Foot = styled.footer`
   }
   .footer__site-info .content .legal {
     @media (min-width: 1024px) {
-      width: 70%;
+      width: 100%;
     }
   }
   .footer__site-info .content .legal ul {
