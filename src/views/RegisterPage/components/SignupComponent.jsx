@@ -38,6 +38,7 @@ const SignupFormComponent = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(postSignUp(values));
+          resetForm({ values: '' });
           swal({
             title: '¡Estás a un solo paso de terminar tu registro!',
             text: 'Revisa tu correo electrónico para validar tu cuenta',
@@ -47,8 +48,6 @@ const SignupFormComponent = () => {
             className: 'swal-register-modal',
             closeModal: true,
           });
-          /* dispatch(setLogin()); */
-          resetForm({ values: '' });
         }}
       >
         {({ errors, touched }) => (
@@ -87,7 +86,9 @@ const SignupFormComponent = () => {
                 <span>{errors.confirmPassword}</span>
               ) : null}
             </div>
-            <Button type="submit">Registrarse</Button>
+            <Button type="submit" data-cy="register-submmit-button">
+              Registrarse
+            </Button>
           </Form>
         )}
       </Formik>

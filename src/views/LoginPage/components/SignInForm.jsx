@@ -49,7 +49,7 @@ const SignInForm = () => {
           <Form>
             <div className="inputBx">
               <span>Correo Electrónico</span>
-              <Field name="email" type="email" data-cy="register-email-input" />
+              <Field name="email" type="email" data-cy="login-email-input" />
               {errors.email && touched.email ? (
                 <span>{errors.email}</span>
               ) : null}
@@ -59,13 +59,15 @@ const SignInForm = () => {
               <Field
                 name="password"
                 type="password"
-                data-cy="register-password-input"
+                data-cy="login-password-input"
               />
               {errors.password && touched.password ? (
                 <span>{errors.password}</span>
               ) : null}
             </div>
-            <Button type="submit">Registrarse</Button>
+            <Button type="submit" data-cy="login-submmit-button">
+              Iniciar Sesión
+            </Button>
           </Form>
         )}
       </Formik>

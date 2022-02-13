@@ -1,12 +1,12 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PetsIcon from '@mui/icons-material/Pets';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import ChurchIcon from '@mui/icons-material/Church';
+import { useNavigate } from 'react-router-dom';
 import Progres from '../Progress';
 import config from '../../config';
 import { timeAgo } from '../../utils/timer';
@@ -14,6 +14,7 @@ import { timeAgo } from '../../utils/timer';
 const { URL_BASE } = config;
 
 const Card = () => {
+  const navigate = useNavigate();
   const [campaignsData, setCampaignsData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [title, setTitle] = useState('');
@@ -72,11 +73,16 @@ const Card = () => {
       <Content>
         {campaignsData &&
           filteredResults.map((data) => (
-            <div className="box" key={data._id} data-cy="campaign-home-cards">
+            <div
+              role="link"
+              tabIndex={0}
+              className="box"
+              key={data._id}
+              data-cy="campaign-home-cards"
+              onClick={() => navigate(`/details/${data._id}`)}
+            >
               <div className="imgBx">
-                <Link to={`/details/${data._id}`}>
-                  <img src={data.img} alt={data.title} />
-                </Link>
+                <img src={data.img} alt={data.title} />
               </div>
               <div className="text">
                 <p className="country">{data.country}</p>
@@ -177,6 +183,7 @@ const Content = styled.div`
     flex-direction: column;
     border: 15px solid #fff;
     box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
   .box .imgBx {
     position: relative;

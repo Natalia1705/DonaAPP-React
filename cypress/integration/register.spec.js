@@ -9,7 +9,7 @@ describe('Register testing', () => {
     );
   });
   it('Register view loads correctly', () => {
-    cy.contains('Registro').should('be.visible');
+    cy.contains('Registrarse').should('be.visible');
     cy.get('header')
       .should('be.visible')
       .within(() => {
@@ -29,20 +29,22 @@ describe('Register testing', () => {
       .should('be.visible')
       .should('contain.text', 'Registrarse');
   });
-  it('Register a new user', () => {
-    cy.get("[data-cy='register-name-input']").type('cypressTest');
-    cy.get("[data-cy='register-email-input']").type('cypressTest@fakemail.com');
-    cy.get("[data-cy='register-password-input']").type('Cypress123*');
-    cy.get("[data-cy='register-repeat-password-input']").type('Cypress123*');
-    cy.get("[data-cy='register-submmit-button']").click();
-    cy.url().should('include', '/campaigns');
-  });
   it('Register a new user with an taken email', () => {
-    cy.get("[data-cy='register-name-input']").type('cypressTest');
-    cy.get("[data-cy='register-email-input']").type('cypressTest@fakemail.com');
-    cy.get("[data-cy='register-password-input']").type('Cypress123*');
-    cy.get("[data-cy='register-repeat-password-input']").type('Cypress123*');
+    cy.get("[data-cy='register-name-input']").type('Fabrizzio Test');
+    cy.get("[data-cy='register-email-input']").type('faker@gfake.com');
+    cy.get("[data-cy='register-password-input']").type('Contra123*');
+    cy.get("[data-cy='register-repeat-password-input']").type('Contra123*');
     cy.get("[data-cy='register-submmit-button']").click();
     cy.contains('El usuario ya existe, por favor inicia sesión');
+  });
+  it('Register a new user', () => {
+    cy.get("[data-cy='register-name-input']").type('Fabrizzio Test');
+    cy.get("[data-cy='register-email-input']").type('ps.fabc.011772@gmail.com');
+    cy.get("[data-cy='register-password-input']").type('Contra123*');
+    cy.get("[data-cy='register-repeat-password-input']").type('Contra123*');
+    cy.get("[data-cy='register-submmit-button']").click();
+    cy.contains('¡Estás a un solo paso de terminar tu registro!').should(
+      'be.visible',
+    );
   });
 });

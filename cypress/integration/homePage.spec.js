@@ -17,9 +17,7 @@ describe('HomePage', () => {
     cy.get("[data-cy='new-campaign-button']")
       .should('be.visible')
       .should('contain.text', 'Inicia tu campaña ahora');
-    cy.get("[data-cy='campaign-home-cards']")
-      .should('be.visible')
-      .should('have.length', 6);
+    cy.get("[data-cy='campaign-home-cards']").should('be.visible');
   });
   it('login button works', () => {
     cy.get("[data-cy='login-button']").click();
