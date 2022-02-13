@@ -106,7 +106,7 @@ const Navbar = () => {
                 setVisible(!visible);
               }}
             >
-              <AccountCircleIcon fontSize="large" />
+              <AccountCircleIcon fontSize="large" data-cy="menu-profile" />
             </div>
             <MenuProfile toggle={visible}>
               <h3>{userName && userName}</h3>
