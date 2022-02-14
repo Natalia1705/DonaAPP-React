@@ -7,7 +7,6 @@ describe('Login testing', () => {
     cy.get("[data-cy='menu-profile']").click();
     cy.wait(1000);
     cy.get("[data-cy='log-out-button']").click();
-    // log out
   });
   it('Login view loads correctly', () => {
     cy.contains('Iniciar Sesión').should('be.visible');
