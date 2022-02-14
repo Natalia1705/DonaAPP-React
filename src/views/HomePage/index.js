@@ -1,32 +1,43 @@
 /* eslint-disable import/no-named-as-default-member */
-import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/Cards';
+import { setLogin } from '../../state/auth/navBarLoginSlice';
 import Footer from '../../components/Footer';
 
-const HomePage = () => (
-  <Container>
-    <Banner>
-      <div className="content">
-        <h2>Apoya una noble causa.</h2>
-        <h1>
-          Recaudación de fondos confiable para todos los momentos de la vida.
-          <br />
-          Consigue ayuda o bríndala
-        </h1>
-        <a
-          href="/campaignform"
-          className="boton2"
-          data-cy="new-campaign-button"
-        >
-          Inicia tu campaña ahora
-        </a>
-      </div>
-    </Banner>
-    <Card />
-    <Footer />
-  </Container>
-);
+const HomePage = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.authReducer.user);
+  useEffect(() => {
+    if (user) {
+      dispatch(setLogin());
+    }
+  }, []);
+  return (
+    <Container>
+      <Banner>
+        <div className="content">
+          <h2>Apoya una noble causa.</h2>
+          <h1>
+            Recaudación de fondos confiable para todos los momentos de la vida.
+            <br />
+            Consigue ayuda o bríndala
+          </h1>
+          <a
+            href="/campaignform"
+            className="boton2"
+            data-cy="new-campaign-button"
+          >
+            Inicia tu campaña ahora
+          </a>
+        </div>
+      </Banner>
+      <Card />
+      <Footer />
+    </Container>
+  );
+};
 
 export default HomePage;
 const Container = styled.div``;
