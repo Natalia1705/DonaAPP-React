@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { Spinner } from 'react-bootstrap';
 import swal from 'sweetalert';
@@ -10,7 +9,6 @@ import './style.scss';
 import Auth from '../../utils/Auth';
 
 const Comments = ({ name, id, commentsDb, setNewcComment }) => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   return (
@@ -76,13 +74,6 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
           Tu tambien puedes tomar acción y ayudar a
           <span className="cta__name"> {name}</span>
         </p>
-        <button
-          type="button"
-          className="cta__button boton btn btn-primary btn-sm"
-          onClick={() => navigate('/donate:id')}
-        >
-          Donar ahora
-        </button>
       </div>
     </div>
   );
