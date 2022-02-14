@@ -18,7 +18,7 @@ const How = () => (
       </div>
       <div className="section">
         <h1 className="number">2</h1>
-        <h2 className="title">Crea tu campaña</h2>
+        <h2 className="title">Comparte tu campaña</h2>
         <h3 className="description">
           Nuestras herramientas para compartir campañas te ayudan a difundir tu
           historia a través de las redes sociales, por correo electrónico e
@@ -30,7 +30,7 @@ const How = () => (
         <h1 className="number">3</h1>
         <h2 className="title">Acepta donativos </h2>
         <h3 className="description">
-          GoFundMe permite conectar directamente los donativos con la cuenta
+          DonApp permite conectar directamente los donativos con la cuenta
           bancaria de tu beneficiario para que puedas recibir la ayuda
           inmediatamente. Además, como no cobramos comisión por el uso de la
           plataforma, todos los donativos se destinan íntegramente a tu causa.
