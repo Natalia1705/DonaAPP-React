@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
-import Comments from '../../components/Comments';
 import EditDonationsCard from '../../components/EditDonationsCard';
 import ShareModal from '../../components/ShareModal';
 import usePUT from './Hooks/usePUT';
 import './styles.scss';
 import config from '../../config';
+import LoaderComponent from '../../common/LoaderComponent';
 
 const { URL_BASE } = config;
 
@@ -75,30 +75,6 @@ const Edit = () => {
         /* setCampaignDetail(data.data.campaigns) */
       );
   }, []);
-  const campaignDetails = {
-    commentsDb: [
-      {
-        name: 'Fabrizzio DBC',
-        amount: '1550.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        name: 'Alberto C.',
-        amount: '700.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        name: 'Julieta Rabadilla',
-        amount: '3500.00',
-        comment: 'Espero te sirva de mucho, cuídate!',
-      },
-      {
-        amount: '35.00',
-      },
-    ],
-  };
-  const { commentsDb } = campaignDetails;
-
   const [showMore, setShowMore] = useState(true);
   const showMoreToggle = () => {
     setShowMore(!showMore);
@@ -112,7 +88,7 @@ const Edit = () => {
   return (
     <Container>
       {loading ? (
-        'cargando'
+        <LoaderComponent loading />
       ) : (
         <main className="details__main">
           <div className="campaign">
@@ -223,7 +199,8 @@ const Edit = () => {
           </div>
           <EditDonationsCard
             campaignid={id}
-            commentsDb={commentsDb}
+            donationTimes={campaignDetail.donationTimes}
+            donations={campaignDetail.donations}
             goal={campaignDetail.objective}
           />
           <div className="description">
@@ -367,7 +344,6 @@ const Edit = () => {
                 </>
               )}
             </div>
-            <Comments name={campaignDetail.name} commentsDb={commentsDb} />
             <ShareModal />
           </div>
         </main>
