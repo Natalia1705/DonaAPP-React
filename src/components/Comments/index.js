@@ -57,7 +57,7 @@ const Comments = ({ name, id, commentsDb, setNewcComment }) => {
           />
           <div className="comment-form__button-container">
             <button type="submit" className="boton btn btn-secondary btn-sm">
-              Enviar
+              Comentar
             </button>
             {loading && (
               <Spinner
