@@ -42,7 +42,7 @@ const YourCampaigns = () => {
         });
         setIsDelete(false);
         swal.close();
-        swal('Poof! ¡Tu camapaña fue eliminada con éxito!', {
+        swal('Poof! ¡Tu campaña fue eliminada con éxito!', {
           icon: 'success',
         });
       } else {
