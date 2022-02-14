@@ -7,24 +7,23 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import usePUT from '../../views/Edit/Hooks/usePUT';
 
-const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
+const EditDonationsCard = ({
+  donationTimes = 0,
+  donations,
+  goal,
+  campaignid,
+}) => {
   const [editMode, setEditMode] = useState(false);
-  const [userValues, setUserValues] = useState({});
-  useEffect(() => {
-    setUserValues({ commentsDb, goal });
-  }, []);
 
+  const [userValues, setUserValues] = useState({});
   const navigate = useNavigate();
+  useEffect(() => {
+    setUserValues({ goal });
+  }, []);
   const customWidth = () => {
-    const commentMap = commentsDb.map((e) => e.amount);
-    const commentReduce = commentMap.reduce(
-      (acc, e) => Number(acc) + Number(e),
-    );
-    return `${
-      (commentReduce / userValues.goal) * 100 >= 100
-        ? 100
-        : (commentReduce / userValues.goal) * 100
-    }%`;
+    const progress =
+      (donations / goal) * 100 >= 100 ? 100 : (donations / goal) * 100;
+    return `${progress}%`;
   };
   return (
     <Container>
@@ -36,7 +35,6 @@ const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
             }}
             onSubmit={async (values) => {
               setUserValues({
-                commentsDb: userValues.commentsDb,
                 goal: values.goal,
               });
               setEditMode(false);
@@ -75,12 +73,7 @@ const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
               />
             </div>
             <p className="donations__collection">
-              <span className="amount">
-                S./
-                {commentsDb
-                  .map((e) => e.amount)
-                  .reduce((acc, e) => Number(acc) + Number(e))}
-              </span>
+              <span className="amount">$ {donations}</span>
               {` Recaudados del objetivo de S./ ${userValues.goal} `}
               <Pen
                 className="fas fa-pen"
@@ -91,7 +84,7 @@ const EditDonationsCard = ({ commentsDb, goal, campaignid }) => {
                 onClick={() => setEditMode(true)}
               />
               <br />
-              <span className="total">{commentsDb.length}</span>
+              <span className="total">{donationTimes}</span>
               {' donantes'}
             </p>
             <div className="donations__buttons">

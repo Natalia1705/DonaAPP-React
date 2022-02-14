@@ -8,7 +8,7 @@ import usePUT from '../../views/Edit/Hooks/usePUT';
 import './style.scss';
 import Auth from '../../utils/Auth';
 
-const Comments = ({ name, id, commentsDb, setNewcComment }) => {
+const Comments = ({ name, id, commentsDb, setNewcComment = console.log() }) => {
   const [loading, setLoading] = useState(false);
 
   return (
